@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Dashboard - Sri Chakra Eye Clinic | Practice Management System</title>
+    <meta name="description" content="Secure doctor dashboard for Sri Chakra Eye Clinic. Manage appointments, patient records, prescriptions, and practice analytics with HIPAA-compliant interface." />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fsrichakra6267back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+</head>
+<body class="bg-surface">
+    <!-- Login Modal (Initially Visible) -->
+    <div id="loginModal" class="fixed inset-0 bg-primary bg-opacity-90 flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-large">
+            <div class="text-center mb-8">
+                <div class="flex items-center justify-center mb-4">
+                    <svg class="h-12 w-12 text-primary" viewBox="0 0 40 40" fill="currentColor">
+                        <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <circle cx="20" cy="20" r="12" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <circle cx="20" cy="20" r="6" fill="currentColor"/>
+                        <circle cx="20" cy="20" r="2" fill="white"/>
+                    </svg>
+                </div>
+                <h2 class="font-headline font-bold text-2xl text-primary mb-2">Doctor Portal</h2>
+                <p class="font-body text-text-secondary">Secure access to Sri Chakra Eye Clinic</p>
+            </div>
+
+            <form id="loginForm" class="space-y-6" onsubmit="handleLogin(event)">
+                <div>
+                    <label class="block text-sm font-semibold text-text-primary mb-2">Username</label>
+                    <input type="text" id="username" class="input-field" placeholder="Enter your username" required />
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-text-primary mb-2">Password</label>
+                    <input type="password" id="password" class="input-field" placeholder="Enter your password" required />
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <label class="flex items-center">
+                        <input type="checkbox" class="rounded border-gray-300 text-primary focus:ring-primary" />
+                        <span class="ml-2 text-sm text-text-secondary">Remember me</span>
+                    </label>
+                    <a href="javascript:void(0)" class="text-sm text-secondary hover:text-secondary-700">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn-primary w-full text-lg py-4">
+                    Secure Login
+                </button>
+
+                <div class="text-center text-xs text-text-secondary mt-4">
+                    <p>Demo Credentials:</p>
+                    <p>Username: <strong>dr.priya</strong> | Password: <strong>secure123</strong></p>
+                    <p>Admin: <strong>admin</strong> | Password: <strong>admin2025</strong></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Dashboard (Initially Hidden) -->
+    <div id="dashboardContent" class="hidden">
+        <!-- Header -->
+        <header class="bg-white shadow-soft sticky top-0 z-40">
+            <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <!-- Logo -->
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <svg class="h-10 w-10 text-primary" viewBox="0 0 40 40" fill="currentColor">
+                                <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <circle cx="20" cy="20" r="12" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <circle cx="20" cy="20" r="6" fill="currentColor"/>
+                                <circle cx="20" cy="20" r="2" fill="white"/>
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <h1 class="font-headline font-bold text-xl text-primary">Sri Chakra</h1>
+                            <p class="text-sm text-text-secondary font-body">Doctor Portal</p>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-8">
+                            <a href="homepage.html" class="text-text-secondary hover:text-primary px-3 py-2 text-sm font-body transition-colors">Public Site</a>
+                            <a href="appointment_booking_system.html" class="text-text-secondary hover:text-primary px-3 py-2 text-sm font-body transition-colors">Appointments</a>
+                            <a href="services_overview.html" class="text-text-secondary hover:text-primary px-3 py-2 text-sm font-body transition-colors">Services</a>
+                            <a href="contact_location.html" class="text-text-secondary hover:text-primary px-3 py-2 text-sm font-body transition-colors">Contact</a>
+                        </div>
+                    </div>
+
+                    <!-- User Profile & Actions -->
+                    <div class="flex items-center space-x-4">
+                        <div class="hidden lg:block text-right">
+                            <p class="text-sm font-semibold text-primary" id="doctorName">Dr. Priya Sharma</p>
+                            <p class="text-xs text-text-secondary">Ophthalmologist</p>
+                        </div>
+                        <div class="relative">
+                            <button class="flex items-center space-x-2 text-text-secondary hover:text-primary" onclick="toggleUserMenu()">
+                                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Doctor Profile" class="w-8 h-8 rounded-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </button>
+                            <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-medium py-2">
+                                <a href="javascript:void(0)" class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface">Profile Settings</a>
+                                <a href="javascript:void(0)" class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface">Change Password</a>
+                                <hr class="my-2" />
+                                <a href="javascript:void(0)" onclick="logout()" class="block px-4 py-2 text-sm text-error hover:bg-surface">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Welcome Section -->
+            <div class="mb-8">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <div>
+                        <h1 class="font-headline font-bold text-3xl text-primary mb-2">
+                            Good Morning, <span id="welcomeName">Dr. Priya</span>
+                        </h1>
+                        <p class="font-body text-text-secondary">
+                            Today is <span id="currentDate">Friday, August 30, 2025</span> • 
+                            <span class="text-secondary font-semibold">8 appointments scheduled</span>
+                        </p>
+                    </div>
+                    <div class="mt-4 md:mt-0 flex space-x-3">
+                        <button onclick="showEmergencySlot()" class="btn-accent px-4 py-2 text-sm">
+                            Emergency Slot
+                        </button>
+                        <button onclick="generateReport()" class="btn-secondary px-4 py-2 text-sm">
+                            Generate Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="card-elevated text-center">
+                    <div class="text-3xl font-bold text-primary mb-2">8</div>
+                    <p class="font-body text-text-secondary">Today's Appointments</p>
+                    <div class="mt-2 text-sm text-secondary">2 pending</div>
+                </div>
+                <div class="card-elevated text-center">
+                    <div class="text-3xl font-bold text-secondary mb-2">156</div>
+                    <p class="font-body text-text-secondary">This Month</p>
+                    <div class="mt-2 text-sm text-success">+12% from last month</div>
+                </div>
+                <div class="card-elevated text-center">
+                    <div class="text-3xl font-bold text-accent mb-2">3</div>
+                    <p class="font-body text-text-secondary">Surgeries Scheduled</p>
+                    <div class="mt-2 text-sm text-text-secondary">Next: Tomorrow 9 AM</div>
+                </div>
+                <div class="card-elevated text-center">
+                    <div class="text-3xl font-bold text-primary mb-2">98%</div>
+                    <p class="font-body text-text-secondary">Patient Satisfaction</p>
+                    <div class="mt-2 text-sm text-success">Based on 45 reviews</div>
+                </div>
+            </div>
+
+            <!-- Main Dashboard Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Today's Schedule -->
+                <div class="lg:col-span-2">
+                    <div class="card-elevated">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="font-headline font-semibold text-xl text-primary">Today's Schedule</h2>
+                            <div class="flex space-x-2">
+                                <button onclick="refreshSchedule()" class="text-text-secondary hover:text-primary">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                                    </svg>
+                                </button>
+                                <button onclick="addAppointment()" class="text-secondary hover:text-secondary-700">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Appointment Item -->
+                            <div class="flex items-center justify-between p-4 bg-surface rounded-lg border-l-4 border-primary">
+                                <div class="flex items-center space-x-4">
+                                    <div class="text-center">
+                                        <div class="text-sm font-semibold text-primary">09:00</div>
+                                        <div class="text-xs text-text-secondary">AM</div>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-text-primary">Rajesh Kumar</h3>
+                                        <p class="text-sm text-text-secondary">Cataract Consultation • Age: 65</p>
+                                        <div class="flex items-center mt-1">
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs bg-primary-100 text-primary">
+                                                New Patient
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button onclick="viewPatient('rajesh-kumar')" class="btn-secondary px-3 py-1 text-sm">
+                                        View
+                                    </button>
+                                    <button onclick="startConsultation('rajesh-kumar')" class="btn-primary px-3 py-1 text-sm">
+                                        Start
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Appointment Item -->
+                            <div class="flex items-center justify-between p-4 bg-surface rounded-lg border-l-4 border-secondary">
+                                <div class="flex items-center space-x-4">
+                                    <div class="text-center">
+                                        <div class="text-sm font-semibold text-secondary">10:30</div>
+                                        <div class="text-xs text-text-secondary">AM</div>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-text-primary">Lakshmi Devi</h3>
+                                        <p class="text-sm text-text-secondary">Glaucoma Follow-up • Age: 58</p>
+                                        <div class="flex items-center mt-1">
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs bg-secondary-100 text-secondary">
+                                                Follow-up
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button onclick="viewPatient('lakshmi-devi')" class="btn-secondary px-3 py-1 text-sm">
+                                        View
+                                    </button>
+                                    <button onclick="startConsultation('lakshmi-devi')" class="btn-primary px-3 py-1 text-sm">
+                                        Start
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Appointment Item -->
+                            <div class="flex items-center justify-between p-4 bg-surface rounded-lg border-l-4 border-accent">
+                                <div class="flex items-center space-x-4">
+                                    <div class="text-center">
+                                        <div class="text-sm font-semibold text-accent">02:00</div>
+                                        <div class="text-xs text-text-secondary">PM</div>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-text-primary">Venkat Reddy</h3>
+                                        <p class="text-sm text-text-secondary">Diabetic Retinopathy • Age: 52</p>
+                                        <div class="flex items-center mt-1">
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs bg-accent-100 text-accent">
+                                                Urgent
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button onclick="viewPatient('venkat-reddy')" class="btn-secondary px-3 py-1 text-sm">
+                                        View
+                                    </button>
+                                    <button onclick="startConsultation('venkat-reddy')" class="btn-primary px-3 py-1 text-sm">
+                                        Start
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- More appointments indicator -->
+                            <div class="text-center py-4">
+                                <button onclick="viewAllAppointments()" class="text-secondary hover:text-secondary-700 font-semibold">
+                                    View All 8 Appointments →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar -->
+                <div class="space-y-6">
+                    <!-- Quick Actions -->
+                    <div class="card-elevated">
+                        <h3 class="font-headline font-semibold text-lg text-primary mb-4">Quick Actions</h3>
+                        <div class="space-y-3">
+                            <button onclick="createPrescription()" class="w-full flex items-center space-x-3 p-3 bg-surface rounded-lg hover:bg-primary-50 transition-colors">
+                                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                                <span class="font-body text-text-primary">Create Prescription</span>
+                            </button>
+                            
+                            <button onclick="viewReports()" class="w-full flex items-center space-x-3 p-3 bg-surface rounded-lg hover:bg-secondary-50 transition-colors">
+                                <svg class="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                </svg>
+                                <span class="font-body text-text-primary">View Reports</span>
+                            </button>
+                            
+                            <button onclick="manageInventory()" class="w-full flex items-center space-x-3 p-3 bg-surface rounded-lg hover:bg-accent-50 transition-colors">
+                                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                                </svg>
+                                <span class="font-body text-text-primary">Manage Inventory</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Recent Patients -->
+                    <div class="card-elevated">
+                        <h3 class="font-headline font-semibold text-lg text-primary mb-4">Recent Patients</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center space-x-3 p-2 hover:bg-surface rounded-lg cursor-pointer" onclick="viewPatient('anitha-reddy')">
+                                <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Patient" class="w-10 h-10 rounded-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                <div class="flex-1">
+                                    <p class="font-semibold text-text-primary text-sm">Anitha Reddy</p>
+                                    <p class="text-xs text-text-secondary">Last visit: Aug 28</p>
+                                </div>
+                                <span class="text-xs bg-success-100 text-success px-2 py-1 rounded-full">Completed</span>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3 p-2 hover:bg-surface rounded-lg cursor-pointer" onclick="viewPatient('suresh-kumar')">
+                                <img src="https://images.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg" alt="Patient" class="w-10 h-10 rounded-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                <div class="flex-1">
+                                    <p class="font-semibold text-text-primary text-sm">Suresh Kumar</p>
+                                    <p class="text-xs text-text-secondary">Last visit: Aug 26</p>
+                                </div>
+                                <span class="text-xs bg-primary-100 text-primary px-2 py-1 rounded-full">Follow-up</span>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3 p-2 hover:bg-surface rounded-lg cursor-pointer" onclick="viewPatient('priya-sharma')">
+                                <img src="https://images.unsplash.com/photo-1494790108755-2616c27b2e5b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Patient" class="w-10 h-10 rounded-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                <div class="flex-1">
+                                    <p class="font-semibold text-text-primary text-sm">Priya Sharma</p>
+                                    <p class="text-xs text-text-secondary">Last visit: Aug 25</p>
+                                </div>
+                                <span class="text-xs bg-secondary-100 text-secondary px-2 py-1 rounded-full">Surgery</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 text-center">
+                            <button onclick="viewAllPatients()" class="text-secondary hover:text-secondary-700 font-semibold text-sm">
+                                View All Patients →
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- System Alerts -->
+                    <div class="card-elevated">
+                        <h3 class="font-headline font-semibold text-lg text-primary mb-4">System Alerts</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3 p-3 bg-accent-50 rounded-lg">
+                                <svg class="w-5 h-5 text-accent mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                                </svg>
+                                <div>
+                                    <p class="font-semibold text-accent text-sm">Equipment Maintenance</p>
+                                    <p class="text-xs text-text-secondary">OCT machine service due in 3 days</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3 p-3 bg-secondary-50 rounded-lg">
+                                <svg class="w-5 h-5 text-secondary mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <div>
+                                    <p class="font-semibold text-secondary text-sm">Inventory Alert</p>
+                                    <p class="text-xs text-text-secondary">Low stock: Tropicamide drops (5 units left)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Patient Management Section -->
+            <div class="mt-8">
+                <div class="card-elevated">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="font-headline font-semibold text-xl text-primary">Patient Management</h2>
+                        <div class="flex space-x-3">
+                            <div class="relative">
+                                <input type="text" placeholder="Search patients..." class="input-field pl-10 pr-4 py-2 w-64" />
+                                <svg class="w-5 h-5 text-text-secondary absolute left-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                </svg>
+                            </div>
+                            <button onclick="addNewPatient()" class="btn-primary px-4 py-2">
+                                Add Patient
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Patient Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-surface">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Patient</th>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Age</th>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Last Visit</th>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Condition</th>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-border">
+                                <tr class="hover:bg-surface">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Patient" class="w-10 h-10 rounded-full object-cover mr-4" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                            <div>
+                                                <div class="text-sm font-semibold text-text-primary">Rajesh Kumar</div>
+                                                <div class="text-sm text-text-secondary">+91 9876543210</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">65</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">Aug 30, 2025</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">Cataract</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary">
+                                            Active
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                                        <button onclick="viewPatientDetails('rajesh-kumar')" class="text-secondary hover:text-secondary-700">View</button>
+                                        <button onclick="editPatient('rajesh-kumar')" class="text-primary hover:text-primary-700">Edit</button>
+                                        <button onclick="createPrescriptionFor('rajesh-kumar')" class="text-accent hover:text-accent-700">Prescribe</button>
+                                    </td>
+                                </tr>
+                                
+                                <tr class="hover:bg-surface">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Patient" class="w-10 h-10 rounded-full object-cover mr-4" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                            <div>
+                                                <div class="text-sm font-semibold text-text-primary">Lakshmi Devi</div>
+                                                <div class="text-sm text-text-secondary">+91 9876543211</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">58</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">Aug 28, 2025</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">Glaucoma</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary-100 text-secondary">
+                                            Follow-up
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                                        <button onclick="viewPatientDetails('lakshmi-devi')" class="text-secondary hover:text-secondary-700">View</button>
+                                        <button onclick="editPatient('lakshmi-devi')" class="text-primary hover:text-primary-700">Edit</button>
+                                        <button onclick="createPrescriptionFor('lakshmi-devi')" class="text-accent hover:text-accent-700">Prescribe</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="flex items-center justify-between mt-6">
+                        <div class="text-sm text-text-secondary">
+                            Showing 1 to 10 of 156 patients
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="px-3 py-1 border border-border rounded hover:bg-surface">Previous</button>
+                            <button class="px-3 py-1 bg-primary text-white rounded">1</button>
+                            <button class="px-3 py-1 border border-border rounded hover:bg-surface">2</button>
+                            <button class="px-3 py-1 border border-border rounded hover:bg-surface">3</button>
+                            <button class="px-3 py-1 border border-border rounded hover:bg-surface">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <svg class="h-8 w-8 text-accent mr-2" viewBox="0 0 40 40" fill="currentColor">
+                        <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <circle cx="20" cy="20" r="12" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <circle cx="20" cy="20" r="6" fill="currentColor"/>
+                        <circle cx="20" cy="20" r="2" fill="white"/>
+                    </svg>
+                    <div>
+                        <h3 class="font-headline font-bold text-lg">Sri Chakra Eye Clinic</h3>
+                        <p class="text-sm text-blue-200">Doctor Portal - Secure & HIPAA Compliant</p>
+                    </div>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="homepage.html" class="text-blue-200 hover:text-white transition-colors">Public Site</a>
+                    <a href="about_sri_chakra_eye_clinic.html" class="text-blue-200 hover:text-white transition-colors">About</a>
+                    <a href="contact_location.html" class="text-blue-200 hover:text-white transition-colors">Contact</a>
+                    <a href="javascript:void(0)" class="text-blue-200 hover:text-white transition-colors">Privacy Policy</a>
+                </div>
+            </div>
+            
+            <div class="border-t border-blue-700 mt-6 pt-6 text-center">
+                <p class="font-body text-blue-200 text-sm">
+                    © 2025 Sri Chakra Eye Clinic. All Rights Reserved. | Secure Medical Portal
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Login functionality
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Mock authentication
+            if ((username === 'dr.priya' && password === 'secure123') || 
+                (username === 'admin' && password === 'admin2025')) {
+                
+                // Hide login modal and show dashboard
+                document.getElementById('loginModal').classList.add('hidden');
+                document.getElementById('dashboardContent').classList.remove('hidden');
+                
+                // Update welcome name based on login
+                const welcomeName = username === 'admin' ? 'Admin' : 'Dr. Priya';
+                const doctorName = username === 'admin' ? 'System Administrator' : 'Dr. Priya Sharma';
+                
+                document.getElementById('welcomeName').textContent = welcomeName;
+                document.getElementById('doctorName').textContent = doctorName;
+                
+                // Set current date
+                const today = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                document.getElementById('currentDate').textContent = today.toLocaleDateString('en-US', options);
+                
+            } else {
+                alert('Invalid credentials. Please use the demo credentials provided.');
+            }
+        }
+
+        // Logout functionality
+        function logout() {
+            document.getElementById('loginModal').classList.remove('hidden');
+            document.getElementById('dashboardContent').classList.add('hidden');
+            document.getElementById('loginForm').reset();
+        }
+
+        // Toggle user menu
+        function toggleUserMenu() {
+            const userMenu = document.getElementById('userMenu');
+            userMenu.classList.toggle('hidden');
+        }
+
+        // Close user menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const userMenu = document.getElementById('userMenu');
+            const userButton = event.target.closest('button');
+            
+            if (!userButton || !userButton.onclick || userButton.onclick.toString().indexOf('toggleUserMenu') === -1) {
+                userMenu.classList.add('hidden');
+            }
+        });
+
+        // Dashboard functions
+        function refreshSchedule() {
+            alert('Schedule refreshed successfully!');
+        }
+
+        function addAppointment() {
+            alert('Redirecting to appointment booking system...');
+            window.location.href = 'appointment_booking_system.html';
+        }
+
+        function viewPatient(patientId) {
+            alert(`Opening patient record for: ${patientId}`);
+        }
+
+        function startConsultation(patientId) {
+            alert(`Starting consultation for: ${patientId}`);
+        }
+
+        function viewAllAppointments() {
+            alert('Opening full appointment schedule...');
+        }
+
+        function createPrescription() {
+            alert('Opening prescription creation interface...');
+        }
+
+        function viewReports() {
+            alert('Opening practice reports dashboard...');
+        }
+
+        function manageInventory() {
+            alert('Opening inventory management system...');
+        }
+
+        function showEmergencySlot() {
+            alert('Creating emergency appointment slot...');
+        }
+
+        function generateReport() {
+            alert('Generating practice analytics report...');
+        }
+
+        function viewAllPatients() {
+            alert('Opening complete patient database...');
+        }
+
+        function addNewPatient() {
+            alert('Opening new patient registration form...');
+        }
+
+        function viewPatientDetails(patientId) {
+            alert(`Opening detailed view for patient: ${patientId}`);
+        }
+
+        function editPatient(patientId) {
+            alert(`Opening edit form for patient: ${patientId}`);
+        }
+
+        function createPrescriptionFor(patientId) {
+            alert(`Creating prescription for patient: ${patientId}`);
+        }
+
+        // Initialize dashboard on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current date
+            const today = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('currentDate').textContent = today.toLocaleDateString('en-US', options);
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>
