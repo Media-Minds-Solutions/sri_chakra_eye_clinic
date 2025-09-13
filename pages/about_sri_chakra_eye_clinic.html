@@ -55,7 +55,23 @@
                     </button>
                 </div>
             </div>
-
+            <!-- Google Calendar Appointment Scheduling begin -->
+<link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+<script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+<script>
+(function() {
+  var target = document.currentScript;
+  window.addEventListener('load', function() {
+    calendar.schedulingButton.load({
+      url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1AES5FOjzTbpeRi5KEeW9NKGSfhUFuy1ntJpT64BB6PFnt1E74zjufsoXk2izw4zrwm4A7Xm-I?gv=true',
+      color: '#009688',
+      label: "Book Appointment",
+      target,
+    });
+  });
+})();
+</script>
+<!-- end Google Calendar Appointment Scheduling -->
             <!-- Mobile Navigation Menu -->
             <div id="mobile-menu" class="md:hidden hidden">
                 <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface border-t border-border">
