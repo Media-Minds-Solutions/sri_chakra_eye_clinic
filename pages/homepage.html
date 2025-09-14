@@ -31,7 +31,6 @@
                         <a href="homepage.html" class="text-primary font-semibold px-3 py-2 text-sm font-body">Home</a>
                         <a href="services_overview.html" class="text-text-secondary hover:text-primary px-3 py-2 text-sm font-body transition-colors">Services</a>
                         <a href="about_sri_chakra_eye_clinic.html" class="text-text-secondary hover:text-primary px-3 py-2 text-sm font-body transition-colors">About</a>
-                        <a href="appointment_booking_system.html" class="text-text-secondary hover:text-primary px-3 py-2 text-sm font-body transition-colors">Patient Portal</a>
                         <a href="contact_location.html" class="text-text-secondary hover:text-primary px-3 py-2 text-sm font-body transition-colors">Contact</a>
                     </div>
                 </div>
@@ -178,83 +177,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Appointment Booking Widget -->
-    <section class="py-16 bg-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="font-headline font-bold text-3xl md:text-4xl text-primary mb-4">
-                    Book Your Appointment
-                </h2>
-                <p class="font-body text-lg text-text-secondary">
-                    Schedule your consultation with our expert ophthalmologists
-                </p>
-            </div>
-
-            <div class="card-elevated max-w-2xl mx-auto">
-                <form class="space-y-6" onsubmit="handleBookingSubmit(event)">
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-semibold text-text-primary mb-2">Full Name</label>
-                            <input type="text" class="input-field" placeholder="Enter your full name" required />
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-text-primary mb-2">Phone Number</label>
-                            <input type="tel" class="input-field" placeholder="+91 XXXXX XXXXX" required />
-                        </div>
-                    </div>
-                    
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-semibold text-text-primary mb-2">Preferred Date</label>
-                            <input type="date" class="input-field" required />
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-text-primary mb-2">Preferred Time</label>
-                            <select class="input-field" required>
-                                <option value>Select time slot</option>
-                                <option value="09:00">09:00 AM</option>
-                                <option value="10:00">10:00 AM</option>
-                                <option value="11:00">11:00 AM</option>
-                                <option value="14:00">02:00 PM</option>
-                                <option value="15:00">03:00 PM</option>
-                                <option value="16:00">04:00 PM</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-semibold text-text-primary mb-2">Service Required</label>
-                        <select class="input-field" required>
-                            <option value>Select service</option>
-                            <option value="consultation">General Consultation</option>
-                            <option value="cataract">Cataract Evaluation</option>
-                            <option value="glaucoma">Glaucoma Screening</option>
-                            <option value="retinal">Retinal Examination</option>
-                            <option value="pediatric">Pediatric Eye Care</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-semibold text-text-primary mb-2">Additional Notes (Optional)</label>
-                        <textarea class="input-field" rows="3" placeholder="Any specific concerns or symptoms..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-primary w-full text-lg py-4">
-                        Book Appointment with OTP Verification
-                    </button>
-                </form>
-
-                <div class="mt-6 text-center">
-                    <p class="text-sm text-text-secondary">
-                        For immediate assistance, call us at 
-                        <a href="tel:+918555123456" class="text-primary font-semibold hover:text-primary-700">+91 8555 123 456</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Trust Signals -->
     <section class="py-16 bg-surface">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -264,9 +186,9 @@
                 </h2>
             </div>
 
-            <div class="grid md:grid-cols-4 gap-8 text-center">
+            <div class="grid md:grid-cols-3 gap-6 text-center">
                 <div class="card-elevated">
-                    <div class="text-3xl font-bold text-primary mb-2">15+</div>
+                    <div class="text-3xl font-bold text-primary mb-2">6+</div>
                     <p class="font-body text-text-secondary">Years of Excellence</p>
                 </div>
                 <div class="card-elevated">
@@ -276,10 +198,6 @@
                 <div class="card-elevated">
                     <div class="text-3xl font-bold text-accent mb-2">98%</div>
                     <p class="font-body text-text-secondary">Patient Satisfaction</p>
-                </div>
-                <div class="card-elevated">
-                    <div class="text-3xl font-bold text-primary mb-2">24/7</div>
-                    <p class="font-body text-text-secondary">Emergency Care</p>
                 </div>
             </div>
 
