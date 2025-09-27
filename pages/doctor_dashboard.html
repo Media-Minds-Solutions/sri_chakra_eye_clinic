@@ -1,63 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Doctor Dashboard - Sri Chakra Eye Clinic | Practice Management System</title>
-    <meta name="description" content="Secure doctor dashboard for Sri Chakra Eye Clinic. Manage appointments, patient records, prescriptions, and practice analytics with HIPAA-compliant interface." />
-    <link rel="stylesheet" href="../css/main.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Doctor Dashboard - Sri Chakra Eye Clinic | Practice Management System</title>
+<meta name="description" content="Secure doctor dashboard for Sri Chakra Eye Clinic. Manage appointments, patient records, prescriptions, and practice analytics with HIPAA-compliant interface." />
+<link rel="stylesheet" href="../css/main.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fsrichakra6267back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
+
+<style>
+/* --- Existing Styles --- */
+.appointments-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+.appointments-table th, .appointments-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+.appointments-table th {
+    background: #f4f4f4;
+}
+.appointments-table tr.past {
+    background-color: #f9f9f9;
+    color: #888;
+}
+.appointments-table tr.upcoming {
+    background-color: #e6ffed;
+}
+.appointments-table tr.ongoing {
+    background-color: #fff4c2;
+}
+.timeline-item.highlight, .appointments-table tr.highlight {
+    border-left: 4px solid #1e40af;
+    animation: highlightBlink 1s ease-in-out 2;
+}
+@keyframes highlightBlink {
+    0% { background-color: #fff4c2; }
+    50% { background-color: #ffff99; }
+    100% { background-color: #fff4c2; }
+}
+
+/* --- Futuristic Patient Cards & Timeline --- */
+.card {
+    background: linear-gradient(145deg, #a6acbd, #123acd);
+    color: #f1f5f9;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 25px rgba(242, 242, 242, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+input, textarea, button {
+    border-radius: 0.5rem;
+    border: none;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    outline: none;
+}
+input, textarea {
+    width: 100%;
+    background-color: #f1f5f9;
+    color: #83afda;
+}
+button {
+    background: #1e40af;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+button:hover {
+    background: #3b82f6;
+}
+.summary-card {
+    background: linear-gradient(135deg, #3b82f6, #06b6d4);
+    color: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    animation: fadeIn 0.5s ease;
+}
+.summary-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+.summary-detail, .summary-condition, .summary-prescription {
+    margin-top: 0.3rem;
+}
+.spinner {
+    display: none;
+    width: 30px;
+    height: 30px;
+    border: 4px solid #3b82f6;
+    border-top: 4px solid #f1f5f9;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-top: 1rem;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(-10px);}
+    100% { opacity: 1; transform: translateY(0);}
+}
+
+/* --- Futuristic Timeline --- */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem 0;
+}
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background: linear-gradient(to bottom, #3b82f6, #06b6d4);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -2px;
+}
+.timeline-item {
+    position: relative;
+    width: 50%;
+    padding: 1rem 2rem;
+    box-sizing: border-box;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: slideInTimeline 0.6s forwards;
+}
+.timeline-item.left { left: 0; text-align: right; }
+.timeline-item.right { left: 50%; text-align: left; }
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #1e40af;
+    border: 4px solid #06b6d4;
+    top: 1rem;
+    border-radius: 50%;
+    z-index: 1;
+}
+.timeline-item.left::before { right: -10px; }
+.timeline-item.right::before { left: -10px; }
+.timeline-card {
+    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    color: #f1f5f9;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.timeline-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+}
+.timeline-date { font-size: 0.8rem; color: #a5b4fc; margin-bottom: 0.5rem; }
+.timeline-condition, .timeline-prescription { margin-top: 0.3rem; font-size: 0.9rem; color: #cbd5e1; }
+@keyframes slideInTimeline {
+    0% { opacity: 0; transform: translateY(50px);}
+    100% { opacity: 1; transform: translateY(0);}
+}
+@media screen and (max-width: 768px) {
+    .timeline-item { width: 100%; padding-left: 2rem; padding-right: 2rem; text-align: left !important; }
+    .timeline-item.left, .timeline-item.right { left: 0; }
+    .timeline-item::before { left: -12px; right: auto; }
+}
+</style>
 </head>
 <body class="bg-surface">
-    <!-- Login Modal (Initially Visible) -->
-    <div id="loginModal" class="fixed inset-0 bg-primary bg-opacity-90 flex items-center justify-center z-50">
-        <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-large">
-            <div class="text-center mb-8">
-                <div class="flex items-center justify-center mb-4">
-                    <img src="images/Sri_Chakra_Logo.png" alt="Sri Chakra Logo" class="h-15 w-20 object-contain">
-                </div>
-                <h2 class="font-headline font-bold text-2xl text-primary mb-2">Doctor Portal</h2>
-                <p class="font-body text-text-secondary">Secure access to Sri Chakra Eye Clinic</p>
+
+<!-- Login Modal -->
+<div id="loginModal" class="fixed inset-0 bg-primary bg-opacity-90 flex items-center justify-center z-50">
+    <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-large">
+        <div class="text-center mb-8">
+            <div class="flex items-center justify-center mb-4">
+                <img src="images/Sri_Chakra_Logo.png" alt="Sri Chakra Logo" class="h-15 w-20 object-contain">
             </div>
-
-            <form id="loginForm" class="space-y-6" onsubmit="handleLogin(event)">
-                <div>
-                    <label class="block text-sm font-semibold text-text-primary mb-2">Username</label>
-                    <input type="text" id="username" class="input-field" placeholder="Enter your username" required />
-                </div>
-                
-                <div>
-                    <label class="block text-sm font-semibold text-text-primary mb-2">Password</label>
-                    <input type="password" id="password" class="input-field" placeholder="Enter your password" required />
-                </div>
-
-                <div class="flex items-center justify-between">
-                    <label class="flex items-center">
-                        <input type="checkbox" class="rounded border-gray-300 text-primary focus:ring-primary" />
-                        <span class="ml-2 text-sm text-text-secondary">Remember me</span>
-                    </label>
-                    <a href="javascript:void(0)" class="text-sm text-secondary hover:text-secondary-700">Forgot password?</a>
-                </div>
-
-                <button type="submit" class="btn-primary w-full text-lg py-4">
-                    Secure Login
-                </button>
-
-                <div class="text-center text-xs text-text-secondary mt-4">
-                    <p>Demo Credentials:</p>
-                    <p>Username: <strong>dr.priya</strong> | Password: <strong>secure123</strong></p>
-                    <p>Admin: <strong>admin</strong> | Password: <strong>admin2025</strong></p>
-                </div>
-            </form>
+            <h2 class="font-headline font-bold text-2xl text-primary mb-2">Doctor Portal</h2>
+            <p class="font-body text-text-secondary">Secure access to Sri Chakra Eye Clinic</p>
         </div>
+        <form id="loginForm" class="space-y-6" onsubmit="handleLogin(event)">
+            <div>
+                <label class="block text-sm font-semibold text-text-primary mb-2">Username</label>
+                <input type="text" id="username" class="input-field" placeholder="Enter your username" required />
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-text-primary mb-2">Password</label>
+                <input type="password" id="password" class="input-field" placeholder="Enter your password" required />
+            </div>
+            <div class="flex items-center justify-between">
+                <label class="flex items-center">
+                    <input type="checkbox" class="rounded border-gray-300 text-primary focus:ring-primary" />
+                    <span class="ml-2 text-sm text-text-secondary">Remember me</span>
+                </label>
+                <a href="javascript:void(0)" class="text-sm text-secondary hover:text-secondary-700">Forgot password?</a>
+            </div>
+            <button type="submit" class="btn-primary w-full text-lg py-4">Secure Login</button>
+            <div class="text-center text-xs text-text-secondary mt-4">
+                <p>Demo Credentials:</p>
+                <p>Username: <strong>dr.priya</strong> | Password: <strong>secure123</strong></p>
+                <p>Admin: <strong>admin</strong> | Password: <strong>admin2025</strong></p>
+            </div>
+        </form>
     </div>
+</div>
 
-    <!-- Main Dashboard (Initially Hidden) -->
-    <div id="dashboardContent" class="hidden">
-        <!-- Header -->
-        <header class="bg-white shadow-soft sticky top-0 z-40">
+<!-- Main Dashboard -->
+<div id="dashboardContent" class="hidden">
+    <!-- Header, Calendar, Appointments Dashboard remain unchanged -->
+    <header class="bg-white shadow-soft sticky top-0 z-40">
             <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center h-16">
                     <!-- Logo -->
@@ -104,47 +271,15 @@
                 </div>
             </nav>
         </header>
-
-        <!-- Dashboard Content -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <!-- Welcome Section -->
-            <div class="mb-8">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                    <div>
-                        <h1 class="font-headline font-bold text-3xl text-primary mb-2">
-                            Good Morning, <span id="welcomeName">Dr. Priya</span>
-                        </h1>
-                        <p class="font-body text-text-secondary">
-                            Today is <span id="currentDate">Friday, August 30, 2025</span> • 
-                            <span class="text-secondary font-semibold">8 appointments scheduled</span>
-                        </p>
-                    </div>
-                    <div class="mt-4 md:mt-0 flex space-x-3">
-                        <button onclick="showEmergencySlot()" class="btn-accent px-4 py-2 text-sm">
-                            Emergency Slot
-                        </button>
-                        <button onclick="generateReport()" class="btn-secondary px-4 py-2 text-sm">
-                            Generate Report
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <iframe src="https://calendar.google.com/calendar/embed?src=thummalaseshadri%40gmail.com&ctz=Asia%2FKolkata" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-
-           <title>Doctor Dashboard</title>
-            <style>
-                body { font-family: Arial, sans-serif; margin: 20px; }
-                table { border-collapse: collapse; width: 100%; margin-top: 20px; }
-                th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-                th { background: #f4f4f4; }
-                input[type="date"] { padding: 5px; }
-            </style>
-            <h2>Appointments Dashboard</h2>
-            <label for="dateSelector">Select Date:</label>
-            <input type="date" id="dateSelector">
-
-            <table id="appointmentsTable">
-                <thead>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 class="font-headline font-bold text-3xl text-primary mb-4">Calendar & Appointments Dashboard</h1>
+        <iframe src="https://calendar.google.com/calendar/embed?src=thummalaseshadri%40gmail.com&ctz=Asia%2FKolkata" style="border:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+        
+        <h2 class="font-headline font-bold text-3xl text-primary mb-4">Appointments Dashboard</h2>
+        <label for="dateSelector">Select Date:</label>
+        <input type="date" id="dateSelector">
+        <table id="appointmentsTable" class="appointments-table">
+            <thead>
                 <tr>
                     <th>Time</th>
                     <th>Patient</th>
@@ -153,225 +288,211 @@
                     <th>Location</th>
                     <th>Status</th>
                 </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-            <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbwUBMrJDyLHu49XIYBHOGkeBiF9tUnkT7kC833LG8kH7rq5lt_EPIX-o8YTU5lMCfA/exec"; // e.g. https://script.google.com/macros/s/XXXX/exec
+            </thead>
+            <tbody></tbody>
+        </table>
 
-    // format to YYYY-MM-DD (for <input type="date">)
-    function todayISO() {
-      const d = new Date();
-      return d.toISOString().split('T')[0];
-    }
+        <div class="container mt-8">
+            <h2 class="font-headline font-bold text-3xl text-primary mb-4">Patient Record Management</h2>
+            <!-- Patient Entry Form -->
+            <div class="card">
+                <h2>Add Patient</h2>
+                <form id="patientForm">
+                    <input type="text" id="mobile" placeholder="Mobile Number" required>
+                    <input type="text" id="name" placeholder="Patient Name" required>
+                    <input type="number" id="age" placeholder="Age" required>
+                    <textarea id="condition" placeholder="Condition"></textarea>
+                    <textarea id="prescription" placeholder="Prescription"></textarea>
+                    <button type="submit">Add Patient</button>
+                </form>
+            </div>
 
-    document.getElementById("dateSelector").value = todayISO();
-
-    // This function is called by Apps Script JSONP response
-    function loadAppointments(data) {
-      const dateSel = document.getElementById("dateSelector").value;
-      const [yyyy, mm, dd] = dateSel.split("-");
-      const filterDate = `${dd}/${mm}/${yyyy}`; // matches sheet format dd/MM/yyyy
-
-      const tbody = document.querySelector("#appointmentsTable tbody");
-      tbody.innerHTML = "";
-
-      const filtered = data.filter(app => app.Date === filterDate);
-
-      if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6">No appointments</td></tr>`;
-        return;
-      }
-
-      filtered.forEach(app => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${app["Start Time"]} - ${app["End Time"]}</td>
-          <td>${app["Patient Name"]}</td>
-          <td>${app["Email"]}</td>
-          <td>${app["Phone Number"]}</td>
-          <td>${app["Location/Notes"]}</td>
-          <td>${app["Status"]}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    function fetchAppointments() {
-      // Remove old JSONP script if exists
-      const oldScript = document.getElementById("jsonpScript");
-      if (oldScript) oldScript.remove();
-
-      // Append new script tag
-      const script = document.createElement("script");
-      script.id = "jsonpScript";
-      script.src = API_URL + "?callback=loadAppointments";
-      document.body.appendChild(script);
-    }
-
-    document.getElementById("dateSelector").addEventListener("change", fetchAppointments);
-
-    // Initial load
-    fetchAppointments();
-</script>
+            <!-- Search Patient -->
+            <div class="card">
+                <h2>Search Patient</h2>
+                <input type="text" id="searchMobile" placeholder="Enter Mobile Number">
+                <button onclick="searchPatient()">Search</button>
+                <div class="spinner" id="loadingSpinner"></div>
+                <div id="summary"></div>
+                <div id="addVisitSection" style="display:none;margin-top:20px;">
+                    <h3 style="color:#1e40af;font-size:1.1rem;">➕ Add Visit</h3>
+                    <textarea id="newCondition" placeholder="New Condition"></textarea>
+                    <textarea id="newPrescription" placeholder="New Prescription"></textarea>
+                    <button onclick="addVisit()">Add Visit</button>
                 </div>
+                <!-- Futuristic Timeline -->
+                <div class="timeline" id="timeline"></div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Footer -->
-    <footer class="bg-primary text-white py-8 mt-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                <div class="flex items-center mb-4 md:mb-0">
-                    <img src="images/Sri_Chakra_Logo.png" alt="Sri Chakra Logo" class="h-15 w-20 object-contain">
-                    <div>
-                        <h3 class="font-headline font-bold text-lg">Sri Chakra Eye Clinic</h3>
-                        <p class="text-sm text-blue-200">Doctor Portal - Secure & HIPAA Compliant</p>
-                    </div>
-                </div>
-                
-                <div class="flex space-x-6">
-                    <a href="homepage.html" class="text-blue-200 hover:text-white transition-colors">Public Site</a>
-                    <a href="about_sri_chakra_eye_clinic.html" class="text-blue-200 hover:text-white transition-colors">About</a>
-                    <a href="contact_location.html" class="text-blue-200 hover:text-white transition-colors">Contact</a>
-                    <a href="javascript:void(0)" class="text-blue-200 hover:text-white transition-colors">Privacy Policy</a>
-                </div>
-            </div>
-            
-            <div class="border-t border-blue-700 mt-6 pt-6 text-center">
-                <p class="font-body text-blue-200 text-sm">
-                    © 2025 Sri Chakra Eye Clinic. All Rights Reserved. | Secure Medical Portal
-                </p>
-            </div>
-        </div>
-    </footer>
+<footer class="bg-primary text-white py-8 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p>© 2025 Sri Chakra Eye Clinic. All Rights Reserved. | Secure Medical Portal</p>
+    </div>
+</footer>
 
-    <script>
-        // Login functionality
-        function handleLogin(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            // Mock authentication
-            if ((username === 'dr.priya' && password === 'secure123') || 
-                (username === 'admin' && password === 'admin2025')) {
-                
-                // Hide login modal and show dashboard
-                document.getElementById('loginModal').classList.add('hidden');
-                document.getElementById('dashboardContent').classList.remove('hidden');
-                
-                // Update welcome name based on login
-                const welcomeName = username === 'admin' ? 'Admin' : 'Dr. Priya';
-                const doctorName = username === 'admin' ? 'System Administrator' : 'Dr. Priya Sharma';
-                
-                document.getElementById('welcomeName').textContent = welcomeName;
-                document.getElementById('doctorName').textContent = doctorName;
-                
-                // Set current date
-                const today = new Date();
-                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                document.getElementById('currentDate').textContent = today.toLocaleDateString('en-US', options);
-                
-            } else {
-                alert('Invalid credentials. Please use the demo credentials provided.');
-            }
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbx9uK0WyfEKKPSM3C9giNMqXGjz6uoJz-0w4o06WVu-Nf4dTifdXyu5uFwUSZtbocGu/exec";
+let currentPatient = null;
+
+// Add patient
+document.getElementById("patientForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    let data = {
+        mobile: document.getElementById("mobile").value,
+        name: document.getElementById("name").value,
+        age: document.getElementById("age").value,
+        condition: document.getElementById("condition").value,
+        prescription: document.getElementById("prescription").value
+    };
+    document.getElementById("loadingSpinner").style.display = "block";
+    fetch(API_URL, { method:"POST", body: JSON.stringify(data)})
+    .then(res => res.text())
+    .then(()=> {
+        alert("Patient Added!");
+        document.getElementById("patientForm").reset();
+        document.getElementById("loadingSpinner").style.display = "none";
+    });
+});
+
+// Render futuristic timeline
+function renderTimeline(data){
+    const timeline = document.getElementById("timeline");
+    timeline.innerHTML = "";
+    data.forEach((row,index)=>{
+        const item = document.createElement("div");
+        item.className = "timeline-item " + (index % 2 === 0 ? "left" : "right");
+        item.style.animationDelay = `${0.1*index}s`;
+        item.innerHTML = `
+        <div class="timeline-card">
+            <div class="timeline-date">${row[5]}</div>
+            <div><strong>${row[1]}</strong>, Age ${row[2]}</div>
+            <div class="timeline-condition">Condition: ${row[3]}</div>
+            <div class="timeline-prescription">Prescription: ${row[4]}</div>
+        </div>`;
+        timeline.appendChild(item);
+    });
+}
+
+// Search patient
+function searchPatient(){
+    let mobile = document.getElementById("searchMobile").value.trim();
+    if(!mobile) return alert("Enter mobile number");
+    document.getElementById("loadingSpinner").style.display = "block";
+
+    fetch(`${API_URL}?action=search&mobile=${mobile}`)
+    .then(res=>res.json())
+    .then(data=>{
+        const summaryDiv = document.getElementById("summary");
+        summaryDiv.innerHTML = ""; 
+        document.getElementById("timeline").innerHTML = "";
+
+        if(data.length===0){
+            summaryDiv.innerHTML="<p>No patient found.</p>";
+            document.getElementById("addVisitSection").style.display="none";
+            document.getElementById("loadingSpinner").style.display="none";
+            return;
         }
 
-        // Logout functionality
-        function logout() {
-            document.getElementById('loginModal').classList.remove('hidden');
-            document.getElementById('dashboardContent').classList.add('hidden');
-            document.getElementById('loginForm').reset();
-        }
+        currentPatient = { mobile: data[0][0], name:data[0][1], age:data[0][2] };
+        const latest = data[data.length-1];
 
-        // Toggle user menu
-        function toggleUserMenu() {
-            const userMenu = document.getElementById('userMenu');
-            userMenu.classList.toggle('hidden');
-        }
+        summaryDiv.innerHTML = `
+        <div class="summary-card">
+            <div class="summary-title">${latest[1]} (Age ${latest[2]})</div>
+            <div class="summary-detail">Mobile: ${latest[0]}</div>
+            <div class="summary-detail">Total Visits: ${data.length}</div>
+            <div class="summary-detail">Latest Visit: ${latest[5]}</div>
+            <div class="summary-condition">Condition: ${latest[3]}</div>
+            <div class="summary-prescription">Prescription: ${latest[4]}</div>
+        </div>`;
 
-        // Close user menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const userMenu = document.getElementById('userMenu');
-            const userButton = event.target.closest('button');
-            
-            if (!userButton || !userButton.onclick || userButton.onclick.toString().indexOf('toggleUserMenu') === -1) {
-                userMenu.classList.add('hidden');
-            }
-        });
+        document.getElementById("addVisitSection").style.display = "block";
+        renderTimeline(data);
+        document.getElementById("loadingSpinner").style.display="none";
+    });
+}
 
-        // Dashboard functions
-        function refreshSchedule() {
-            alert('Schedule refreshed successfully!');
-        }
+// Add visit
+function addVisit(){
+    if(!currentPatient) return alert("Search a patient first");
+    let condition = document.getElementById("newCondition").value.trim();
+    let prescription = document.getElementById("newPrescription").value.trim();
+    if(!condition && !prescription) return alert("Enter condition or prescription");
+    let data = {
+        mobile: currentPatient.mobile,
+        name: currentPatient.name,
+        age: currentPatient.age,
+        condition: condition,
+        prescription: prescription,
+        date: new Date().toLocaleDateString('en-GB')
+    };
+    document.getElementById("loadingSpinner").style.display="block";
+    fetch(API_URL, { method:"POST", body: JSON.stringify(data)})
+    .then(res => res.text())
+    .then(()=> searchPatient());
+}
 
-        function addAppointment() {
-            alert('Redirecting to appointment booking system...');
-            window.location.href = 'appointment_booking_system.html';
-        }
+// Login
+function handleLogin(event){
+    event.preventDefault();
+    const username=document.getElementById("username").value;
+    const password=document.getElementById("password").value;
+    if((username==="dr.priya" && password==="secure123") || (username==="admin" && password==="admin2025")){
+        document.getElementById("loginModal").classList.add("hidden");
+        document.getElementById("dashboardContent").classList.remove("hidden");
+        const doctorName=username==="admin"?"System Administrator":"Dr. Priya Sharma";
+        document.getElementById("doctorName").textContent=doctorName;
+    } else alert("Invalid credentials. Please use demo credentials.");
+}
 
-        function viewPatient(patientId) {
-            alert(`Opening patient record for: ${patientId}`);
-        }
+// Logout
+function logout(){
+    document.getElementById("loginModal").classList.remove("hidden");
+    document.getElementById("dashboardContent").classList.add("hidden");
+    document.getElementById("loginForm").reset();
+}
 
-        function startConsultation(patientId) {
-            alert(`Starting consultation for: ${patientId}`);
-        }
+// Toggle user menu
+function toggleUserMenu(){
+    document.getElementById("userMenu").classList.toggle("hidden");
+}
+document.addEventListener('click', function(event){
+    const userMenu = document.getElementById('userMenu');
+    if(!event.target.closest('button')) userMenu.classList.add('hidden');
+});
 
-        function viewAllAppointments() {
-            alert('Opening full appointment schedule...');
-        }
-
-        function createPrescription() {
-            alert('Opening prescription creation interface...');
-        }
-
-        function viewReports() {
-            alert('Opening practice reports dashboard...');
-        }
-
-        function manageInventory() {
-            alert('Opening inventory management system...');
-        }
-
-        function showEmergencySlot() {
-            alert('Creating emergency appointment slot...');
-        }
-
-        function generateReport() {
-            alert('Generating practice analytics report...');
-        }
-
-        function viewAllPatients() {
-            alert('Opening complete patient database...');
-        }
-
-        function addNewPatient() {
-            alert('Opening new patient registration form...');
-        }
-
-        function viewPatientDetails(patientId) {
-            alert(`Opening detailed view for patient: ${patientId}`);
-        }
-
-        function editPatient(patientId) {
-            alert(`Opening edit form for patient: ${patientId}`);
-        }
-
-        function createPrescriptionFor(patientId) {
-            alert(`Creating prescription for patient: ${patientId}`);
-        }
-
-        // Initialize dashboard on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set current date
-            const today = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('currentDate').textContent = today.toLocaleDateString('en-US', options);
-        });
-    </script>
-<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+// Appointments (unchanged)
+document.getElementById("dateSelector").value = new Date().toISOString().split('T')[0];
+const BOOKING_API_URL = "https://script.google.com/macros/s/AKfycbwUBMrJDyLHu49XIYBHOGkeBiF9tUnkT7kC833LG8kH7rq5lt_EPIX-o8YTU5lMCfA/exec";
+function todayISO(){const d=new Date(); return d.toISOString().split('T')[0];}
+document.getElementById("dateSelector").value=todayISO();
+function loadAppointments(data){
+    const dateSel=document.getElementById("dateSelector").value;
+    const [yyyy, mm, dd]=dateSel.split("-");
+    const filterDate=`${dd}/${mm}/${yyyy}`;
+    const tbody=document.querySelector("#appointmentsTable tbody");
+    tbody.innerHTML="";
+    const filtered=data.filter(app=>app.Date===filterDate);
+    if(filtered.length===0){tbody.innerHTML=`<tr><td colspan="6">No appointments</td></tr>`; return;}
+    filtered.forEach(app=>{
+        const tr=document.createElement("tr");
+        tr.innerHTML=`<td>${app["Start Time"]} - ${app["End Time"]}</td>
+        <td>${app["Patient Name"]}</td><td>${app["Email"]}</td><td>${app["Phone Number"]}</td>
+        <td>${app["Location/Notes"]}</td><td>${app["Status"]}</td>`;
+        tbody.appendChild(tr);
+    });
+}
+function fetchAppointments(){
+    const oldScript=document.getElementById("jsonpScript"); if(oldScript) oldScript.remove();
+    const script=document.createElement("script");
+    script.id="jsonpScript"; script.src=BOOKING_API_URL+"?callback=loadAppointments";
+    document.body.appendChild(script);
+}
+document.getElementById("dateSelector").addEventListener("change", fetchAppointments);
+fetchAppointments();
+</script>
 </body>
 </html>
