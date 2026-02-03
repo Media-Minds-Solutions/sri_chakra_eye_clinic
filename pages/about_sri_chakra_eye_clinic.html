@@ -1,659 +1,1056 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>About Sri Chakra Eye Clinic - Our Story & Mission | Expert Eye Care in Anantapur</title>
-      <meta name="description" content="Learn about Sri Chakra Eye Clinic's journey in bringing world-class ophthalmology to Anantapur. Meet our expert doctors, explore our advanced technology, and discover our community commitment." />
-      <link rel="stylesheet" href="../css/main.css" />
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-      <script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fsrichakra6267back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
-   </head>
-   <body class="bg-background" >
-      <!-- Header Navigation -->
-      <header class="bg-white shadow-soft sticky top-0 z-50">
-         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-               <!-- Logo -->
-               <div class="flex items-center">
-                  <div class="flex-shrink-0">
-                     <img src="images/Sri_Chakra_Logo.png" alt="Sri Chakra Logo" class="h-15 w-20 object-contain">
-                  </div>
-                  <div class="ml-3">
-                     <h1 class="font-headline font-bold text-xl text-primary">Sri Chakra</h1>
-                     <p class="text-sm text-text-secondary font-body">Eye Clinic</p>
-                  </div>
-               </div>
-               <!-- Desktop Navigation -->
-               <div class="hidden md:block">
-                  <div class="ml-10 flex items-baseline space-x-8">
-                     <a href="homepage.html" class="text-text-secondary hover:text-primary px-3 py-2 text-sm font-body transition-colors">Home</a>
-                     <a href="services_overview.html" class="text-text-secondary hover:text-primary px-3 py-2 text-sm font-body transition-colors">Services</a>
-                     <a href="about_sri_chakra_eye_clinic.html" class="text-primary font-semibold px-3 py-2 text-sm font-body">About</a>
-                  </div>
-               </div>
-               <!-- Emergency Contact & CTA -->
-               <div style="display: flex; justify-content: flex-end;">
-                  <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
-                  <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-                  <script>
-                     (function() {
-                       var target = document.currentScript;
-                       window.addEventListener('load', function() {
-                         calendar.schedulingButton.load({
-                           url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1AES5FOjzTbpeRi5KEeW9NKGSfhUFuy1ntJpT64BB6PFnt1E74zjufsoXk2izw4zrwm4A7Xm-I?gv=true',
-                           color: '#009688',
-                           label: "Book Appointment",
-                           target,
-                         });
-                       });
-                     })();
-                  </script>
-               </div>
-               <!-- Mobile menu button -->
-               <div class="md:hidden">
-                  <button type="button" class="text-text-secondary hover:text-primary focus:outline-none focus:text-primary" onclick="toggleMobileMenu()">
-                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                     </svg>
-                  </button>
-               </div>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Sri Chakra Eye Clinic - Our Story & Mission | Expert Eye Care in Anantapur</title>
+    <meta name="description" content="Learn about Sri Chakra Eye Clinic's journey in bringing world-class ophthalmology to Anantapur. Meet Dr. Eswar Sakare, explore our advanced technology, and discover our community commitment." />
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#009688',
+                        secondary: '#00695c',
+                        accent: '#ffab00',
+                        background: '#f0fdfa',
+                        surface: '#ffffff',
+                    },
+                    fontFamily: {
+                        headline: ['Poppins', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Critical CSS inline for above-fold content -->
+    <style>
+        /* Reset and Base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0fdfa;
+            overflow-x: hidden;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #009688;
+            border-radius: 5px;
+        }
+        
+        /* Flip Animation */
+        .flip-container {
+            perspective: 1000px;
+        }
+        .flip-inner {
+            display: inline-block;
+            position: relative;
+            width: 90px;
+            height: 28px;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-container:hover .flip-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-front, .flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+        .flip-back {
+            transform: rotateY(180deg);
+            color: #009688;
+            font-weight: 600;
+        }
+        
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #009688 0%, #00695c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Doctor Card Pop-out Styles */
+        .doctor-card-container {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+        
+        .doctor-card {
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .doctor-card:hover {
+            transform: rotateY(-2deg) rotateX(2deg) translateZ(10px);
+        }
+        
+        .image-wrapper {
+            transform: translateZ(50px);
+            transition: transform 0.5s ease;
+        }
+        
+        .doctor-card:hover .image-wrapper {
+            transform: translateZ(80px) scale(1.02);
+        }
+        
+        .doctor-image {
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-origin: bottom center;
+        }
+        
+        .doctor-card:hover .doctor-image {
+            filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.4));
+            transform: translateY(-10px);
+        }
+        
+        .specialization-badge {
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .doctor-card:hover .specialization-badge {
+            transform: translateX(-50%) translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 150, 136, 0.5);
+        }
+        
+        /* Card Hover Effects */
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Animated underline */
+        .animated-underline {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .animated-underline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, #009688, #ffab00);
+            transition: width 0.6s ease;
+        }
+        
+        .doctor-card:hover .animated-underline::after {
+            width: 100%;
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .doctor-card {
+                transform: none !important;
+            }
+            .doctor-card:hover {
+                transform: translateY(-5px) !important;
+            }
+        }
+        
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* Focus Visible */
+        :focus-visible {
+            outline: 2px solid #009688;
+            outline-offset: 2px;
+        }
+    </style>
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "MedicalBusiness",
+        "name": "Sri Chakra Eye Clinic",
+        "image": "images/Sri_Chakra_Logo.png",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "near Riya Hospital, SAPTHAGIRI CIRCLE",
+            "addressLocality": "Anantapur",
+            "addressRegion": "Andhra Pradesh",
+            "postalCode": "515001",
+            "addressCountry": "IN"
+        },
+        "telephone": "+919493288101",
+        "email": "srichakraeyeclinic@gmail.com",
+        "url": "https://srichakraeyeclinic.com",
+        "medicalSpecialty": "Ophthalmology",
+        "priceRange": "$$"
+    }
+    </script>
+</head>
+<body class="bg-background antialiased">
+
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-white px-4 py-2 rounded z-50">
+        Skip to main content
+    </a>
+
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 transition-all duration-300" id="site-header">
+        <div class="bg-white/80 backdrop-blur-lg shadow-sm border-b border-gray-100">
+            <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+                <div class="flex justify-between items-center h-16 lg:h-20">
+                    
+                    <!-- Logo - Mobile Fixed -->
+                    <div class="flex items-center flex-shrink-0">
+                        <a href="homepage.html" class="flex items-center group">
+                            <div class="relative w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 overflow-hidden rounded-full bg-white shadow-md group-hover:shadow-lg transition-shadow flex-shrink-0">
+                                <img src="images/Sri_Chakra_Logo.png" 
+                                    alt="Sri Chakra Eye Clinic Logo" 
+                                    class="w-full h-full object-contain p-1"
+                                    loading="eager"
+                                    width="64" 
+                                    height="64">
+                            </div>
+                            <!-- Now visible on mobile too -->
+                            <div class="ml-2 sm:ml-3 min-w-0">
+                                <h1 class="font-headline font-bold text-base sm:text-lg lg:text-2xl text-gray-900 leading-tight truncate">Sri Chakra</h1>
+                                <p class="text-xs text-gray-600 font-medium tracking-wide">Eye Clinic</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Desktop Navigation -->
+                    <div class="hidden md:flex items-center space-x-1 lg:space-x-8">
+                        <div class="flip-container">
+                            <a href="homepage.html" class="flip-inner">
+                                <span class="flip-front text-gray-600 font-medium">Home</span>
+                                <span class="flip-back text-primary">Home</span>
+                            </a>
+                        </div>
+                        <div class="flip-container">
+                            <a href="services_overview.html" class="flip-inner">
+                                <span class="flip-front text-gray-600 font-medium">Services</span>
+                                <span class="flip-back text-primary">Services</span>
+                            </a>
+                        </div>
+                        <div class="flip-container">
+                            <a href="about_sri_chakra_eye_clinic.html" class="flip-inner" aria-current="page">
+                                <span class="flip-front text-gray-600 font-medium">About</span>
+                                <span class="flip-back text-primary font-semibold">About</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <div class="hidden md:flex items-center">
+                        <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1AES5FOjzTbpeRi5KEeW9NKGSfhUFuy1ntJpT64BB6PFnt1E74zjufsoXk2izw4zrwm4A7Xm-I?gv=true" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="bg-primary hover:bg-secondary text-white px-6 py-2.5 rounded-full font-semibold text-sm lg:text-base transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            Book Appointment
+                        </a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="md:hidden">
+                        <button type="button" 
+                                class="p-2 rounded-lg text-gray-600 hover:text-primary hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
+                                onclick="toggleMobileMenu()"
+                                aria-expanded="false"
+                                aria-controls="mobile-menu"
+                                aria-label="Toggle menu">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" id="menu-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                            <svg class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" id="close-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile Navigation -->
+                <div id="mobile-menu" class="md:hidden hidden border-t border-gray-100 bg-white/95 backdrop-blur-lg">
+                    <div class="px-4 py-3 space-y-1">
+                        <a href="homepage.html" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50 transition-colors">Home</a>
+                        <a href="services_overview.html" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50 transition-colors">Services</a>
+                        <a href="about_sri_chakra_eye_clinic.html" class="block px-3 py-2 rounded-lg text-base font-medium text-primary bg-primary/10" aria-current="page">About</a>
+                        
+                        <div class="pt-4 pb-2 border-t border-gray-100 mt-2">
+                            <a href="tel:+919493288101" class="flex items-center px-3 py-2 text-primary font-semibold">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                </svg>
+                                Emergency: +91 9493288101
+                            </a>
+                        </div>
+                        
+                        <div class="px-3 py-2">
+                            <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1AES5FOjzTbpeRi5KEeW9NKGSfhUFuy1ntJpT64BB6PFnt1E74zjufsoXk2izw4zrwm4A7Xm-I?gv=true" 
+                               target="_blank"
+                               class="block w-full bg-primary text-white text-center py-3 rounded-lg font-semibold hover:bg-secondary transition-colors">
+                                Book Appointment
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- Hero Section with Video Background Style (Matching Homepage) -->
+        <section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-16">
+            <!-- Video Background -->
+            <div class="absolute inset-0 w-full h-full">
+                <video autoplay loop muted playsinline poster="images/Eye_Backgrop_Image.png" class="w-full h-full object-cover">
+                    <source src="videos/Eye_Backdrop_Video.mp4" type="video/mp4" />
+                </video>
+                <div class="absolute inset-0 bg-gradient-to-b from-primary/70 via-primary/50 to-primary/80"></div>
             </div>
-            <!-- Mobile Navigation Menu -->
-            <div id="mobile-menu" class="md:hidden hidden">
-               <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface border-t border-border">
-                  <a href="homepage.html" class="text-text-secondary hover:text-primary block px-3 py-2 text-base font-body">Home</a>
-                  <a href="services_overview.html" class="text-text-secondary hover:text-primary block px-3 py-2 text-base font-body">Services</a>
-                  <a href="about_sri_chakra_eye_clinic.html" class="text-primary font-semibold block px-3 py-2 text-base font-body">About</a>
-                  <a href="appointment_booking_system.html" class="text-text-secondary hover:text-primary block px-3 py-2 text-base font-body">Patient Portal</a>
-                  <a href="contact_location.html" class="text-text-secondary hover:text-primary block px-3 py-2 text-base font-body">Contact</a>
-                  <div class="px-3 py-2 border-t border-border mt-2">
-                     <p class="text-xs text-text-secondary font-body">Emergency Contact</p>
-                     <a href="tel:+919493288101" class="text-sm font-semibold text-primary">+91 9493288101</a>
-                  </div>
-               </div>
+
+            <!-- Hero Content -->
+            <div class="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+                <h1 class="font-headline font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight animate-fade-in-up">
+                    About <span class="text-accent inline-block animate-float">Sri Chakra</span>
+                </h1>
+                <p class="font-body text-lg sm:text-xl md:text-2xl mb-8 text-blue-50 max-w-3xl mx-auto leading-relaxed opacity-90">
+                    Bringing World-Class Eye Care to Anantapur with Compassion, Expertise, and Advanced Technology
+                </p>
+                
+                <!-- Trust Badges -->
+                <div class="mt-8 flex flex-wrap justify-center gap-6 text-sm font-medium text-blue-100">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        15+ Years Experience
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        Advanced Technology
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        Aarogyasri Accepted
+                    </div>
+                </div>
             </div>
-         </nav>
-      </header>
-      <!-- Hero Section -->
-      <section class="relative py-20 bg-gradient-to-br from-primary-50 to-secondary-50 overflow-hidden">
-         <div class="absolute inset-0">
-            <div class="absolute inset-0 bg-white opacity-80"></div>
-            <svg class="absolute top-0 right-0 w-96 h-96 text-primary-100 transform translate-x-32 -translate-y-32" fill="currentColor" viewBox="0 0 100 100">
-               <circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="1" fill="none"/>
-               <circle cx="50" cy="50" r="30" stroke="currentColor" stroke-width="0.5" fill="none"/>
-               <circle cx="50" cy="50" r="20" stroke="currentColor" stroke-width="0.5" fill="none"/>
-               <circle cx="50" cy="50" r="10" fill="currentColor" opacity="0.3"/>
-            </svg>
-         </div>
-         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-         <div class="text-center">
-            <h1 class="font-headline font-bold text-4xl md:text-5xl text-primary mb-4">
-               About Sri Chakra Eye Clinic
-            </h1>
-            <p class="font-body text-lg md:text-xl text-text-secondary max-w-3xl mx-auto">
-               Bringing World-Class Eye Care to Anantapur with Compassion, Expertise, and Advanced Technology
-            </p>
-         </div>
-      </section>
-      <!-- Doctor Profiles Section -->
-      <section class="py-16 bg-surface">
-         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-               <h2 class="font-headline font-bold text-3xl md:text-4xl text-primary mb-4">
-                  Meet the Man behind the Eye Care
-               </h2>
-               <p class="font-body text-lg text-text-secondary max-w-2xl mx-auto">
-                  Experienced and specialized expertise to serve the Anantapur community with Eye Care excellence
-               </p>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                </svg>
             </div>
-            <div class="grid md:grid-cols-1 gap-12">
-               <!-- Senior Consultant -->
-               <div class="doctor-profile-card">
-                  <div class="image-container">
-                     <img src="images/Doctor_Photo.jpeg" alt="Dr. Eswar Sakare - Ophthalmologist" class="doctor-image" />
-                     <div class="specialization-badge">Ophthalmologist</div>
-                  </div>
-                  <div class="profile-details">
-                     <h2 class="doctor-name">Dr. Eswar Sakare</h2>
-                     <p class="doctor-qualification">MBBS, MS Ophthalmology</p>
-                     <div class="doctor-experience">
-                        <h3>Experience:</h3>
-                        <p>6+ years in ophthalmology</p>
-                     </div>
-                     <div class="doctor-education">
-                        <h3>Education:</h3>
-                        <p>Fellowship in Cornea & Anterior Segment, Sankara Nethralaya, Chennai</p>
-                     </div>
-                     <div class="doctor-specializations">
-                        <h3>Specializations:</h3>
-                        <ul>
-                           <li>Cataract & Refractive Surgery</li>
-                           <li>Glaucoma Management</li>
-                           <li>Diabetic Retinopathy</li>
-                           <li>Corneal Disorders</li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
-               <style>
-                  /* Container */
-                  .doctor-profile-card {
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: center;
-                  background: linear-gradient(135deg, #1a1a1a, #1456d8);
-                  border-radius: 20px;
-                  padding: 30px;
-                  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-                  max-width: 1200px;
-                  margin: 20px auto;
-                  color: #ffffff;
-                  }
-                  /* Image Section */
-                  .image-container {
-                  position: relative;
-                  width: 35%;
-                  border-radius: 15px;
-                  overflow: hidden;
-                  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-                  }
-                  .doctor-image {
-                  width: 100%;
-                  height: auto;
-                  transition: transform 0.3s ease;
-                  }
-                  .doctor-image:hover {
-                  transform: scale(1.05);
-                  }
-                  .specialization-badge {
-                  position: absolute;
-                  bottom: 10px;
-                  left: 50%;
-                  transform: translateX(-50%);
-                  background: rgba(17, 66, 165, 0.8);
-                  color: #ffffff;
-                  padding: 5px 15px;
-                  border-radius: 50px;
-                  font-weight: bold;
-                  font-size: 0.9rem;
-                  }
-                  /* Profile Details */
-                  .profile-details {
-                  width: 60%;
-                  padding-left: 20px;
-                  }
-                  .doctor-name {
-                  font-size: 2rem;
-                  font-weight: 700;
-                  margin-bottom: 10px;
-                  color: #ffffff;
-                  }
-                  .doctor-qualification {
-                  font-size: 1.1rem;
-                  margin-bottom: 20px;
-                  color: #b0b0b0;
-                  }
-                  .doctor-experience, .doctor-education, .doctor-specializations {
-                  margin-bottom: 20px;
-                  }
-                  .doctor-experience h3, .doctor-education h3, .doctor-specializations h3 {
-                  font-size: 1.2rem;
-                  font-weight: 600;
-                  margin-bottom: 5px;
-                  color: #ffffff;
-                  }
-                  .doctor-experience p, .doctor-education p, .doctor-specializations ul {
-                  font-size: 1rem;
-                  color: #b0b0b0;
-                  }
-                  .doctor-specializations ul {
-                  list-style-type: disc;
-                  padding-left: 20px;
-                  }
-                  /* Responsive Design */
-                  @media (max-width: 768px) {
-                  .doctor-profile-card {
-                  flex-direction: column;
-                  align-items: flex-start;
-                  }
-                  .image-container {
-                  width: 100%;
-                  margin-bottom: 20px;
-                  }
-                  .profile-details {
-                  width: 100%;
-                  padding-left: 0;
-                  }
-                  }
-               </style>
-               <!-- Founding Story Section -->
-               <section class="py-16 bg-white">
-                  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                     <div class="grid lg:grid-cols-2 gap-12 items-center">
-                        <div>
-                           <h2 class="font-headline font-bold text-3xl md:text-4xl text-primary mb-6">
-                              The Vision Behind Sri Chakra
-                           </h2>
-                           <div class="space-y-6 font-body text-text-secondary leading-relaxed">
-                              <p>
-                                 Founded in 2025 with a profound vision to transform eye care in Anantapur, Sri Chakra Eye Clinic emerged from a simple yet powerful belief: every person deserves access to world-class ophthalmology, regardless of their location or background.
-                              </p>
-                              <p>
-                                 The name "Sri Chakra" symbolizes the ancient concept of enlightenment through clarity of vision - both literal and metaphorical. Just as the chakra represents the wheel of energy and balance, our clinic serves as a center of healing energy, restoring not just sight but hope and quality of life to our patients.
-                              </p>
-                              <p>
-                                 What began as a modest practice has grown into a comprehensive eye care center, serving patients from Anantapur and surrounding districts. Our journey reflects our unwavering commitment to bringing advanced medical technology and compassionate care to a region that was traditionally underserved by specialized healthcare facilities.
-                              </p>
-                              <div class="bg-primary-50 p-6 rounded-lg border-l-4 border-primary">
-                                 <p class="font-accent italic text-primary">
+        </section>
+
+        <!-- Doctor Profile Section with Pop-out Effect -->
+        <section class="py-16 lg:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="font-headline font-bold text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-4">
+                        Meet the <span class="gradient-text">Expert</span>
+                    </h2>
+                    <p class="font-body text-lg text-gray-600 max-w-2xl mx-auto">
+                        Dedicated ophthalmologist serving the Anantapur community with excellence
+                    </p>
+                </div>
+
+                <!-- NEW POP-OUT DOCTOR CARD -->
+                <div class="doctor-card-container w-full max-w-5xl mx-auto">
+                    <div class="doctor-card relative bg-white rounded-3xl shadow-2xl overflow-visible grid md:grid-cols-2 gap-0" 
+                         style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;">
+                        
+                        <!-- Left Side: Image with Pop-out Effect -->
+                        <div class="relative bg-gradient-to-br from-gray-50 to-gray-100 rounded-l-3xl md:rounded-l-3xl rounded-t-3xl md:rounded-tr-none p-8 flex items-end justify-center min-h-[400px] md:min-h-[550px] overflow-visible">
+                            
+                            <!-- Decorative Circles -->
+                            <div class="absolute w-[300px] h-[300px] bg-primary/10 rounded-full -top-[100px] -right-[100px] pointer-events-none"></div>
+                            <div class="absolute w-[200px] h-[200px] bg-accent/10 rounded-full -bottom-[50px] -left-[50px] pointer-events-none"></div>
+                            
+                            <!-- Image Wrapper with 3D Effect -->
+                            <div class="image-wrapper relative w-full max-w-sm">
+                                <!-- The Full Doctor Image -->
+                                <img 
+                                    src="images/Doctor_Photo.jpeg" 
+                                    alt="Dr. Eswar Sakare - Ophthalmologist" 
+                                    class="doctor-image w-full h-auto block relative rounded-lg"
+                                    style="filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));"
+                                />
+                                
+                                <!-- Floating Badge -->
+                                <div class="specialization-badge absolute bottom-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-full font-semibold text-sm shadow-lg whitespace-nowrap z-20">
+                                    Ophthalmologist
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Side: Content -->
+                        <div class="content-section p-6 md:p-10 flex flex-col justify-center bg-white rounded-r-3xl md:rounded-r-3xl rounded-b-3xl md:rounded-bl-none">
+                            
+                            <!-- Header -->
+                            <div class="mb-6">
+                                <h2 class="font-headline text-sm font-semibold text-primary uppercase tracking-wider mb-2">Meet the Expert</h2>
+                                <h1 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 animated-underline">
+                                    Dr. Eswar Sakare
+                                </h1>
+                                <p class="text-lg text-gray-600 font-medium">MBBS, MS Ophthalmology</p>
+                            </div>
+                            
+                            <!-- Qualifications Grid -->
+                            <div class="grid grid-cols-1 gap-4 mb-6">
+                                
+                                <!-- Experience -->
+                                <div class="flex items-start p-4 bg-gray-50 rounded-xl hover:bg-primary/5 transition-colors group">
+                                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                                        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-900">Experience</h3>
+                                        <p class="text-gray-600 text-sm">6+ years in ophthalmology with specialized training in advanced surgical techniques</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Education -->
+                                <div class="flex items-start p-4 bg-gray-50 rounded-xl hover:bg-secondary/5 transition-colors group">
+                                    <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0 group-hover:bg-secondary/20 transition-colors">
+                                        <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-900">Education</h3>
+                                        <p class="text-gray-600 text-sm">Fellowship in Cornea & Anterior Segment, Sankara Nethralaya, Chennai</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Specializations -->
+                                <div class="flex items-start p-4 bg-gray-50 rounded-xl hover:bg-accent/5 transition-colors group">
+                                    <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0 group-hover:bg-accent/20 transition-colors">
+                                        <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-900">Specializations</h3>
+                                        <div class="flex flex-wrap gap-2 mt-2">
+                                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full font-medium">Cataract Surgery</span>
+                                            <span class="px-3 py-1 bg-secondary/10 text-secondary text-xs rounded-full font-medium">Glaucoma</span>
+                                            <span class="px-3 py-1 bg-accent/10 text-accent text-xs rounded-full font-medium">Cornea</span>
+                                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full font-medium">Refractive Surgery</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- CTA Buttons -->
+                            <div class="flex flex-wrap gap-3 mt-auto">
+                                <a href="tel:+919493288101" class="flex-1 bg-primary hover:bg-secondary text-white px-6 py-3 rounded-full font-semibold text-center transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                    </svg>
+                                    Book Consultation
+                                </a>
+                                <button onclick="toggleDetails()" class="px-6 py-3 border-2 border-gray-200 hover:border-primary text-gray-700 hover:text-primary rounded-full font-semibold transition-all duration-300 flex items-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    More Info
+                                </button>
+                            </div>
+
+                            <!-- Hidden Details Section -->
+                            <div id="doctor-more-info" class="hidden mt-4 p-4 bg-primary/5 rounded-xl border border-primary/10">
+                                <p class="text-sm text-gray-600">
+                                    Dr. Eswar Sakare is a distinguished ophthalmologist with extensive experience in cataract surgery, glaucoma management, and corneal disorders. He is committed to providing personalized care using the latest technology. He has successfully performed thousands of surgeries and is known for his patient-centric approach.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Professional Affiliations -->
+                <div class="mt-16 text-center">
+                    <h3 class="font-headline font-semibold text-xl text-gray-900 mb-6">Professional Affiliations</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-3">
+                                <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-900">All India Ophthalmological Society</p>
+                            <p class="text-xs text-gray-500 mt-1">Active Member</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 mx-auto bg-secondary/10 rounded-full flex items-center justify-center mb-3">
+                                <svg class="w-6 h-6 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-900">Andhra Pradesh Medical Council</p>
+                            <p class="text-xs text-gray-500 mt-1">Registered</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 mx-auto bg-accent/10 rounded-full flex items-center justify-center mb-3">
+                                <svg class="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-900">Indian Medical Association</p>
+                            <p class="text-xs text-gray-500 mt-1">Life Member</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-3">
+                                <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-900">Vitreo Retinal Society</p>
+                            <p class="text-xs text-gray-500 mt-1">Member</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Story Section -->
+        <section class="py-16 lg:py-24 bg-primary/5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="font-headline font-bold text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-6">
+                            The Vision Behind <span class="gradient-text">Sri Chakra</span>
+                        </h2>
+                        <div class="space-y-4 text-gray-600 leading-relaxed">
+                            <p>
+                                Founded in 2025 with a profound vision to transform eye care in Anantapur, Sri Chakra Eye Clinic emerged from a simple yet powerful belief: every person deserves access to world-class ophthalmology, regardless of their location or background.
+                            </p>
+                            <p>
+                                The name "Sri Chakra" symbolizes the ancient concept of enlightenment through clarity of vision - both literal and metaphorical. Just as the chakra represents the wheel of energy and balance, our clinic serves as a center of healing energy, restoring not just sight but hope and quality of life to our patients.
+                            </p>
+                            <p>
+                                What began as a modest practice has grown into a comprehensive eye care center, serving patients from Anantapur and surrounding districts. Our journey reflects our unwavering commitment to bringing advanced medical technology and compassionate care to a region that was traditionally underserved by specialized healthcare facilities.
+                            </p>
+                            <div class="bg-white p-6 rounded-xl border-l-4 border-primary shadow-sm mt-6">
+                                <p class="italic text-primary font-medium">
                                     "Our mission has always been simple: to be the beacon of hope for those seeking clarity in their vision and peace in their hearts."
-                                 </p>
-                                 <p class="text-sm text-primary-700 mt-2">- Founding Philosophy</p>
-                              </div>
-                           </div>
+                                </p>
+                                <p class="text-sm text-gray-500 mt-2">- Founding Philosophy</p>
+                            </div>
                         </div>
-                        <div class="relative">
-                           <div class="aspect-w-4 aspect-h-3 rounded-2xl overflow-hidden shadow-large">
-                              <img src="images/Sri_Chakra_Logo.png" alt="Sri Chakra Eye Clinic founding story" class="w-full h-96 object-cover" />
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </section>
-               <!-- Medical Credentials -->
-               <div class="mt-12 text-center">
-                  <h3 class="font-headline font-semibold text-xl text-primary mb-6">Professional Affiliations</h3>
-                  <div class="grid md:grid-cols-4 gap-6">
-                     <div class="bg-white p-4 rounded-lg shadow-soft">
-                        <p class="text-sm font-semibold text-primary">All India Ophthalmological Society</p>
-                        <p class="text-xs text-text-secondary mt-1">Active Members</p>
-                     </div>
-                     <div class="bg-white p-4 rounded-lg shadow-soft">
-                        <p class="text-sm font-semibold text-primary">Andhra Pradesh Medical Council</p>
-                        <p class="text-xs text-text-secondary mt-1">Registered Practitioners</p>
-                     </div>
-                     <div class="bg-white p-4 rounded-lg shadow-soft">
-                        <p class="text-sm font-semibold text-primary">Indian Medical Association</p>
-                        <p class="text-xs text-text-secondary mt-1">Life Members</p>
-                     </div>
-                     <div class="bg-white p-4 rounded-lg shadow-soft">
-                        <p class="text-sm font-semibold text-primary">Vitreo Retinal Society</p>
-                        <p class="text-xs text-text-secondary mt-1">Specialized Training</p>
-                     </div>
-                  </div>
-               </div>
+                    </div>
+                    <div class="relative">
+                        <img src="images/Sri_Chakra_Logo.png" alt="Sri Chakra Eye Clinic" class="w-full h-96 object-contain rounded-2xl bg-white p-8 shadow-lg" />
+                    </div>
+                </div>
             </div>
-      </section>
-      <!-- Mission & Values -->
-      <section class="py-16 bg-gradient-to-br from-primary-50 to-secondary-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-      <h2 class="font-headline font-bold text-3xl md:text-4xl text-primary mb-4">
-      Our Mission & Values
-      </h2>
-      <p class="font-body text-lg text-text-secondary max-w-2xl mx-auto">
-      Guided by the sacred geometry of the Sri Chakra, we restore vision and transform lives
-      </p>
-      </div>
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-      <div>
-      <div class="space-y-8">
-      <div class="flex items-start">
-      <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-      <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-      </svg>
-      </div>
-      <div>
-      <h3 class="font-headline font-semibold text-xl text-primary mb-2">Excellence in Care</h3>
-      <p class="font-body text-text-secondary">Delivering world-class ophthalmology services with precision, compassion, and unwavering commitment to patient outcomes.</p>
-      </div>
-      </div>
-      <div class="flex items-start">
-      <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-      <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-      </svg>
-      </div>
-      <div>
-      <h3 class="font-headline font-semibold text-xl text-primary mb-2">Community First</h3>
-      <p class="font-body text-text-secondary">Serving the Anantapur region with cultural sensitivity, multilingual care, and deep understanding of local health needs.</p>
-      </div>
-      </div>
-      <div class="flex items-start">
-      <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-      <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-      </svg>
-      </div>
-      <div>
-      <h3 class="font-headline font-semibold text-xl text-primary mb-2">Innovation & Technology</h3>
-      <p class="font-body text-text-secondary">Embracing cutting-edge medical technology while maintaining the personal touch that defines compassionate healthcare.</p>
-      </div>
-      </div>
-      </div>
-      </div>
-      <div class="relative">
-      <div class="aspect-w-4 aspect-h-3 rounded-2xl overflow-hidden shadow-large">
-      <img src="images/Sri_Chakra_services.webp" alt="Sri Chakra Eye Clinic mission and values"/>
-      </div>
-      </div>
-      </div>
-      </div>
-      </div>
-      </section>
-      <!-- Cultural Sensitivity -->
-      <section class="py-16 bg-surface">
-         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-               <div>
-                  <h2 class="font-headline font-bold text-3xl md:text-4xl text-primary mb-6">
-                     Culturally Rooted, Globally Advanced
-                  </h2>
-                  <div class="space-y-6 font-body text-text-secondary leading-relaxed">
-                     <p>
-                        At Sri Chakra Eye Clinic, we understand that healthcare is deeply personal and cultural. Our approach honors the rich traditions of Andhra Pradesh while delivering internationally recognized medical standards.
-                     </p>
-                     <p>
-                        Our multilingual team communicates fluently in Telugu, Hindi, Tamil, and English, ensuring every patient feels comfortable and understood. We respect traditional health beliefs while gently educating about modern treatment options.
-                     </p>
-                     <div class="bg-white p-6 rounded-lg shadow-soft border-l-4 border-secondary">
-                        <h4 class="font-headline font-semibold text-primary mb-3">Our Cultural Commitments:</h4>
-                        <ul class="space-y-2 text-sm">
-                           <li class="flex items-center">
-                              <svg class="w-4 h-4 text-secondary mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                              </svg>
-                              Multilingual consultations in patient's preferred language
-                           </li>
-                           <li class="flex items-center">
-                              <svg class="w-4 h-4 text-secondary mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                              </svg>
-                              Respect for traditional health practices and beliefs
-                           </li>
-                           <li class="flex items-center">
-                              <svg class="w-4 h-4 text-secondary mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                              </svg>
-                              Family-centered care approach honoring local customs
-                           </li>
-                           <li class="flex items-center">
-                              <svg class="w-4 h-4 text-secondary mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                              </svg>
-                              Flexible scheduling for agricultural and festival seasons
-                           </li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
-               <div class="relative">
-                  <div class="aspect-w-4 aspect-h-3 rounded-2xl overflow-hidden shadow-large">
-                     <img src="images/Clinic_Photo.webp" alt="Cultural sensitivity in healthcare" class="w-full h-96 w-96 object-cover"/>
-                  </div>
-               </div>
+        </section>
+
+        <!-- Mission & Values -->
+        <section class="py-16 lg:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="font-headline font-bold text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-4">
+                        Our Mission & <span class="gradient-text">Values</span>
+                    </h2>
+                    <p class="font-body text-lg text-gray-600 max-w-2xl mx-auto">
+                        Guided by compassion and excellence in every aspect of patient care
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 rounded-2xl p-8 text-center hover:shadow-lg transition-shadow border border-gray-100 service-card">
+                        <div class="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-headline font-bold text-xl text-gray-900 mb-2">Excellence in Care</h3>
+                        <p class="text-gray-600 text-sm">Delivering world-class ophthalmology services with precision, compassion, and unwavering commitment to patient outcomes.</p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-2xl p-8 text-center hover:shadow-lg transition-shadow border border-gray-100 service-card">
+                        <div class="w-16 h-16 mx-auto bg-secondary/10 rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-headline font-bold text-xl text-gray-900 mb-2">Community First</h3>
+                        <p class="text-gray-600 text-sm">Serving the Anantapur region with cultural sensitivity, multilingual care, and deep understanding of local health needs.</p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-2xl p-8 text-center hover:shadow-lg transition-shadow border border-gray-100 service-card">
+                        <div class="w-16 h-16 mx-auto bg-accent/10 rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-headline font-bold text-xl text-gray-900 mb-2">Innovation</h3>
+                        <p class="text-gray-600 text-sm">Embracing cutting-edge medical technology while maintaining the personal touch that defines compassionate healthcare.</p>
+                    </div>
+                </div>
             </div>
-         </div>
-      </section>
-      <!-- Location & Directions -->
-      <section class="py-16 bg-white">
-         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-               <h2 class="font-headline font-bold text-3xl md:text-4xl text-primary mb-4">
-                  Find Us in Anantapur
-               </h2>
-               <p class="font-body text-lg text-text-secondary">
-                  Conveniently located with easy access from all major landmarks
-               </p>
+        </section>
+
+        <!-- Cultural Sensitivity -->
+        <section class="py-16 lg:py-24 bg-primary/5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 lg:order-1">
+                        <img src="images/Clinic_Photo.webp" alt="Sri Chakra Eye Clinic Facility" class="w-full h-96 object-cover rounded-2xl shadow-lg" />
+                    </div>
+                    <div class="order-1 lg:order-2">
+                        <h2 class="font-headline font-bold text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-6">
+                            Culturally Rooted, <span class="gradient-text">Globally Advanced</span>
+                        </h2>
+                        <div class="space-y-4 text-gray-600 leading-relaxed">
+                            <p>
+                                At Sri Chakra Eye Clinic, we understand that healthcare is deeply personal and cultural. Our approach honors the rich traditions of Andhra Pradesh while delivering internationally recognized medical standards.
+                            </p>
+                            <p>
+                                Our multilingual team communicates fluently in Telugu, Hindi, Tamil, and English, ensuring every patient feels comfortable and understood. We respect traditional health beliefs while gently educating about modern treatment options.
+                            </p>
+                        </div>
+                        
+                        <div class="mt-6 bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                            <h4 class="font-semibold text-gray-900 mb-4">Our Cultural Commitments:</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-center text-sm text-gray-600">
+                                    <svg class="w-5 h-5 text-primary mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                    Multilingual consultations in patient's preferred language
+                                </li>
+                                <li class="flex items-center text-sm text-gray-600">
+                                    <svg class="w-5 h-5 text-primary mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                    Respect for traditional health practices and beliefs
+                                </li>
+                                <li class="flex items-center text-sm text-gray-600">
+                                    <svg class="w-5 h-5 text-primary mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                    Family-centered care approach honoring local customs
+                                </li>
+                                <li class="flex items-center text-sm text-gray-600">
+                                    <svg class="w-5 h-5 text-primary mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                    Flexible scheduling for agricultural and festival seasons
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="grid lg:grid-cols-2 gap-12">
-               <!-- Map -->
-               <div class="card-elevated">
-                  <div class="aspect-w-16 aspect-h-12 bg-gray-200 rounded-lg overflow-hidden">
-                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.8267!2d77.6!3d14.68!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDQwJzQ4LjAiTiA3N8KwMzYnMDAuMCJF!5e0!3m2!1sen!2sin!4v1635000000000!5m2!1sen!2sin" width="100%" height="400" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="rounded-lg">
-                     </iframe>
-                  </div>
-                  <div class="mt-4 text-center">
-                     <a href="https://goo.gl/maps/example" class="btn-secondary">
-                     Open in Google Maps
-                     </a>
-                  </div>
-               </div>
-               <!-- Address & Directions -->
-               <div class="space-y-8">
-                  <!-- Address -->
-                  <div class="card-elevated">
-                     <div class="flex items-start">
-                        <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                           <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                           </svg>
+        </section>
+
+        <!-- Location & Hours -->
+        <section class="py-16 lg:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="font-headline font-bold text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-4">
+                        Find Us in <span class="gradient-text">Anantapur</span>
+                    </h2>
+                    <p class="font-body text-lg text-gray-600">
+                        Conveniently located with easy access from all major landmarks
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Map -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 service-card">
+                        <div class="aspect-w-16 aspect-h-12 bg-gray-200 h-[400px]">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.8267!2d77.6!3d14.68!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDQwJzQ4LjAiTiA3N8KwMzYnMDAuMCJF!5e0!3m2!1sen!2sin!4v1635000000000!5m2!1sen!2sin" 
+                                    width="100%" 
+                                    height="100%" 
+                                    style="border:0;" 
+                                    allowfullscreen 
+                                    loading="lazy" 
+                                    referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
                         </div>
-                        <div>
-                           <h3 class="font-headline font-semibold text-lg text-primary mb-2">Clinic Address</h3>
-                           <p class="font-body text-text-primary mb-2">
-                              Sri Chakra Eye Clinic, <br />
-                              near Riya Hospital, SAPTHAGIRI CIRCLE,<br />
-                              Anantapur, Andhra Pradesh 515001
-                           </p>
-                           <p class="font-body text-text-secondary text-sm">
-                              శ్రీ చక్ర ఐ క్లినిక్,<br />
-                              రియా హాస్పిటల్ సమీపంలో, సప్తగిరి సర్కిల్,<br />
-                              అనంతపురం, ఆంధ్రప్రదేశ్ 515001<br />
-                           </p>
+                        <div class="p-4 text-center">
+                            <a href="https://maps.google.com/?q=Sri+Chakra+Eye+Clinic+Anantapur" 
+                               target="_blank"
+                               class="inline-flex items-center text-primary font-semibold hover:text-secondary transition-colors">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                Open in Google Maps
+                            </a>
                         </div>
-                     </div>
-                  </div>
-                  <!-- Landmarks -->
-                  <div class="card-elevated">
-                     <h3 class="font-headline font-semibold text-lg text-primary mb-4">Nearby Landmarks</h3>
-                     <div class="space-y-3">
-                        <div class="flex items-center">
-                           <div class="w-2 h-2 bg-secondary rounded-full mr-3"></div>
-                           <span class="font-body text-text-primary">200m from Anantapur Railway Station</span>
+                    </div>
+
+                    <!-- Info Cards -->
+                    <div class="space-y-6">
+                        <!-- Address -->
+                        <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100 service-card">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-headline font-semibold text-lg text-gray-900 mb-2">Clinic Address</h3>
+                                    <p class="text-gray-600 mb-1">
+                                        Sri Chakra Eye Clinic,<br />
+                                        near Riya Hospital, SAPTHAGIRI CIRCLE,<br />
+                                        Anantapur, Andhra Pradesh 515001
+                                    </p>
+                                    <p class="text-gray-500 text-sm">
+                                        శ్రీ చక్ర ఐ క్లినిక్,<br />
+                                        రియా హాస్పిటల్ సమీపంలో, సప్తగిరి సర్కిల్,<br />
+                                        అనంతపురం, ఆంధ్రప్రదేశ్ 515001
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="flex items-center">
-                           <div class="w-2 h-2 bg-secondary rounded-full mr-3"></div>
-                           <span class="font-body text-text-primary">500m from Central Bus Stand</span>
+
+                        <!-- Landmarks -->
+                        <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100 service-card">
+                            <h3 class="font-headline font-semibold text-lg text-gray-900 mb-4">Nearby Landmarks</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center text-gray-600">
+                                    <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
+                                    <span>200m from Anantapur Railway Station</span>
+                                </div>
+                                <div class="flex items-center text-gray-600">
+                                    <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
+                                    <span>500m from Central Bus Stand</span>
+                                </div>
+                                <div class="flex items-center text-gray-600">
+                                    <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
+                                    <span>1km from Anantapur Main Market</span>
+                                </div>
+                                <div class="flex items-center text-gray-600">
+                                    <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
+                                    <span>Opposite to State Bank of India</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="flex items-center">
-                           <div class="w-2 h-2 bg-secondary rounded-full mr-3"></div>
-                           <span class="font-body text-text-primary">1km from Anantapur Main Market</span>
+
+                        <!-- Operating Hours -->
+                        <div class="bg-primary rounded-2xl p-6 text-white service-card">
+                            <h3 class="font-headline font-semibold text-lg mb-4 flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                Operating Hours
+                            </h3>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between items-center py-1 border-b border-white/20">
+                                    <span>Monday - Saturday</span>
+                                    <span class="font-semibold">9:30 AM - 8:00 PM</span>
+                                </div>
+                                <div class="flex justify-between items-center py-1 border-b border-white/20">
+                                    <span>Sunday</span>
+                                    <span class="text-white/70">Closed</span>
+                                </div>
+                                <div class="flex justify-between items-center py-1">
+                                    <span>Lunch Break</span>
+                                    <span class="text-white/70">1:00 PM - 2:00 PM</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="flex items-center">
-                           <div class="w-2 h-2 bg-secondary rounded-full mr-3"></div>
-                           <span class="font-body text-text-primary">Opposite to State Bank of India</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </section>
-      <!-- Operating Hours -->
-      <section class="py-16 bg-surface">
-         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-               <h2 class="font-headline font-bold text-3xl md:text-4xl text-primary mb-4">
-                  Operating Hours
-               </h2>
-               <p class="font-body text-lg text-text-secondary">
-                  We're here when you need us most
-               </p>
-            </div>
-            <div class="grid md:grid-cols-1 gap-2">
-               <!-- Regular Hours -->
-               <div class="card-elevated">
-                  <h3 class="font-headline font-semibold text-xl text-primary mb-6 text-center">Regular Hours</h3>
-                  <div class="space-y-4">
-                     <div class="flex justify-between items-center py-2 border-b border-border-light">
-                        <span class="font-body text-text-primary">Monday - Saturday</span>
-                        <span class="font-semibold text-secondary">9:30 AM - 8:00 PM</span>
-                     </div>
-                     <div class="flex justify-between items-center py-2 border-b border-border-light">
-                        <span class="font-body text-text-primary">Sunday</span>
-                        <span class="font-semibold text-text-secondary">Closed</span>
-                     </div>
-                     <div class="flex justify-between items-center py-2">
-                        <span class="font-body text-text-primary">Lunch Break</span>
-                        <span class="font-semibold text-text-secondary">1:00 PM - 2:00 PM</span>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-      <!-- Footer -->
-      <footer class="bg-primary text-white py-12">
-         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8">
-               <!-- Clinic Info -->
-               <div>
-                  <div class="flex items-center mb-4">
-                     <img src="images/Sri_Chakra_Logo.png" alt="Sri Chakra Logo" class="h-15 w-20 object-contain mr-4">
-                     <div>
-                        <h3 class="font-headline font-bold text-lg">Sri Chakra Eye Clinic</h3>
-                     </div>
-                  </div>
-                  <p class="font-body text-blue-200 mb-4">
-                     Advanced eye care with compassionate service in Anantapur
-                  </p>
-                  <div class="flex space-x-4">
-                     <a href="https://www.youtube.com/@yourseyedoctor" target="_blank" 
-                        class="text-red-500 hover:text-white transition-colors">
+        </section>
+
+        <!-- Call to Action -->
+        <section class="py-16 lg:py-24 bg-primary text-white relative overflow-hidden">
+            <!-- Decorative Elements -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+            <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+            
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <h2 class="font-headline font-bold text-3xl md:text-4xl lg:text-5xl mb-6">
+                    Experience Excellence in Eye Care
+                </h2>
+                <p class="font-body text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
+                    Visit Sri Chakra Eye Clinic and discover why we're trusted by thousands of patients across Anantapur.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1AES5FOjzTbpeRi5KEeW9NKGSfhUFuy1ntJpT64BB6PFnt1E74zjufsoXk2izw4zrwm4A7Xm-I?gv=true" 
+                       target="_blank"
+                       class="bg-accent hover:bg-yellow-500 text-gray-900 px-8 py-4 rounded-full font-headline font-bold text-lg transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        Book Appointment
+                    </a>
+                    <a href="tel:+919493288101" class="border-2 border-white text-white px-8 py-4 rounded-full font-headline font-semibold hover:bg-white hover:text-primary transition-all duration-300 flex items-center gap-2">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                           <path d="M23.5 6.2s-.2-1.6-.8-2.3c-.7-.8-1.5-.8-1.9-.9C18.1 2.7 12 2.7 
-                              12 2.7h-.1s-6.1 0-8.8.3c-.4.1-1.2.1-1.9.9C.7 4.6.5 6.2.5 
-                              6.2S0 8.1 0 10v1.9c0 1.9.5 3.8.5 3.8s.2 1.6.8 2.3c.7.8 
-                              1.6.8 2 1 1.5.1 6.6.3 8.7.3h.1s6.1 0 8.8-.3c.4-.1 
-                              1.2-.1 1.9-.9.6-.7.8-2.3.8-2.3s.5-1.9.5-3.8V10c0-1.9-.5-3.8-.5-3.8zM9.5 
-                              14.6V8.4l6.2 3.1-6.2 3.1z"/>
+                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                         </svg>
-                     </a>
-                     <a href="https://www.instagram.com/dr.opthamology?igsh=MW1wN25pa2VqbHJucg==" target="_blank" 
-                        class="text-pink-400 hover:text-white transition-colors">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                           <path d="M7.75 2h8.5C19.55 2 22 4.45 22 7.75v8.5C22 19.55 19.55 22 16.25 22h-8.5C4.45 
-                              22 2 19.55 2 16.25v-8.5C2 4.45 4.45 2 7.75 2zm0 2C5.68 4 4 5.68 4 
-                              7.75v8.5C4 18.32 5.68 20 7.75 20h8.5c2.07 0 3.75-1.68 
-                              3.75-3.75v-8.5C20 5.68 18.32 4 16.25 4h-8.5zm4.25 3.25a4.75 4.75 
-                              0 1 1 0 9.5 4.75 4.75 0 0 1 0-9.5zm0 2a2.75 2.75 0 1 0 0 5.5 
-                              2.75 2.75 0 0 0 0-5.5zm5.5-.5a1 1 0 1 1-2 0 1 1 0 0 1 
-                              2 0z"/>
-                        </svg>
-                     </a>
-                  </div>
-               </div>
-               <!-- Quick Links -->
-               <div>
-                  <h4 class="font-headline font-semibold text-lg mb-4">Quick Links</h4>
-                  <ul class="space-y-2 font-body">
-                     <li><a href="homepage.html" class="text-blue-200 hover:text-white transition-colors">Home</a></li>
-                     <li><a href="services_overview.html" class="text-blue-200 hover:text-white transition-colors">Services</a></li>
-                     <li><a href="about_sri_chakra_eye_clinic.html" class="text-blue-200 hover:text-white transition-colors">About Us</a></li>
-                  </ul>
-               </div>
-               <!-- Services -->
-               <div>
-                  <h4 class="font-headline font-semibold text-lg mb-4">Our Services</h4>
-                  <ul class="space-y-2 font-body">
-                     <li><a href="services_overview.html" class="text-blue-200 hover:text-white transition-colors">Cataract Surgery</a></li>
-                     <li><a href="services_overview.html" class="text-blue-200 hover:text-white transition-colors">Glaucoma Treatment</a></li>
-                     <li><a href="services_overview.html" class="text-blue-200 hover:text-white transition-colors">Retinal Care</a></li>
-                     <li><a href="services_overview.html" class="text-blue-200 hover:text-white transition-colors">Pediatric Eye Care</a></li>
-                  </ul>
-               </div>
-               <!-- Contact Info -->
-               <div>
-                  <h4 class="font-headline font-semibold text-lg mb-4">Contact Info</h4>
-                  <div class="space-y-3 font-body">
-                     <div class="flex items-start">
-                        <svg class="w-5 h-5 text-accent mr-2 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
-                           <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                        <p class="text-blue-200">
-                           Sri Chakra Eye Clinic, <br />
-                           near Riya Hospital, SAPTHAGIRI CIRCLE,<br />
-                           Anantapur, Andhra Pradesh 515001
-                        </p>
-                     </div>
-                     <div class="flex items-center">
-                        <svg class="w-5 h-5 text-accent mr-2" fill="currentColor" viewBox="0 0 24 24">
-                           <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                        </svg>
-                        <a href="tel:+919493288101" class="text-blue-200 hover:text-white transition-colors">+91 9493288101</a>
-                     </div>
-                     <div class="flex items-center">
-                        <svg class="w-5 h-5 text-accent mr-2" fill="currentColor" viewBox="0 0 24 24">
-                           <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                        </svg>
-                        <a href="mailto:info@srichakraeyeclinic.com" class="text-blue-200 hover:text-white transition-colors">info@srichakraeyeclinic.com</a>
-                     </div>
-                  </div>
-               </div>
+                        Call: +91 9493288101
+                    </a>
+                </div>
             </div>
-            <div class="border-t border-blue-700 mt-8 pt-8 text-center">
-               <p class="font-body text-blue-200">
-                  © 2025 Sri Chakra Eye Clinic. All Rights Reserved. | 
-                  <a href="javascript:void(0)" class="hover:text-white transition-colors">Privacy Policy</a> | 
-                  <a href="javascript:void(0)" class="hover:text-white transition-colors">Terms of Service</a>
-               </p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
+                
+                <!-- Brand -->
+                <div class="lg:col-span-1">
+                    <div class="flex items-center mb-4">
+                        <img src="images/Sri_Chakra_Logo.png" alt="Sri Chakra Eye Clinic" class="h-16 w-16 object-contain bg-white rounded-lg p-1" loading="lazy">
+                        <div class="ml-3">
+                            <h3 class="font-headline font-bold text-xl">Sri Chakra</h3>
+                            <p class="text-sm text-gray-400">Eye Clinic</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Advanced eye care with compassionate service in Anantapur. Your vision is our mission.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.youtube.com/@yourseyedoctor" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-red-600/20 flex items-center justify-center text-red-500 hover:bg-red-600 hover:text-white transition-all" aria-label="YouTube">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.5 6.2s-.2-1.6-.8-2.3c-.7-.8-1.5-.8-1.9-.9C18.1 2.7 12 2.7 12 2.7h-.1s-6.1 0-8.8.3c-.4.1-1.2.1-1.9.9C.7 4.6.5 6.2.5 6.2S0 8.1 0 10v1.9c0 1.9.5 3.8.5 3.8s.2 1.6.8 2.3c.7.8 1.6.8 2 1 1.5.1 6.6.3 8.7.3h.1s6.1 0 8.8-.3c.4-.1 1.2-.1 1.9-.9.6-.7.8-2.3.8-2.3s.5-1.9.5-3.8V10c0-1.9-.5-3.8-.5-3.8zM9.5 14.6V8.4l6.2 3.1-6.2 3.1z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/dr.opthamology" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-pink-600/20 flex items-center justify-center text-pink-500 hover:bg-pink-600 hover:text-white transition-all" aria-label="Instagram">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-headline font-semibold text-lg mb-4 text-white">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="homepage.html" class="text-gray-400 hover:text-primary transition-colors flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            Home
+                        </a></li>
+                        <li><a href="services_overview.html" class="text-gray-400 hover:text-primary transition-colors flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            Services
+                        </a></li>
+                        <li><a href="about_sri_chakra_eye_clinic.html" class="text-primary font-semibold flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            About Us
+                        </a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="font-headline font-semibold text-lg mb-4 text-white">Our Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="services_overview.html" class="text-gray-400 hover:text-primary transition-colors">Cataract Surgery</a></li>
+                        <li><a href="services_overview.html" class="text-gray-400 hover:text-primary transition-colors">Glaucoma Treatment</a></li>
+                        <li><a href="services_overview.html" class="text-gray-400 hover:text-primary transition-colors">Retinal Care</a></li>
+                        <li><a href="services_overview.html" class="text-gray-400 hover:text-primary transition-colors">Pediatric Eye Care</a></li>
+                        <li><a href="services_overview.html" class="text-gray-400 hover:text-primary transition-colors">LASIK Surgery</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-headline font-semibold text-lg mb-4 text-white">Contact Info</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-primary mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Sri Chakra Eye Clinic,<br>
+                                near Riya Hospital, SAPTHAGIRI CIRCLE,<br>
+                                Anantapur, Andhra Pradesh 515001
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                            </svg>
+                            <a href="tel:+919493288101" class="text-gray-400 hover:text-primary transition-colors">+91 94932 88101</a>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                            <a href="mailto:srichakraeyeclinic@gmail.com" class="text-gray-400 hover:text-primary transition-colors text-sm">srichakraeyeclinic@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </footer>
-      <script>
-         function toggleMobileMenu() {
-             const mobileMenu = document.getElementById('mobile-menu');
-             mobileMenu.classList.toggle('hidden');
-         }
-         
-         // Add smooth scrolling for anchor links
-         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-             anchor.addEventListener('click', function (e) {
-                 e.preventDefault();
-                 const target = document.querySelector(this.getAttribute('href'));
-                 if (target) {
-                     target.scrollIntoView({
-                         behavior: 'smooth',
-                         block: 'start'
-                     });
-                 }
-             });
-         });
-         
-         // Add fade-in animation on scroll
-         const observerOptions = {
-             threshold: 0.1,
-             rootMargin: '0px 0px -50px 0px'
-         };
-         
-         const observer = new IntersectionObserver((entries) => {
-             entries.forEach(entry => {
-                 if (entry.isIntersecting) {
-                     entry.target.classList.add('fade-in');
-                 }
-             });
-         }, observerOptions);
-         
-         document.querySelectorAll('.card-elevated, .card').forEach(el => {
-             observer.observe(el);
-         });
-         
-         // Add hover effects for interactive elements
-         document.querySelectorAll('.hover-lift').forEach(el => {
-             el.addEventListener('mouseenter', function() {
-                 this.style.transform = 'translateY(-4px)';
-             });
-             
-             el.addEventListener('mouseleave', function() {
-                 this.style.transform = 'translateY(0)';
-             });
-         });
-      </script>
-      <script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
-   </body>
-   </body>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm text-center md:text-left">
+                    © 2025 Sri Chakra Eye Clinic. All Rights Reserved.
+                </p>
+                <div class="flex gap-6 text-sm">
+                    <a href="#" class="text-gray-500 hover:text-primary transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-primary transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            const btn = document.querySelector('[aria-controls="mobile-menu"]');
+            
+            const isHidden = menu.classList.contains('hidden');
+            
+            if (isHidden) {
+                menu.classList.remove('hidden');
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+                btn.setAttribute('aria-expanded', 'true');
+            } else {
+                menu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+                btn.setAttribute('aria-expanded', 'false');
+            }
+        }
+
+        // Close mobile menu on resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            }
+        });
+
+        // Toggle More Info
+        function toggleDetails() {
+            const info = document.getElementById('doctor-more-info');
+            info.classList.toggle('hidden');
+        }
+        
+        // 3D Tilt Effect on Mouse Move (Desktop only)
+        const card = document.querySelector('.doctor-card');
+        const container = document.querySelector('.doctor-card-container');
+        
+        if (window.matchMedia("(min-width: 768px)").matches && card && container) {
+            container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 30;
+                const rotateY = (centerX - x) / 30;
+                
+                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+            });
+            
+            container.addEventListener('mouseleave', () => {
+                card.style.transform = 'rotateX(0) rotateY(0) translateZ(0)';
+            });
+        }
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('site-header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-md');
+            } else {
+                header.classList.remove('shadow-md');
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                        entry.target.classList.remove('opacity-0', 'translate-y-10');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+                observer.observe(section);
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
 </html>

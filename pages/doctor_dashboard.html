@@ -358,20 +358,52 @@ document.getElementById("patientForm").addEventListener("submit", function(e){
 });
 
 // Render futuristic timeline
-function renderTimeline(data){
+
+function renderTimeline(data) {
     const timeline = document.getElementById("timeline");
     timeline.innerHTML = "";
-    data.forEach((row,index)=>{
+
+    const total = data.length;
+
+    data.forEach((row, index) => {
+        // row structure: [mobile, name, age, condition, prescription, date]
+        const name = row[1] || "Unknown";
+        const age = row[2] || "-";
+        const condition = row[3] || "N/A";
+        const prescription = row[4] || "N/A";
+        const dateRaw = row[5] || "";
+
+        // Format date
+        let dateFormatted = dateRaw;
+        try {
+            const d = new Date(dateRaw);
+            if (!isNaN(d)) {
+                dateFormatted = d.toLocaleString("en-GB", {
+                    year: "numeric",
+                    month: "short",
+                    day: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit"
+                });
+            }
+        } catch (e) {}
+
+        // Create timeline item
         const item = document.createElement("div");
         item.className = "timeline-item " + (index % 2 === 0 ? "left" : "right");
-        item.style.animationDelay = `${0.1*index}s`;
+
+        // Animate newest first (index 0 = no delay, others increase)
+        item.style.animationDelay = `${0.1 * index}s`;
+
         item.innerHTML = `
-        <div class="timeline-card">
-            <div class="timeline-date">${row[5]}</div>
-            <div><strong>${row[1]}</strong>, Age ${row[2]}</div>
-            <div class="timeline-condition">Condition: ${row[3]}</div>
-            <div class="timeline-prescription">Prescription: ${row[4]}</div>
-        </div>`;
+            <div class="timeline-card">
+                <div class="timeline-date">${dateFormatted}</div>
+                <div><strong>${name}</strong>, Age ${age}</div>
+                <div class="timeline-condition">Condition: ${condition}</div>
+                <div class="timeline-prescription">Prescription: ${prescription}</div>
+            </div>
+        `;
+
         timeline.appendChild(item);
     });
 }

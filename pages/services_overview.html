@@ -1,736 +1,800 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Comprehensive Eye Care Services | Sri Chakra Eye Clinic Anantapur</title>
-      <meta name="description" content="Expert ophthalmology services in Anantapur - Cataract Surgery, Glaucoma Treatment, Retinal Care, LASIK & Pediatric Eye Care. Advanced technology with compassionate care." />
-      <link rel="stylesheet" href="../css/main.css" />
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-      <script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fsrichakra6267back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
-   </head>
-   <body class="bg-background">
-      <!-- Header Navigation -->
-      <header class="bg-white shadow-soft sticky top-0 z-50">
-         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-               <!-- Logo -->
-               <div class="flex items-center">
-                  <div class="flex-shrink-0">
-                     <img src="images/Sri_Chakra_Logo.png" alt="Sri Chakra Logo" class="h-15 w-20 object-contain">
-                  </div>
-                  <div class="ml-3">
-                     <h1 class="font-headline font-bold text-xl text-primary">Sri Chakra</h1>
-                     <p class="text-sm text-text-secondary font-body">Eye Clinic</p>
-                  </div>
-               </div>
-               <!-- Desktop Navigation -->
-               <div class="hidden md:block">
-                  <div class="ml-10 flex items-baseline space-x-8">
-                     <a href="homepage.html" class="text-text-secondary hover:text-primary px-3 py-2 text-sm font-body transition-colors">Home</a>
-                     <a href="services_overview.html" class="text-primary font-semibold px-3 py-2 text-sm font-body">Services</a>
-                     <a href="about_sri_chakra_eye_clinic.html" class="text-text-secondary hover:text-primary px-3 py-2 text-sm font-body transition-colors">About</a>
-                  </div>
-               </div>
-               <!-- Google calendar -->
-               <div style="display: flex; justify-content: flex-end;">
-                  <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
-                  <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-                  <script>
-                     (function() {
-                       var target = document.currentScript;
-                       window.addEventListener('load', function() {
-                         calendar.schedulingButton.load({
-                           url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1AES5FOjzTbpeRi5KEeW9NKGSfhUFuy1ntJpT64BB6PFnt1E74zjufsoXk2izw4zrwm4A7Xm-I?gv=true',
-                           color: '#009688',
-                           label: "Book Appointment",
-                           target,
-                         });
-                       });
-                     })();
-                  </script>
-               </div>
-               <!-- Mobile menu button -->
-               <div class="md:hidden">
-                  <button type="button" class="text-text-secondary hover:text-primary focus:outline-none focus:text-primary" onclick="toggleMobileMenu()">
-                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                     </svg>
-                  </button>
-               </div>
-            </div>
-            <!-- Mobile Navigation Menu -->
-            <div id="mobile-menu" class="md:hidden hidden">
-               <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface border-t border-border">
-                  <a href="homepage.html" class="text-text-secondary hover:text-primary block px-3 py-2 text-base font-body">Home</a>
-                  <a href="services_overview.html" class="text-primary font-semibold block px-3 py-2 text-base font-body">Services</a>
-                  <a href="about_sri_chakra_eye_clinic.html" class="text-text-secondary hover:text-primary block px-3 py-2 text-base font-body">About</a>
-                  <div class="px-3 py-2 border-t border-border mt-2">
-                     <p class="text-xs text-text-secondary font-body">Emergency Contact</p>
-                     <a href="tel:+919493288101" class="text-sm font-semibold text-primary">+91 9493288101</a>
-                  </div>
-               </div>
-            </div>
-         </nav>
-      </header>
-      <!-- Hero Section -->
-      <section class="relative py-16 bg-gradient-to-br from-primary-50 to-secondary-50 overflow-hidden">
-         <div class="absolute inset-0 bg-blue-50 bg-opacity-50"></div>
-         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="font-headline font-bold text-4xl md:text-5xl lg:text-6xl text-primary mb-6">
-               Comprehensive Eye Care <span class="text-accent">Services</span>
-            </h1>
-            <p class="font-body text-lg md:text-xl text-text-secondary max-w-3xl mx-auto mb-8 leading-relaxed">
-               Advanced ophthalmology treatments tailored for the Anantapur region's unique eye health needs. From routine check-ups to complex surgical procedures.
-            </p>
-         </div>
-      </section>
-      <!-- Services Grid -->
-      <section id="services-grid" class="py-16 bg-white">
-         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-               <h2 class="font-headline font-bold text-3xl md:text-4xl text-primary mb-4">
-                  Our Specialized Services
-               </h2>
-               <p class="font-body text-lg text-text-secondary max-w-2xl mx-auto">
-                  Expert care across all aspects of eye health with state-of-the-art technology and personalized treatment plans
-               </p>
-            </div>
-            <!-- Cataract Surgery -->
-            <div class="mb-12">
-               <div class="card-elevated hover-lift">
-                  <div class="grid lg:grid-cols-2 gap-8 items-center">
-                     <div>
-                        <div class="flex items-center mb-6">
-                           <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mr-4">
-                              <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                                 <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
-                                 <circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                                 <circle cx="12" cy="12" r="2" fill="currentColor"/>
-                              </svg>
-                           </div>
-                           <div>
-                              <h3 class="font-headline font-bold text-2xl text-primary">Cataract Surgery</h3>
-                              <p class="text-secondary font-semibold">Advanced Phacoemulsification</p>
-                           </div>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comprehensive Eye Care Services | Sri Chakra Eye Clinic Anantapur</title>
+    <meta name="description" content="Expert ophthalmology services in Anantapur - Cataract Surgery, Glaucoma Treatment, Retinal Care, LASIK & Pediatric Eye Care. Advanced technology with compassionate care." />
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Config matching Homepage -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#009688',
+                        secondary: '#00695c',
+                        accent: '#ffab00',
+                        background: '#f0fdfa',
+                        surface: '#ffffff',
+                    },
+                    fontFamily: {
+                        headline: ['Poppins', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Critical CSS -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f0fdfa; }
+        .font-headline { font-family: 'Poppins', sans-serif; }
+        
+        /* Flip Animation from Homepage */
+        .flip-container { perspective: 1000px; }
+        .flip-inner {
+            display: inline-block;
+            position: relative;
+            width: 90px;
+            height: 28px;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-container:hover .flip-inner { transform: rotateY(180deg); }
+        .flip-front, .flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+        .flip-back {
+            transform: rotateY(180deg);
+            color: #009688;
+            font-weight: 600;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #009688; border-radius: 5px; }
+        
+        /* Service Card Hover */
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Accordion Styles */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .accordion-content.active {
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body class="bg-background antialiased">
+
+    <!-- Skip to main content -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-white px-4 py-2 rounded z-50">
+        Skip to main content
+    </a>
+
+    <!-- Header - EXACTLY matching Homepage -->
+    <header class="fixed w-full top-0 z-50 transition-all duration-300" id="site-header">
+        <div class="bg-white/80 backdrop-blur-lg shadow-sm border-b border-gray-100">
+            <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+                <div class="flex justify-between items-center h-16 lg:h-20">
+                    
+                    <!-- Logo - Mobile Fixed -->
+                    <div class="flex items-center flex-shrink-0">
+                        <a href="homepage.html" class="flex items-center group">
+                            <div class="relative w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 overflow-hidden rounded-full bg-white shadow-md group-hover:shadow-lg transition-shadow flex-shrink-0">
+                                <img src="images/Sri_Chakra_Logo.png" 
+                                     alt="Sri Chakra Eye Clinic Logo" 
+                                     class="w-full h-full object-contain p-1"
+                                     loading="eager"
+                                     width="64" 
+                                     height="64">
+                            </div>
+                            <div class="ml-2 sm:ml-3 min-w-0">
+                                <h1 class="font-headline font-bold text-base sm:text-lg lg:text-2xl text-gray-900 leading-tight truncate">Sri Chakra</h1>
+                                <p class="text-xs text-gray-600 font-medium tracking-wide">Eye Clinic</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Desktop Navigation with Flip Effect -->
+                    <div class="hidden md:flex items-center space-x-1 lg:space-x-8">
+                        <div class="flip-container">
+                            <a href="homepage.html" class="flip-inner">
+                                <span class="flip-front text-gray-600 font-medium">Home</span>
+                                <span class="flip-back text-primary">Home</span>
+                            </a>
                         </div>
-                        <p class="font-body text-text-secondary mb-6 leading-relaxed">
-                           State-of-the-art cataract removal using micro-incision phacoemulsification technology. We offer premium IOL options including multifocal and toric lenses for optimal vision correction.
-                        </p>
-                        <!-- Expandable Content -->
-                        <div class="space-y-4">
-                           <button onclick="toggleContent('cataract-details')" class="flex items-center text-primary font-semibold hover:text-primary-700 transition-colors">
-                              <span>Treatment Details</span>
-                              <svg class="w-4 h-4 ml-2 transform transition-transform" id="cataract-arrow" fill="currentColor" viewBox="0 0 24 24">
-                                 <path d="M7 10l5 5 5-5z"/>
-                              </svg>
-                           </button>
-                           <div id="cataract-details" class="hidden bg-surface p-4 rounded-lg">
-                              <div class="grid md:grid-cols-2 gap-4 text-sm">
-                                 <div>
-                                    <h4 class="font-semibold text-primary mb-2">Procedure Timeline:</h4>
-                                    <ul class="space-y-1 text-text-secondary">
-                                       <li>• Pre-operative assessment: 1-2 hours</li>
-                                       <li>• Surgery duration: 15-20 minutes</li>
-                                       <li>• Recovery time: 2-4 weeks</li>
-                                       <li>• Follow-up visits: 3 appointments</li>
-                                    </ul>
-                                 </div>
-                              </div>
-                           </div>
+                        <div class="flip-container">
+                            <a href="services_overview.html" class="flip-inner" aria-current="page">
+                                <span class="flip-front text-gray-600 font-medium">Services</span>
+                                <span class="flip-back text-primary font-semibold">Services</span>
+                            </a>
                         </div>
-                     </div>
-                     <div class="relative">
-                        <img src="images/Eye_Backgrop_Image.png" alt="Cataract Surgery Procedure" class="w-full h-80 object-cover rounded-lg" />
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <!-- Glaucoma Management -->
-            <div class="mb-12">
-               <div class="card-elevated hover-lift">
-                  <div class="grid lg:grid-cols-2 gap-8 items-center">
-                     <div class="lg:order-2">
-                        <div class="flex items-center mb-6">
-                           <div class="w-16 h-16 bg-secondary-100 rounded-full flex items-center justify-center mr-4">
-                              <svg class="w-8 h-8 text-secondary" fill="currentColor" viewBox="0 0 24 24">
-                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
-                              </svg>
-                           </div>
-                           <div>
-                              <h3 class="font-headline font-bold text-2xl text-primary">Glaucoma Management</h3>
-                              <p class="text-secondary font-semibold">Early Detection & Treatment</p>
-                           </div>
+                        <div class="flip-container">
+                            <a href="about_sri_chakra_eye_clinic.html" class="flip-inner">
+                                <span class="flip-front text-gray-600 font-medium">About</span>
+                                <span class="flip-back text-primary">About</span>
+                            </a>
                         </div>
-                        <p class="font-body text-text-secondary mb-6 leading-relaxed">
-                           Comprehensive glaucoma screening and management, crucial for diabetic patients common in Andhra Pradesh. Advanced diagnostic tools for early detection and personalized treatment plans.
-                        </p>
-                        <!-- Symptom Checker -->
-                        <div class="bg-accent-50 p-4 rounded-lg mb-6">
-                           <h4 class="font-semibold text-primary mb-3">Check Your Symptoms:</h4>
-                           <div class="space-y-2 text-sm">
-                              <label class="flex items-center">
-                              <input type="checkbox" class="mr-2 text-primary" /> Gradual loss of peripheral vision
-                              </label>
-                              <label class="flex items-center">
-                              <input type="checkbox" class="mr-2 text-primary" /> Severe eye pain with nausea
-                              </label>
-                              <label class="flex items-center">
-                              <input type="checkbox" class="mr-2 text-primary" /> Seeing halos around lights
-                              </label>
-                              <label class="flex items-center">
-                              <input type="checkbox" class="mr-2 text-primary" /> Sudden vision loss
-                              </label>
-                           </div>
-                           <p class="text-xs text-text-secondary mt-2 italic">
-                              *If you experience any of these symptoms, schedule an immediate consultation
-                           </p>
-                        </div>
-                     </div>
-                     <div class="lg:order-1 relative">
-                        <img src="images/Glaucoma_Management.png" alt="Glaucoma Eye Examination" class="w-full h-80 object-cover rounded-lg"/>
-                        <div class="absolute top-4 right-4 bg-white bg-opacity-90 px-3 py-1 rounded-full">
-                           <span class="text-sm font-semibold text-secondary">Early Detection</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <!-- Retinal Care -->
-            <div class="mb-12">
-               <div class="card-elevated hover-lift">
-                  <div class="grid lg:grid-cols-2 gap-8 items-center">
-                     <div>
-                        <div class="flex items-center mb-6">
-                           <div class="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mr-4">
-                              <svg class="w-8 h-8 text-accent" fill="currentColor" viewBox="0 0 24 24">
-                                 <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-                              </svg>
-                           </div>
-                           <div>
-                              <h3 class="font-headline font-bold text-2xl text-primary">Retinal Care</h3>
-                              <p class="text-secondary font-semibold">Diabetic Retinopathy Specialist</p>
-                           </div>
-                        </div>
-                        <p class="font-body text-text-secondary mb-6 leading-relaxed">
-                           Specialized treatment for diabetic retinopathy, macular degeneration, and retinal disorders. Critical care for the high diabetic population in Anantapur region.
-                        </p>
-                        <!-- Regional Health Focus -->
-                        <div class="bg-primary-50 p-4 rounded-lg mb-6">
-                           <h4 class="font-semibold text-primary mb-3">Regional Health Alert:</h4>
-                           <p class="text-sm text-text-secondary">
-                              Andhra Pradesh has one of the highest diabetes rates in India. Regular retinal screening is essential for diabetic patients to prevent vision loss. We recommend annual check-ups for all diabetic patients over 30.
-                           </p>
-                        </div>
-                        <!-- Treatment Options -->
-                        <button onclick="toggleContent('retinal-treatments')" class="flex items-center text-primary font-semibold hover:text-primary-700 transition-colors mb-4">
-                           <span>Treatment Options</span>
-                           <svg class="w-4 h-4 ml-2 transform transition-transform" id="retinal-arrow" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M7 10l5 5 5-5z"/>
-                           </svg>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <div class="hidden md:flex items-center">
+                        <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1AES5FOjzTbpeRi5KEeW9NKGSfhUFuy1ntJpT64BB6PFnt1E74zjufsoXk2izw4zrwm4A7Xm-I?gv=true" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="bg-primary hover:bg-secondary text-white px-6 py-2.5 rounded-full font-semibold text-sm lg:text-base transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            Book Appointment
+                        </a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="md:hidden">
+                        <button type="button" 
+                                class="p-2 rounded-lg text-gray-600 hover:text-primary hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
+                                onclick="toggleMobileMenu()"
+                                aria-expanded="false"
+                                aria-controls="mobile-menu"
+                                aria-label="Toggle menu">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" id="menu-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                            <svg class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" id="close-icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
                         </button>
-                        <div id="retinal-treatments" class="hidden bg-surface p-4 rounded-lg mb-6">
-                           <div class="grid md:grid-cols-2 gap-4 text-sm">
-                              <div>
-                                 <h5 class="font-semibold text-primary mb-2">Non-Surgical:</h5>
-                                 <ul class="space-y-1 text-text-secondary">
-                                    <li>• Anti-VEGF Injections</li>
-                                    <li>• Laser Photocoagulation</li>
-                                    <li>• Steroid Injections</li>
-                                 </ul>
-                              </div>
-                              <div>
-                                 <h5 class="font-semibold text-primary mb-2">Surgical:</h5>
-                                 <ul class="space-y-1 text-text-secondary">
-                                    <li>• Vitrectomy</li>
-                                    <li>• Retinal Detachment Repair</li>
-                                    <li>• Macular Hole Surgery</li>
-                                 </ul>
-                              </div>
-                           </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Navigation -->
+                <div id="mobile-menu" class="md:hidden hidden border-t border-gray-100 bg-white/95 backdrop-blur-lg">
+                    <div class="px-4 py-3 space-y-1">
+                        <a href="homepage.html" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50 transition-colors">Home</a>
+                        <a href="services_overview.html" class="block px-3 py-2 rounded-lg text-base font-medium text-primary bg-primary/10" aria-current="page">Services</a>
+                        <a href="about_sri_chakra_eye_clinic.html" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50 transition-colors">About</a>
+                        
+                        <div class="pt-4 pb-2 border-t border-gray-100 mt-2">
+                            <a href="tel:+919493288101" class="flex items-center px-3 py-2 text-primary font-semibold">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                </svg>
+                                Emergency: +91 9493288101
+                            </a>
                         </div>
-                     </div>
-                     <div class="relative">
-                        <img src="images/Retinopathy_Treatment.png" alt="Retinal Examination Technology" class="w-full h-80 object-cover rounded-lg" />
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <!-- Our Services -->
-            <div class="mb-12">
-               <div class="card-elevated bg-gradient-to-r from-primary-50 to-secondary-50">
-                  <div class="text-center mb-8">
-                     <h3 class="font-headline font-bold text-2xl text-primary mb-4">Our Eye Care Services</h3>
-                  </div>
-                  <div class="grid md:grid-cols-3 gap-6">
-                     <div class="text-center">
-                        <div class="w-12 h-12 mx-auto bg-primary-100 rounded-full flex items-center justify-center mb-4">
-                           <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                           </svg>
+                        
+                        <div class="px-3 py-2">
+                            <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1AES5FOjzTbpeRi5KEeW9NKGSfhUFuy1ntJpT64BB6PFnt1E74zjufsoXk2izw4zrwm4A7Xm-I?gv=true" 
+                               target="_blank"
+                               class="block w-full bg-primary text-white text-center py-3 rounded-lg font-semibold hover:bg-secondary transition-colors">
+                                Book Appointment
+                            </a>
                         </div>
-                        <h4 class="font-semibold text-primary mb-2">Examinations</h4>
-                        <ul class="text-sm text-text-secondary space-y-1">
-                           <li>Comprehensive Eye Examination</li>
-                           <li>Dry Eye Treatment</li>
-                           <li>Eye Allergy Treatment</li>
-                           <li>Pediatric Eye Care</li>
-                        </ul>
-                     </div>
-                     <div class="text-center">
-                        <div class="w-12 h-12 mx-auto bg-secondary-100 rounded-full flex items-center justify-center mb-4">
-                           <svg class="w-6 h-6 text-secondary" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                           </svg>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- Hero Section - Matching Homepage Style -->
+        <section class="relative pt-32 pb-16 bg-gradient-to-br from-primary/10 to-secondary/10 overflow-hidden">
+            <div class="absolute inset-0 bg-blue-50/50"></div>
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="font-headline font-bold text-4xl sm:text-5xl md:text-6xl text-gray-900 mb-6">
+                    Comprehensive Eye Care <span class="text-primary">Services</span>
+                </h1>
+                <p class="font-body text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
+                    Advanced ophthalmology treatments tailored for the Anantapur region's unique eye health needs. From routine check-ups to complex surgical procedures.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 text-sm text-gray-500">
+                    <span class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                        15+ Years Experience
+                    </span>
+                    <span class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                        Advanced Technology
+                    </span>
+                    <span class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                        Aarogyasri Accepted
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Grid -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="font-headline font-bold text-3xl md:text-4xl text-gray-900 mb-4">
+                        Our Specialized <span class="text-primary">Services</span>
+                    </h2>
+                    <p class="font-body text-lg text-gray-600 max-w-2xl mx-auto">
+                        Expert care across all aspects of eye health with state-of-the-art technology and personalized treatment plans
+                    </p>
+                </div>
+
+                <!-- Cataract Surgery -->
+                <div class="mb-12">
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 service-card">
+                        <div class="grid lg:grid-cols-2 gap-8 items-center p-8">
+                            <div>
+                                <div class="flex items-center mb-6">
+                                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                                            <circle cx="12" cy="12" r="6" stroke-width="1.5"/>
+                                            <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-headline font-bold text-2xl text-gray-900">Cataract Surgery</h3>
+                                        <p class="text-primary font-semibold">Advanced Phacoemulsification</p>
+                                    </div>
+                                </div>
+                                <p class="font-body text-gray-600 mb-6 leading-relaxed">
+                                    State-of-the-art cataract removal using micro-incision phacoemulsification technology. We offer premium IOL options including multifocal and toric lenses for optimal vision correction.
+                                </p>
+                                <button onclick="toggleAccordion('cataract-details', 'cataract-arrow')" class="flex items-center text-primary font-semibold hover:text-primary-700 transition-colors mb-4">
+                                    <span>Treatment Details</span>
+                                    <svg class="w-4 h-4 ml-2 transform transition-transform duration-300" id="cataract-arrow" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M7 10l5 5 5-5z"/>
+                                    </svg>
+                                </button>
+                                <div id="cataract-details" class="accordion-content bg-gray-50 p-4 rounded-lg">
+                                    <div class="grid md:grid-cols-2 gap-4 text-sm">
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900 mb-2">Procedure Timeline:</h4>
+                                            <ul class="space-y-1 text-gray-600">
+                                                <li class="flex items-start"><span class="text-primary mr-2">•</span>Pre-operative assessment: 1-2 hours</li>
+                                                <li class="flex items-start"><span class="text-primary mr-2">•</span>Surgery duration: 15-20 minutes</li>
+                                                <li class="flex items-start"><span class="text-primary mr-2">•</span>Recovery time: 2-4 weeks</li>
+                                                <li class="flex items-start"><span class="text-primary mr-2">•</span>Follow-up visits: 3 appointments</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-semibold text-gray-900 mb-2">IOL Options:</h4>
+                                            <ul class="space-y-1 text-gray-600">
+                                                <li class="flex items-start"><span class="text-primary mr-2">•</span>Monofocal Lenses</li>
+                                                <li class="flex items-start"><span class="text-primary mr-2">•</span>Multifocal Lenses</li>
+                                                <li class="flex items-start"><span class="text-primary mr-2">•</span>Toric (Astigmatism correction)</li>
+                                                <li class="flex items-start"><span class="text-primary mr-2">•</span>EDOF Extended Depth of Focus</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relative rounded-xl overflow-hidden">
+                                <img src="images/Eye_Backgrop_Image.png" alt="Cataract Surgery Procedure" class="w-full h-80 object-cover rounded-lg" />
+                                <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-full">
+                                    <span class="text-sm font-semibold text-primary">Stitchless Surgery</span>
+                                </div>
+                            </div>
                         </div>
-                        <h4 class="font-semibold text-primary mb-2">Surgeries</h4>
-                        <ul class="text-sm text-text-secondary space-y-1">
-                           <li>Cataract-Topical Phaco Surgery</li>
-                           <li>Keratoplasty-Corneal Transplantation</li>
-                           <li>DCR Surgeries</li>
-                        </ul>
-                     </div>
-                     <div class="text-center">
-                        <div class="w-12 h-12 mx-auto bg-accent-100 rounded-full flex items-center justify-center mb-4">
-                           <svg class="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                           </svg>
+                    </div>
+                </div>
+
+                <!-- Glaucoma Management -->
+                <div class="mb-12">
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 service-card">
+                        <div class="grid lg:grid-cols-2 gap-8 items-center p-8">
+                            <div class="lg:order-2">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mr-4">
+                                        <svg class="w-8 h-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-headline font-bold text-2xl text-gray-900">Glaucoma Management</h3>
+                                        <p class="text-secondary font-semibold">Early Detection & Treatment</p>
+                                    </div>
+                                </div>
+                                <p class="font-body text-gray-600 mb-6 leading-relaxed">
+                                    Comprehensive glaucoma screening and management, crucial for diabetic patients common in Andhra Pradesh. Advanced diagnostic tools for early detection and personalized treatment plans.
+                                </p>
+                                
+                                <!-- Symptom Checker -->
+                                <div class="bg-accent/10 p-4 rounded-lg mb-6 border border-accent/20">
+                                    <h4 class="font-semibold text-gray-900 mb-3 flex items-center">
+                                        <svg class="w-5 h-5 text-accent mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+                                        Check Your Symptoms
+                                    </h4>
+                                    <div class="space-y-2 text-sm">
+                                        <label class="flex items-center cursor-pointer hover:text-primary transition-colors">
+                                            <input type="checkbox" class="mr-2 rounded text-primary focus:ring-primary" onchange="checkSymptoms(this)" /> 
+                                            <span>Gradual loss of peripheral vision</span>
+                                        </label>
+                                        <label class="flex items-center cursor-pointer hover:text-primary transition-colors">
+                                            <input type="checkbox" class="mr-2 rounded text-primary focus:ring-primary" onchange="checkSymptoms(this)" /> 
+                                            <span>Severe eye pain with nausea</span>
+                                        </label>
+                                        <label class="flex items-center cursor-pointer hover:text-primary transition-colors">
+                                            <input type="checkbox" class="mr-2 rounded text-primary focus:ring-primary" onchange="checkSymptoms(this)" /> 
+                                            <span>Seeing halos around lights</span>
+                                        </label>
+                                        <label class="flex items-center cursor-pointer hover:text-primary transition-colors">
+                                            <input type="checkbox" class="mr-2 rounded text-primary focus:ring-primary" onchange="checkSymptoms(this)" /> 
+                                            <span>Sudden vision loss</span>
+                                        </label>
+                                    </div>
+                                    <div id="symptom-alert" class="hidden mt-3 p-3 bg-red-100 border border-red-300 rounded-lg">
+                                        <p class="text-red-700 text-sm font-semibold flex items-center">
+                                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                                            Multiple symptoms detected. Schedule an immediate consultation.
+                                        </p>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-2 italic">
+                                        *If you experience any of these symptoms, seek immediate care
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="lg:order-1 relative rounded-xl overflow-hidden">
+                                <img src="images/Glaucoma_Management.png" alt="Glaucoma Eye Examination" class="w-full h-80 object-cover rounded-lg"/>
+                                <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full">
+                                    <span class="text-sm font-semibold text-secondary">Early Detection</span>
+                                </div>
+                            </div>
                         </div>
-                        <h4 class="font-semibold text-primary mb-2">Treatments</h4>
-                        <ul class="text-sm text-text-secondary space-y-1">
-                           <li>Corneal Infections Treatment</li>
-                           <li>Glaucoma Services</li>
-                           <li>Diabetic Retinopathy Screening & Treatment</li>
-                        </ul>
-                     </div>
-                  </div>
-               </div>
+                    </div>
+                </div>
+
+                <!-- Retinal Care -->
+                <div class="mb-12">
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 service-card">
+                        <div class="grid lg:grid-cols-2 gap-8 items-center p-8">
+                            <div>
+                                <div class="flex items-center mb-6">
+                                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mr-4">
+                                        <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-headline font-bold text-2xl text-gray-900">Retinal Care</h3>
+                                        <p class="text-secondary font-semibold">Diabetic Retinopathy Specialist</p>
+                                    </div>
+                                </div>
+                                <p class="font-body text-gray-600 mb-6 leading-relaxed">
+                                    Specialized treatment for diabetic retinopathy, macular degeneration, and retinal disorders. Critical care for the high diabetic population in Anantapur region.
+                                </p>
+                                
+                                <!-- Regional Health Alert -->
+                                <div class="bg-primary/10 p-4 rounded-lg mb-6 border border-primary/20">
+                                    <h4 class="font-semibold text-gray-900 mb-2 flex items-center">
+                                        <svg class="w-5 h-5 text-primary mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+                                        Regional Health Alert
+                                    </h4>
+                                    <p class="text-sm text-gray-600">
+                                        Andhra Pradesh has one of the highest diabetes rates in India. Regular retinal screening is essential for diabetic patients to prevent vision loss. We recommend annual check-ups for all diabetic patients over 30.
+                                    </p>
+                                </div>
+
+                                <button onclick="toggleAccordion('retinal-details', 'retinal-arrow')" class="flex items-center text-primary font-semibold hover:text-primary-700 transition-colors mb-4">
+                                    <span>Treatment Options</span>
+                                    <svg class="w-4 h-4 ml-2 transform transition-transform duration-300" id="retinal-arrow" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M7 10l5 5 5-5z"/>
+                                    </svg>
+                                </button>
+                                <div id="retinal-details" class="accordion-content bg-gray-50 p-4 rounded-lg">
+                                    <div class="grid md:grid-cols-2 gap-4 text-sm">
+                                        <div>
+                                            <h5 class="font-semibold text-gray-900 mb-2">Non-Surgical:</h5>
+                                            <ul class="space-y-1 text-gray-600">
+                                                <li class="flex items-start"><span class="text-primary mr-2">•</span>Anti-VEGF Injections</li>
+                                                <li class="flex items-start"><span class="text-primary mr-2">•</span>Laser Photocoagulation</li>
+                                                <li class="flex items-start"><span class="text-primary mr-2">•</span>Steroid Injections</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-semibold text-gray-900 mb-2">Surgical:</h5>
+                                            <ul class="space-y-1 text-gray-600">
+                                                <li class="flex items-start"><span class="text-primary mr-2">•</span>Vitrectomy</li>
+                                                <li class="flex items-start"><span class="text-primary mr-2">•</span>Retinal Detachment Repair</li>
+                                                <li class="flex items-start"><span class="text-primary mr-2">•</span>Macular Hole Surgery</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relative rounded-xl overflow-hidden">
+                                <img src="images/Retinopathy_Treatment.png" alt="Retinal Examination Technology" class="w-full h-80 object-cover rounded-lg" />
+                                <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-full">
+                                    <span class="text-sm font-semibold text-accent">Laser Treatment Available</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Services Grid -->
+                <div class="mb-12">
+                    <div class="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-2xl p-8 border border-primary/10">
+                        <h3 class="font-headline font-bold text-2xl text-gray-900 mb-8 text-center">Complete Eye Care Services</h3>
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <!-- Examinations -->
+                            <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                                <div class="w-12 h-12 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                                    <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-gray-900 mb-3 text-center">Examinations</h4>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-primary mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Comprehensive Eye Exam</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-primary mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Dry Eye Treatment</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-primary mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Eye Allergy Treatment</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-primary mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Pediatric Eye Care</li>
+                                </ul>
+                            </div>
+
+                            <!-- Surgeries -->
+                            <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                                <div class="w-12 h-12 mx-auto bg-secondary/10 rounded-full flex items-center justify-center mb-4">
+                                    <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-gray-900 mb-3 text-center">Surgeries</h4>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-secondary mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Phacoemulsification</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-secondary mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Corneal Transplantation</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-secondary mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>DCR Surgery</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-secondary mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>LASIK Laser</li>
+                                </ul>
+                            </div>
+
+                            <!-- Treatments -->
+                            <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                                <div class="w-12 h-12 mx-auto bg-accent/10 rounded-full flex items-center justify-center mb-4">
+                                    <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                                    </svg>
+                                </div>
+                                <h4 class="font-semibold text-gray-900 mb-3 text-center">Treatments</h4>
+                                <ul class="text-sm text-gray-600 space-y-2">
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-accent mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Corneal Infections</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-accent mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Glaucoma Management</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-accent mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Diabetic Retinopathy</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-accent mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>Squint Correction</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </section>
-      <!--FAQ-->
-      <section id="faq" class="faq-futuristic">
-         <!-- Light/Dark Mode Toggle -->
-         <h2>Frequently Asked Questions</h2>
-         <input type="text" id="faqSearch" placeholder="Search your question..." />
-         <div class="faq-container">
-            <!-- FAQ 1 -->
-            <div class="faq-card" data-question="How often should I get my eyes checked?">
-               <div class="faq-question">How often should I get my eyes checked?</div>
-               <div class="faq-answer">Adults should get an eye check-up every 1–2 years. Children and people with diabetes, glaucoma, or family history of eye diseases should have more frequent check-ups.</div>
+        </section>
+
+        <!-- FAQ Section - Styled to match Homepage -->
+        <section class="py-16 bg-gray-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="font-headline font-bold text-3xl md:text-4xl text-gray-900 mb-4">
+                        Frequently Asked <span class="text-primary">Questions</span>
+                    </h2>
+                    <p class="text-gray-600">Find answers to common questions about our services</p>
+                </div>
+
+                <!-- Search -->
+                <div class="mb-8">
+                    <input type="text" id="faqSearch" placeholder="Search your question..." 
+                           class="w-full px-6 py-4 rounded-full border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all" />
+                </div>
+
+                <!-- FAQ Items -->
+                <div class="space-y-4" id="faq-container">
+                    <div class="faq-item bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                        <button onclick="toggleFaq(this)" class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors">
+                            <span class="font-semibold text-gray-900">How often should I get my eyes checked?</span>
+                            <svg class="w-5 h-5 text-gray-400 transform transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                        </button>
+                        <div class="hidden px-6 pb-4 text-gray-600">
+                            Adults should get an eye check-up every 1–2 years. Children and people with diabetes, glaucoma, or family history of eye diseases should have more frequent check-ups.
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                        <button onclick="toggleFaq(this)" class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors">
+                            <span class="font-semibold text-gray-900">What is cataract surgery and is it safe?</span>
+                            <svg class="w-5 h-5 text-gray-400 transform transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                        </button>
+                        <div class="hidden px-6 pb-4 text-gray-600">
+                            Cataract surgery is the removal of the cloudy natural lens and replacement with an artificial intraocular lens (IOL). Modern cataract surgery is very safe, quick (10–15 minutes), and usually performed as a day procedure with fast recovery.
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                        <button onclick="toggleFaq(this)" class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors">
+                            <span class="font-semibold text-gray-900">Do you accept Aarogyasri health scheme?</span>
+                            <svg class="w-5 h-5 text-gray-400 transform transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                        </button>
+                        <div class="hidden px-6 pb-4 text-gray-600">
+                            Yes, we accept Aarogyasri and major health insurance for cataract surgery and other eligible procedures. Please contact our office for specific coverage details.
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                        <button onclick="toggleFaq(this)" class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors">
+                            <span class="font-semibold text-gray-900">What is the recovery time after cataract surgery?</span>
+                            <svg class="w-5 h-5 text-gray-400 transform transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                        </button>
+                        <div class="hidden px-6 pb-4 text-gray-600">
+                            Most patients recover within a few days. Vision stabilizes in 2–4 weeks after cataract surgery. You can resume normal activities within a week, with some precautions.
+                        </div>
+                    </div>
+
+                    <div class="faq-item bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                        <button onclick="toggleFaq(this)" class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors">
+                            <span class="font-semibold text-gray-900">Do you provide emergency eye care?</span>
+                            <svg class="w-5 h-5 text-gray-400 transform transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                        </button>
+                        <div class="hidden px-6 pb-4 text-gray-600">
+                            Yes, we provide emergency eye care for injuries, infections, sudden vision loss, and foreign body removal. Call our emergency number +91 9493288101 for immediate assistance.
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- FAQ 2 -->
-            <div class="faq-card" data-question="What are the early signs of eye problems?">
-               <div class="faq-question">What are the early signs of eye problems?</div>
-               <div class="faq-answer">Blurred vision, eye pain, headaches, double vision, sudden flashes or floaters, difficulty seeing at night, or frequent squinting may indicate eye problems.</div>
-            </div>
-            <!-- FAQ 3 -->
-            <div class="faq-card" data-question="Can watching TV or using mobile for long hours damage my eyes?">
-               <div class="faq-question">Can watching TV or using mobile for long hours damage my eyes?</div>
-               <div class="faq-answer">Prolonged screen time causes digital eye strain and dryness. It doesn’t cause permanent damage but can worsen existing vision issues. Following the 20-20-20 rule helps.</div>
-            </div>
-            <!-- FAQ 4 -->
-            <div class="faq-card" data-question="What is the right age for a child’s first eye test?">
-               <div class="faq-question">What is the right age for a child’s first eye test?</div>
-               <div class="faq-answer">Children should have an eye test by age 1 for screening and a full exam around 3–5 years. Early detection prevents long-term vision problems.</div>
-            </div>
-            <!-- FAQ 5 -->
-            <div class="faq-card" data-question="Does diet affect my eyesight?">
-               <div class="faq-question">Does diet affect my eyesight?</div>
-               <div class="faq-answer">Yes. Eating carrots, green leafy vegetables, fish rich in omega-3, and vitamin A rich foods supports eye health and reduces risk of night blindness.</div>
-            </div>
-            <!-- FAQ 6 -->
-            <div class="faq-card" data-question="Can wearing glasses weaken my eyesight?">
-               <div class="faq-question">Can wearing glasses weaken my eyesight?</div>
-               <div class="faq-answer">No, wearing glasses does not weaken eyesight. They correct vision and reduce strain but do not change eye power permanently.</div>
-            </div>
-            <!-- FAQ 7 -->
-            <div class="faq-card" data-question="Are sunglasses necessary in Anantapur’s sunny climate?">
-               <div class="faq-question">Are sunglasses necessary in Anantapur’s sunny climate?</div>
-               <div class="faq-answer">Yes, UV-protective sunglasses are important in Anantapur to prevent cataracts, pterygium, and retinal damage from strong sunlight.</div>
-            </div>
-            <!-- FAQ 8 -->
-            <div class="faq-card" data-question="What is cataract and how is it treated?">
-               <div class="faq-question">What is cataract and how is it treated?</div>
-               <div class="faq-answer">Cataract is clouding of the natural lens. It is treated with surgery where the lens is replaced with an artificial intraocular lens (IOL).</div>
-            </div>
-            <!-- FAQ 9 -->
-            <div class="faq-card" data-question="What is glaucoma?">
-               <div class="faq-question">What is glaucoma?</div>
-               <div class="faq-answer">Glaucoma is damage to the optic nerve, usually due to high eye pressure. It can cause irreversible vision loss if not treated early.</div>
-            </div>
-            <!-- FAQ 10 -->
-            <div class="faq-card" data-question="What are the symptoms of glaucoma?">
-               <div class="faq-question">What are the symptoms of glaucoma?</div>
-               <div class="faq-answer">In early stages, glaucoma has no symptoms. Later, it may cause blurred vision, halos, eye pain, headaches, or tunnel vision.</div>
-            </div>
-            <!-- FAQ 11 -->
-            <div class="faq-card" data-question="What is diabetic retinopathy?">
-               <div class="faq-question">What is diabetic retinopathy?</div>
-               <div class="faq-answer">Diabetic retinopathy is an eye complication of diabetes that damages retinal blood vessels and may cause vision loss if untreated.</div>
-            </div>
-            <!-- FAQ 12 -->
-            <div class="faq-card" data-question="Can diabetes and high BP affect eyesight?">
-               <div class="faq-question">Can diabetes and high BP affect eyesight?</div>
-               <div class="faq-answer">Yes, uncontrolled diabetes and hypertension can damage the retina, leading to vision loss, diabetic retinopathy, or hypertensive retinopathy.</div>
-            </div>
-            <!-- FAQ 13 -->
-            <div class="faq-card" data-question="What is conjunctivitis (red eye) and is it contagious?">
-               <div class="faq-question">What is conjunctivitis (red eye) and is it contagious?</div>
-               <div class="faq-answer">Conjunctivitis, also called eye flu, causes redness, irritation, and watering. It is contagious and spreads through touch and sharing items.</div>
-            </div>
-            <!-- FAQ 14 -->
-            <div class="faq-card" data-question="What is dry eye and why is it common in Anantapur?">
-               <div class="faq-question">What is dry eye and why is it common in Anantapur?</div>
-               <div class="faq-answer">Dry eye occurs when tears are insufficient. Anantapur’s hot, dry climate increases risk of dryness, irritation, and eye fatigue.</div>
-            </div>
-            <!-- FAQ 15 -->
-            <div class="faq-card" data-question="What is squint (crossed eyes) and can it be treated?">
-               <div class="faq-question">What is squint (crossed eyes) and can it be treated?</div>
-               <div class="faq-answer">Squint can be treated with glasses, exercises, or surgery depending on severity. Early treatment prevents lazy eye in children.</div>
-            </div>
-            <!-- FAQ 16 -->
-            <div class="faq-card" data-question="What is night blindness?">
-               <div class="faq-question">What is night blindness?</div>
-               <div class="faq-answer">Night blindness is difficulty seeing in dim light, often due to vitamin A deficiency or retinal disorders.</div>
-            </div>
-            <!-- FAQ 17 -->
-            <div class="faq-card" data-question="Is cataract surgery safe?">
-               <div class="faq-question">Is cataract surgery safe?</div>
-               <div class="faq-answer">Yes, modern cataract surgery is very safe, quick (10–15 minutes), and usually performed as a day procedure with fast recovery.</div>
-            </div>
-            <!-- FAQ 18 -->
-            <div class="faq-card" data-question="What is LASIK / laser surgery?">
-               <div class="faq-question">What is LASIK / laser surgery?</div>
-               <div class="faq-answer">LASIK is a laser procedure to correct myopia, hyperopia, and astigmatism, reducing or eliminating the need for glasses or contact lenses.</div>
-            </div>
-            <!-- FAQ 19 -->
-            <div class="faq-card" data-question="Who is eligible for LASIK surgery?">
-               <div class="faq-question">Who is eligible for LASIK surgery?</div>
-               <div class="faq-answer">People above 18 years with stable power for at least one year and healthy corneas are usually eligible for LASIK surgery.</div>
-            </div>
-            <!-- FAQ 20 -->
-            <div class="faq-card" data-question="Is eye surgery painful?">
-               <div class="faq-question">Is eye surgery painful?</div>
-               <div class="faq-answer">Most modern eye surgeries, including cataract and LASIK, are painless due to anesthesia and advanced technology.</div>
-            </div>
-            <!-- FAQ 21 -->
-            <div class="faq-card" data-question="How long does it take to recover after cataract surgery?">
-               <div class="faq-question">How long does it take to recover after cataract surgery?</div>
-               <div class="faq-answer">Most patients recover within a few days. Vision stabilizes in 2–4 weeks after cataract surgery.</div>
-            </div>
-            <!-- FAQ 22 -->
-            <div class="faq-card" data-question="What precautions should I take after eye surgery?">
-               <div class="faq-question">What precautions should I take after eye surgery?</div>
-               <div class="faq-answer">After eye surgery, use prescribed drops, avoid rubbing eyes, protect from dust, wear sunglasses, and attend follow-ups.</div>
-            </div>
-            <!-- FAQ 23 -->
-            <div class="faq-card" data-question="Can children wear contact lenses?">
-               <div class="faq-question">Can children wear contact lenses?</div>
-               <div class="faq-answer">Yes, children can wear contact lenses after 13–14 years under doctor’s guidance. Hygiene and proper care are essential.</div>
-            </div>
-            <!-- FAQ 24 -->
-            <div class="faq-card" data-question="Is it safe to sleep while wearing contact lenses?">
-               <div class="faq-question">Is it safe to sleep while wearing contact lenses?</div>
-               <div class="faq-answer">No, sleeping with contact lenses increases the risk of serious eye infections and should be avoided.</div>
-            </div>
-            <!-- FAQ 25 -->
-            <div class="faq-card" data-question="Do computer glasses help with eye strain?">
-               <div class="faq-question">Do computer glasses help with eye strain?</div>
-               <div class="faq-answer">Yes, blue-light blocking or anti-glare computer glasses help reduce digital eye strain caused by long screen hours.</div>
-            </div>
-            <!-- FAQ 26 -->
-            <div class="faq-card" data-question="Do you provide eye check-ups for schools and companies in Anantapur?">
-               <div class="faq-question">Do you provide eye check-ups for schools and companies in Anantapur?</div>
-               <div class="faq-answer">Yes, we provide eye screening services for schools, colleges, and corporate offices in Anantapur.</div>
-            </div>
-            <!-- FAQ 27 -->
-            <div class="faq-card" data-question="Is emergency eye care available at your clinic?">
-               <div class="faq-question">Is emergency eye care available at your clinic?</div>
-               <div class="faq-answer">Yes, we provide emergency eye care for injuries, infections, sudden vision loss, and foreign body removal.</div>
-            </div>
-            <!-- FAQ 28 -->
-            <div class="faq-card" data-question="Do you accept Aarogyasri health scheme?">
-               <div class="faq-question">Do you accept Aarogyasri health scheme?</div>
-               <div class="faq-answer">Yes, we accept Aarogyasri and major health insurance for cataract surgery and other eligible procedures.</div>
-            </div>
-            <!-- FAQ 29 -->
-            <div class="faq-card" data-question="Do you provide treatment for children’s eye problems?">
-               <div class="faq-question">Do you provide treatment for children’s eye problems?</div>
-               <div class="faq-answer">Yes, we have pediatric ophthalmology services for children’s vision care including squint, lazy eye, and refractive errors.</div>
-            </div>
-            <!-- FAQ 30 -->
-            <div class="faq-card" data-question="How can I book an appointment at your eye clinic in Anantapur?">
-               <div class="faq-question">How can I book an appointment at your eye clinic in Anantapur?</div>
-               <div class="faq-answer">You can call our clinic, book online through our website, or walk in during working hours to schedule an appointment.</div>
-            </div>
-         </div>
-      </section>
-      <canvas id="particle-bg"></canvas>
-      <style>
-         body { margin:0; font-family:'Segoe UI',sans-serif; background:#3d3e40; overflow-x:hidden; }
-         #particle-bg { position: fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
-         .faq-futuristic {
-         max-width:80%; margin:80px auto; padding:50px 30px;
-         border-radius:25px; background: rgba(255,255,255,0.05);
-         backdrop-filter: blur(20px); box-shadow:0 0 50px rgba(61,62,64,0.4);
-         color:#ffffff; position:relative; z-index:2;
-         }
-         .faq-futuristic h2 {
-         text-align:center; font-size:2.8em; margin-bottom:30px;
-         color:#093ca1; text-shadow:0 0 2px #093ca1;
-         }
-         .mode-toggle { display:flex; justify-content:flex-end; margin-bottom:15px; color:#3d3e40; }
-         .mode-toggle input { margin-right:10px; }
-         #faqSearch { width:100%; padding:18px; margin-bottom:35px; border-radius:15px; border:none; outline:none;
-         font-size:1em; backdrop-filter:blur(15px); background:rgba(255,255,255,0.1); color:#ffffff; box-shadow:0 8px 32px rgba(0,0,0,0.2); }
-         .faq-card { background: rgba(255,255,255,0.05); border-radius:25px; padding:25px 30px; margin-bottom:20px;
-         backdrop-filter: blur(15px); box-shadow:0 10px 35px rgba(61,62,64,0.3); cursor:pointer; transition:transform 0.3s, box-shadow 0.3s; }
-         .faq-card:hover { transform: translateY(-3px) scale(1.02); box-shadow:0 20px 60px rgba(61,62,64,0.4); }
-         .faq-question { font-size:1.3em; font-weight:600; color:#3d3e40; }
-         .faq-answer {
-         margin-top: 15px;
-         font-size: 1em;
-         line-height: 1.6em;
-         color: #3d3e40;/* changed from white to grey for readability */
-         max-height: 0;
-         overflow: hidden;
-         opacity: 0;
-         transition: max-height 0.6s ease, opacity 0.6s ease;
-         }
-         .faq-card.active .faq-answer {
-         max-height: 1000px;
-         opacity: 1;
-         color: #3d3e40; /* ensure grey remains when expanded */
-         }
-         /* Light mode */
-         body.light-mode { background:#f1f1f1; }
-         body.light-mode .faq-futuristic { background: rgba(255,255,255,0.2); color:#0f0c29; }
-         body.light-mode .faq-question { color:#3d3e40; text-shadow:none; }
-         /* Mobile */
-         @media(max-width:768px){ .faq-futuristic { padding:30px 20px; } .faq-question { font-size:1.1em; } .faq-answer { font-size:0.95em; } }
-      </style>
-      <script>
-         // Accordion
-         const faqCards = document.querySelectorAll('.faq-card');
-         faqCards.forEach(card => {
-           card.addEventListener('click', () => {
-             card.classList.toggle('active');
-           });
-         });
-         
-         
-         // Search
-         const searchInput = document.getElementById('faqSearch');
-         searchInput.addEventListener('input', () => {
-           const term = searchInput.value.toLowerCase();
-           faqCards.forEach(card => { 
-             const question = card.getAttribute('data-question').toLowerCase(); 
-             card.style.display = question.includes(term) ? 'block' : 'none'; 
-           });
-         });
-         
-         // Light/Dark Mode
-         document.getElementById('toggleMode').addEventListener('change', e => {
-           document.body.classList.toggle('light-mode', e.target.checked);
-         });
-         
-         // Particle Background
-         const canvas = document.getElementById('particle-bg');
-         const ctx = canvas.getContext('2d');
-         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-         let particles = [], particleCount = 120;
-         function createParticles(){ particles=[]; for(let i=0;i<particleCount;i++){ particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*3+1,speedX:(Math.random()-0.5)*0.6,speedY:(Math.random()-0.5)*0.6}); } }
-         function animateParticles(){ ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{ ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fillStyle='#3d3e40'; ctx.fill(); p.x+=p.speedX; p.y+=p.speedY; if(p.x<0||p.x>canvas.width)p.speedX*=-1; if(p.y<0||p.y>canvas.height)p.speedY*=-1; }); requestAnimationFrame(animateParticles); }
-         createParticles(); animateParticles();
-         window.addEventListener('resize',()=>{ canvas.width=window.innerWidth; canvas.height=window.innerHeight; createParticles(); });
-      </script>
-      <!-- Call to Action -->
-      <section class="py-16 bg-primary text-white">
-         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="font-headline font-bold text-3xl md:text-4xl mb-6">
-               Ready to Restore Your Vision?
-            </h2>
-            <p class="font-body text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
-               Don't let vision problems affect your quality of life. Schedule a comprehensive eye examination with our expert team today.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-               <a href="tel:+919493288101" class="border-2 border-white text-white px-8 py-4 rounded-lg font-headline font-semibold hover:bg-white hover:text-primary transition-all duration-300">
-               Call Now: +91 9493288101
-               </a>
-            </div>
-         </div>
-      </section>
-      <!-- Footer -->
-      <footer class="bg-primary text-white py-12">
-         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-4 gap-8">
-               <!-- Clinic Info -->
-               <div>
-                  <div class="flex items-center mb-4">
-                     <img src="images/Sri_Chakra_Logo.png" alt="Sri Chakra Logo" class="h-15 w-20 object-contain mr-4 ">
-                     <div>
-                        <h3 class="font-headline font-bold text-lg">Sri Chakra Eye Clinic</h3>
-                     </div>
-                  </div>
-                  <p class="font-body text-blue-200 mb-4">
-                     Advanced eye care with compassionate service in Anantapur
-                  </p>
-                  <div class="flex space-x-4">
-                     <a href="https://www.youtube.com/@yourseyedoctor" target="_blank" 
-                        class="text-red-500 hover:text-white transition-colors">
+        </section>
+
+        <!-- Call to Action -->
+        <section class="py-16 bg-primary text-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="font-headline font-bold text-3xl md:text-4xl mb-6">
+                    Ready to Restore Your Vision?
+                </h2>
+                <p class="font-body text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
+                    Don't let vision problems affect your quality of life. Schedule a comprehensive eye examination with our expert team today.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1AES5FOjzTbpeRi5KEeW9NKGSfhUFuy1ntJpT64BB6PFnt1E74zjufsoXk2izw4zrwm4A7Xm-I?gv=true" 
+                       target="_blank"
+                       class="bg-accent hover:bg-yellow-500 text-gray-900 px-8 py-4 rounded-full font-headline font-bold text-lg transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        Book Appointment
+                    </a>
+                    <a href="tel:+919493288101" class="border-2 border-white text-white px-8 py-4 rounded-full font-headline font-semibold hover:bg-white hover:text-primary transition-all duration-300 flex items-center gap-2">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                           <path d="M23.5 6.2s-.2-1.6-.8-2.3c-.7-.8-1.5-.8-1.9-.9C18.1 2.7 12 2.7 
-                              12 2.7h-.1s-6.1 0-8.8.3c-.4.1-1.2.1-1.9.9C.7 4.6.5 6.2.5 
-                              6.2S0 8.1 0 10v1.9c0 1.9.5 3.8.5 3.8s.2 1.6.8 2.3c.7.8 
-                              1.6.8 2 1 1.5.1 6.6.3 8.7.3h.1s6.1 0 8.8-.3c.4-.1 
-                              1.2-.1 1.9-.9.6-.7.8-2.3.8-2.3s.5-1.9.5-3.8V10c0-1.9-.5-3.8-.5-3.8zM9.5 
-                              14.6V8.4l6.2 3.1-6.2 3.1z"/>
+                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                         </svg>
-                     </a>
-                     <a href="https://www.instagram.com/dr.opthamology?igsh=MW1wN25pa2VqbHJucg==" target="_blank" 
-                        class="text-pink-400 hover:text-white transition-colors">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                           <path d="M7.75 2h8.5C19.55 2 22 4.45 22 7.75v8.5C22 19.55 19.55 22 16.25 22h-8.5C4.45 
-                              22 2 19.55 2 16.25v-8.5C2 4.45 4.45 2 7.75 2zm0 2C5.68 4 4 5.68 4 
-                              7.75v8.5C4 18.32 5.68 20 7.75 20h8.5c2.07 0 3.75-1.68 
-                              3.75-3.75v-8.5C20 5.68 18.32 4 16.25 4h-8.5zm4.25 3.25a4.75 4.75 
-                              0 1 1 0 9.5 4.75 4.75 0 0 1 0-9.5zm0 2a2.75 2.75 0 1 0 0 5.5 
-                              2.75 2.75 0 0 0 0-5.5zm5.5-.5a1 1 0 1 1-2 0 1 1 0 0 1 
-                              2 0z"/>
-                        </svg>
-                     </a>
-                  </div>
-               </div>
-               <!-- Quick Links -->
-               <div>
-                  <h4 class="font-headline font-semibold text-lg mb-4">Quick Links</h4>
-                  <ul class="space-y-2 font-body">
-                     <li><a href="homepage.html" class="text-blue-200 hover:text-white transition-colors">Home</a></li>
-                     <li><a href="services_overview.html" class="text-blue-200 hover:text-white transition-colors">Services</a></li>
-                     <li><a href="about_sri_chakra_eye_clinic.html" class="text-blue-200 hover:text-white transition-colors">About Us</a></li>
-                  </ul>
-               </div>
-               <!-- Services -->
-               <div>
-                  <h4 class="font-headline font-semibold text-lg mb-4">Our Services</h4>
-                  <ul class="space-y-2 font-body">
-                     <li><a href="services_overview.html" class="text-blue-200 hover:text-white transition-colors">Cataract Surgery</a></li>
-                     <li><a href="services_overview.html" class="text-blue-200 hover:text-white transition-colors">Glaucoma Treatment</a></li>
-                     <li><a href="services_overview.html" class="text-blue-200 hover:text-white transition-colors">Retinal Care</a></li>
-                     <li><a href="services_overview.html" class="text-blue-200 hover:text-white transition-colors">Pediatric Eye Care</a></li>
-                  </ul>
-               </div>
-               <!-- Contact Info -->
-               <div>
-                  <h4 class="font-headline font-semibold text-lg mb-4">Contact Info</h4>
-                  <div class="space-y-3 font-body">
-                     <div class="flex items-start">
-                        <svg class="w-5 h-5 text-accent mr-2 mt-0.5" fill="currentColor" viewBox="0 0 24 24">
-                           <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                        <p class="text-blue-200">
-                           Sri Chakra Eye Clinic, <br />
-                           near Riya Hospital, SAPTHAGIRI CIRCLE,<br />
-                           Anantapur, Andhra Pradesh 515001
-                        </p>
-                     </div>
-                     <div class="flex items-center">
-                        <svg class="w-5 h-5 text-accent mr-2" fill="currentColor" viewBox="0 0 24 24">
-                           <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                        </svg>
-                        <a href="tel:+919493288101" class="text-blue-200 hover:text-white transition-colors">+91 9493288101</a>
-                     </div>
-                     <div class="flex items-center">
-                        <svg class="w-5 h-5 text-accent mr-2" fill="currentColor" viewBox="0 0 24 24">
-                           <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                        </svg>
-                        <a href="mailto:info@srichakraeyeclinic.com" class="text-blue-200 hover:text-white transition-colors">info@srichakraeyeclinic.com</a>
-                     </div>
-                  </div>
-               </div>
+                        Call: +91 9493288101
+                    </a>
+                </div>
             </div>
-            <div class="border-t border-blue-700 mt-8 pt-8 text-center">
-               <p class="font-body text-blue-200">
-                  © 2025 Sri Chakra Eye Clinic. All Rights Reserved. | 
-                  <a href="javascript:void(0)" class="hover:text-white transition-colors">Privacy Policy</a> | 
-                  <a href="javascript:void(0)" class="hover:text-white transition-colors">Terms of Service</a>
-               </p>
+        </section>
+    </main>
+
+    <!-- Footer - Matching Homepage -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
+                
+                <!-- Brand -->
+                <div class="lg:col-span-1">
+                    <div class="flex items-center mb-4">
+                        <img src="images/Sri_Chakra_Logo.png" alt="Sri Chakra Eye Clinic" class="h-16 w-16 object-contain bg-white rounded-lg p-1" loading="lazy">
+                        <div class="ml-3">
+                            <h3 class="font-headline font-bold text-xl">Sri Chakra</h3>
+                            <p class="text-sm text-gray-400">Eye Clinic</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Advanced eye care with compassionate service in Anantapur. Your vision is our mission.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.youtube.com/@yourseyedoctor" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-red-600/20 flex items-center justify-center text-red-500 hover:bg-red-600 hover:text-white transition-all" aria-label="YouTube">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.5 6.2s-.2-1.6-.8-2.3c-.7-.8-1.5-.8-1.9-.9C18.1 2.7 12 2.7 12 2.7h-.1s-6.1 0-8.8.3c-.4.1-1.2.1-1.9.9C.7 4.6.5 6.2.5 6.2S0 8.1 0 10v1.9c0 1.9.5 3.8.5 3.8s.2 1.6.8 2.3c.7.8 1.6.8 2 1 1.5.1 6.6.3 8.7.3h.1s6.1 0 8.8-.3c.4-.1 1.2-.1 1.9-.9.6-.7.8-2.3.8-2.3s.5-1.9.5-3.8V10c0-1.9-.5-3.8-.5-3.8zM9.5 14.6V8.4l6.2 3.1-6.2 3.1z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/dr.opthamology" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-pink-600/20 flex items-center justify-center text-pink-500 hover:bg-pink-600 hover:text-white transition-all" aria-label="Instagram">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163 0-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-headline font-semibold text-lg mb-4 text-white">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="homepage.html" class="text-gray-400 hover:text-primary transition-colors flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            Home
+                        </a></li>
+                        <li><a href="services_overview.html" class="text-primary font-semibold flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            Services
+                        </a></li>
+                        <li><a href="about_sri_chakra_eye_clinic.html" class="text-gray-400 hover:text-primary transition-colors flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            About Us
+                        </a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="font-headline font-semibold text-lg mb-4 text-white">Our Services</h4>
+                    <ul class="space-y-3">
+                        <li><a href="services_overview.html" class="text-gray-400 hover:text-primary transition-colors">Cataract Surgery</a></li>
+                        <li><a href="services_overview.html" class="text-gray-400 hover:text-primary transition-colors">Glaucoma Treatment</a></li>
+                        <li><a href="services_overview.html" class="text-gray-400 hover:text-primary transition-colors">Retinal Care</a></li>
+                        <li><a href="services_overview.html" class="text-gray-400 hover:text-primary transition-colors">Pediatric Eye Care</a></li>
+                        <li><a href="services_overview.html" class="text-gray-400 hover:text-primary transition-colors">LASIK Surgery</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-headline font-semibold text-lg mb-4 text-white">Contact Info</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-primary mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Sri Chakra Eye Clinic,<br>
+                                near Riya Hospital, SAPTHAGIRI CIRCLE,<br>
+                                Anantapur, Andhra Pradesh 515001
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                            </svg>
+                            <a href="tel:+919493288101" class="text-gray-400 hover:text-primary transition-colors">+91 94932 88101</a>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                            <a href="mailto:srichakraeyeclinic@gmail.com" class="text-gray-400 hover:text-primary transition-colors text-sm">srichakraeyeclinic@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </footer>
-      <script>
-         function toggleMobileMenu() {
-             const mobileMenu = document.getElementById('mobile-menu');
-             mobileMenu.classList.toggle('hidden');
-         }
-         
-         function toggleContent(contentId) {
-             const content = document.getElementById(contentId);
-             const arrow = document.getElementById(contentId.replace('-details', '-arrow').replace('-treatments', '-arrow'));
-             
-             if (content.classList.contains('hidden')) {
-                 content.classList.remove('hidden');
-                 arrow.style.transform = 'rotate(180deg)';
-             } else {
-                 content.classList.add('hidden');
-                 arrow.style.transform = 'rotate(0deg)';
-             }
-         }
-         
-         // Add smooth scrolling for anchor links
-         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-             anchor.addEventListener('click', function (e) {
-                 e.preventDefault();
-                 const target = document.querySelector(this.getAttribute('href'));
-                 if (target) {
-                     target.scrollIntoView({
-                         behavior: 'smooth',
-                         block: 'start'
-                     });
-                 }
-             });
-         });
-         
-         // Add fade-in animation on scroll
-         const observerOptions = {
-             threshold: 0.1,
-             rootMargin: '0px 0px -50px 0px'
-         };
-         
-         const observer = new IntersectionObserver((entries) => {
-             entries.forEach(entry => {
-                 if (entry.isIntersecting) {
-                     entry.target.classList.add('fade-in');
-                 }
-             });
-         }, observerOptions);
-         
-         document.querySelectorAll('.card-elevated, .card').forEach(el => {
-             observer.observe(el);
-         });
-         
-         // Symptom checker functionality
-         document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-             checkbox.addEventListener('change', function() {
-                 const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
-                 if (checkedBoxes.length >= 2) {
-                     const alertDiv = document.createElement('div');
-                     alertDiv.className = 'bg-error text-white p-3 rounded-lg mt-4 text-sm';
-                     alertDiv.innerHTML = '⚠️ Multiple symptoms detected. We recommend scheduling an immediate consultation.';
-                     
-                     // Remove existing alerts
-                     const existingAlert = this.closest('.bg-accent-50').querySelector('.bg-error');
-                     if (existingAlert) {
-                         existingAlert.remove();
-                     }
-                     
-                     this.closest('.bg-accent-50').appendChild(alertDiv);
-                 }
-             });
-         });
-      </script>
-      <script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
-   </body>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm text-center md:text-left">
+                    © 2025 Sri Chakra Eye Clinic. All Rights Reserved.
+                </p>
+                <div class="flex gap-6 text-sm">
+                    <a href="#" class="text-gray-500 hover:text-primary transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-primary transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle - Matching Homepage
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            const btn = document.querySelector('[aria-controls="mobile-menu"]');
+            
+            const isHidden = menu.classList.contains('hidden');
+            
+            if (isHidden) {
+                menu.classList.remove('hidden');
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+                btn.setAttribute('aria-expanded', 'true');
+            } else {
+                menu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+                btn.setAttribute('aria-expanded', 'false');
+            }
+        }
+
+        // Close mobile menu on resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            }
+        });
+
+        // Accordion functionality
+        function toggleAccordion(contentId, arrowId) {
+            const content = document.getElementById(contentId);
+            const arrow = document.getElementById(arrowId);
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                content.style.maxHeight = null;
+                arrow.style.transform = 'rotate(0deg)';
+            } else {
+                content.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + "px";
+                arrow.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Symptom checker
+        function checkSymptoms(checkbox) {
+            const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            const alert = document.getElementById('symptom-alert');
+            
+            if (checkedBoxes.length >= 2) {
+                alert.classList.remove('hidden');
+            } else {
+                alert.classList.add('hidden');
+            }
+        }
+
+        // FAQ Toggle
+        function toggleFaq(button) {
+            const answer = button.nextElementSibling;
+            const arrow = button.querySelector('svg');
+            
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                answer.classList.add('hidden');
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // FAQ Search
+        document.getElementById('faqSearch').addEventListener('input', function() {
+            const term = this.value.toLowerCase();
+            const items = document.querySelectorAll('.faq-item');
+            
+            items.forEach(item => {
+                const question = item.querySelector('button span').textContent.toLowerCase();
+                if (question.includes(term)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('site-header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-md');
+            } else {
+                header.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body>
 </html>
