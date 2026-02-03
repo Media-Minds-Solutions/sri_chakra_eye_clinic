@@ -114,17 +114,34 @@
             font-weight: 600;
         }
         
-        /* Carousel Styles */
+        /* Carousel Styles - UPDATED FOR MANUAL SCROLL */
         .services-carousel {
             overflow: hidden;
             position: relative;
             width: 100%;
+            touch-action: pan-y pinch-zoom;
         }
+        
+        .services-carousel.dragging {
+            cursor: grabbing;
+        }
+        
+        .services-carousel.dragging .services-track {
+            transition: none;
+        }
+        
         .services-track {
             display: flex;
             gap: 1.5rem;
-            transition: transform 0.5s ease;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+            cursor: grab;
         }
+        
+        .services-track:active {
+            cursor: grabbing;
+        }
+        
         .service-card {
             flex: 0 0 auto;
             width: 280px;
@@ -132,12 +149,45 @@
             border-radius: 1rem;
             padding: 1.5rem;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            transition: all 0.3s ease, transform 0.2s ease;
             cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: pan-y;
         }
+        
         .service-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .services-carousel.dragging .service-card {
+            pointer-events: none;
+        }
+        
+        /* Snap scroll for mobile */
+        @media (max-width: 1024px) {
+            .services-carousel {
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            
+            .services-carousel::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .services-track {
+                transition: none;
+                cursor: default;
+            }
+            
+            .service-card {
+                scroll-snap-align: start;
+                scroll-snap-stop: always;
+            }
         }
         
         /* Video Slider */
@@ -254,6 +304,16 @@
         :focus-visible {
             outline: 2px solid #009688;
             outline-offset: 2px;
+        }
+        
+        /* Touch hint animation */
+        @keyframes swipeHint {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+        
+        .swipe-hint {
+            animation: swipeHint 1.5s ease-in-out infinite;
         }
     </style>
     
@@ -478,27 +538,45 @@
 
                 <!-- Carousel Container -->
                 <div class="relative">
+                    <!-- Mobile Swipe Hint -->
+                    <div class="lg:hidden flex items-center justify-center gap-2 mb-4 text-gray-400 text-sm">
+                        <svg class="w-5 h-5 swipe-hint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
+                        </svg>
+                        <span>Swipe to explore</span>
+                        <svg class="w-5 h-5 swipe-hint" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="animation-delay: 0.75s;">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </div>
+
                     <div class="services-carousel" id="services-carousel">
                         <div class="services-track" id="services-track" role="list">
                             <!-- Cards injected via JS -->
                         </div>
                     </div>
                     
-                    <!-- Navigation Arrows -->
-                    <button class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 bg-white p-3 rounded-full shadow-lg hover:shadow-xl text-primary hover:bg-primary hover:text-white transition-all z-10 hidden md:block" onclick="moveCarousel(-1)" aria-label="Previous service">
+                    <!-- Navigation Arrows - Desktop Only -->
+                    <button class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 bg-white p-3 rounded-full shadow-lg hover:shadow-xl text-primary hover:bg-primary hover:text-white transition-all z-10 hidden lg:block" onclick="moveCarousel(-1)" aria-label="Previous service">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                         </svg>
                     </button>
-                    <button class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 bg-white p-3 rounded-full shadow-lg hover:shadow-xl text-primary hover:bg-primary hover:text-white transition-all z-10 hidden md:block" onclick="moveCarousel(1)" aria-label="Next service">
+                    <button class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 bg-white p-3 rounded-full shadow-lg hover:shadow-xl text-primary hover:bg-primary hover:text-white transition-all z-10 hidden lg:block" onclick="moveCarousel(1)" aria-label="Next service">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
                     </button>
                 </div>
 
-                <!-- Dots Indicator -->
-                <div class="flex justify-center gap-2 mt-8" id="carousel-dots" role="tablist"></div>
+                <!-- Dots Indicator - Desktop Only -->
+                <div class="hidden lg:flex justify-center gap-2 mt-8" id="carousel-dots" role="tablist"></div>
+                
+                <!-- Progress Bar - Mobile/Tablet -->
+                <div class="lg:hidden mt-6 px-4">
+                    <div class="h-1 bg-gray-200 rounded-full overflow-hidden">
+                        <div class="h-full bg-primary transition-all duration-300 rounded-full" id="scroll-progress" style="width: 0%"></div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -779,10 +857,12 @@
             }
         ];
 
-        // Initialize Services Carousel
+        // Initialize Services Carousel with Drag Support
         function initServicesCarousel() {
             const track = document.getElementById('services-track');
             const dotsContainer = document.getElementById('carousel-dots');
+            const carousel = document.getElementById('services-carousel');
+            const progressBar = document.getElementById('scroll-progress');
             
             // Create cards
             services.forEach((service, index) => {
@@ -803,32 +883,82 @@
                 `;
                 track.appendChild(card);
                 
-                // Create dot
-                const dot = document.createElement('button');
-                dot.className = `w-2 h-2 rounded-full transition-all ${index === 0 ? 'bg-primary w-6' : 'bg-gray-300'}`;
-                dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
-                dot.onclick = () => goToSlide(index);
-                dotsContainer.appendChild(dot);
+                // Create dot (desktop only)
+                if (window.innerWidth >= 1024) {
+                    const dot = document.createElement('button');
+                    dot.className = `w-2 h-2 rounded-full transition-all ${index === 0 ? 'bg-primary w-6' : 'bg-gray-300'}`;
+                    dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                    dot.onclick = () => goToSlide(index);
+                    dotsContainer.appendChild(dot);
+                }
             });
 
-            // Clone for infinite scroll
-            services.forEach((service, index) => {
-                const card = document.createElement('div');
-                card.className = 'service-card';
-                card.setAttribute('role', 'listitem');
-                card.innerHTML = `
-                    <div class="w-14 h-14 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="${service.icon}"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-semibold text-lg text-gray-900 mb-2 text-center">${service.title}</h3>
-                    <p class="text-sm text-gray-600 text-center mb-4 line-clamp-3">${service.desc}</p>
-                    <a href="services_overview.html" class="block text-center text-primary font-semibold text-sm hover:underline">
-                        Learn More →
-                    </a>
-                `;
-                track.appendChild(card);
+            // Setup drag functionality for desktop
+            if (window.innerWidth >= 1024) {
+                setupDragScroll(carousel, track);
+            } else {
+                // Mobile: use native scroll with snap
+                setupMobileScroll(carousel, progressBar);
+            }
+        }
+
+        // Drag scroll for desktop
+        function setupDragScroll(carousel, track) {
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+            let velocity = 0;
+            let rafId;
+
+            carousel.addEventListener('mousedown', (e) => {
+                isDown = true;
+                carousel.classList.add('dragging');
+                startX = e.pageX - carousel.offsetLeft;
+                scrollLeft = currentSlide * cardWidth;
+                cancelAnimationFrame(rafId);
+            });
+
+            carousel.addEventListener('mouseleave', () => {
+                if (isDown) {
+                    isDown = false;
+                    carousel.classList.remove('dragging');
+                    snapToNearest();
+                }
+            });
+
+            carousel.addEventListener('mouseup', () => {
+                isDown = false;
+                carousel.classList.remove('dragging');
+                snapToNearest();
+            });
+
+            carousel.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - carousel.offsetLeft;
+                const walk = (x - startX) * 2;
+                velocity = walk - (currentSlide * cardWidth - scrollLeft);
+                
+                const newTransform = scrollLeft - walk;
+                track.style.transform = `translateX(-${newTransform}px)`;
+            });
+
+            function snapToNearest() {
+                const track = document.getElementById('services-track');
+                const currentTransform = new WebKitCSSMatrix(window.getComputedStyle(track).transform).m41;
+                const slideIndex = Math.round(Math.abs(currentTransform) / cardWidth);
+                
+                currentSlide = Math.max(0, Math.min(slideIndex, services.length - 1));
+                moveCarousel(0);
+            }
+        }
+
+        // Mobile scroll progress
+        function setupMobileScroll(carousel, progressBar) {
+            carousel.addEventListener('scroll', () => {
+                const scrollWidth = carousel.scrollWidth - carousel.clientWidth;
+                const scrolled = (carousel.scrollLeft / scrollWidth) * 100;
+                progressBar.style.width = scrolled + '%';
             });
         }
 
@@ -837,37 +967,31 @@
 
         function moveCarousel(direction) {
             const track = document.getElementById('services-track');
-            const dots = document.getElementById('carousel-dots').children;
+            const dots = document.getElementById('carousel-dots')?.children;
             const maxSlide = services.length;
             
             currentSlide += direction;
             
             if (currentSlide >= maxSlide) {
                 currentSlide = 0;
-                track.style.transition = 'none';
-                track.style.transform = `translateX(0)`;
-                setTimeout(() => {
-                    track.style.transition = 'transform 0.5s ease';
-                    currentSlide = 1;
-                    track.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
-                }, 10);
             } else if (currentSlide < 0) {
                 currentSlide = maxSlide - 1;
-                track.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
-            } else {
-                track.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
             }
             
+            track.style.transform = `translateX(-${currentSlide * cardWidth}px)`;
+            
             // Update dots
-            Array.from(dots).forEach((dot, index) => {
-                if (index === currentSlide % services.length) {
-                    dot.classList.remove('bg-gray-300', 'w-2');
-                    dot.classList.add('bg-primary', 'w-6');
-                } else {
-                    dot.classList.remove('bg-primary', 'w-6');
-                    dot.classList.add('bg-gray-300', 'w-2');
-                }
-            });
+            if (dots) {
+                Array.from(dots).forEach((dot, index) => {
+                    if (index === currentSlide) {
+                        dot.classList.remove('bg-gray-300', 'w-2');
+                        dot.classList.add('bg-primary', 'w-6');
+                    } else {
+                        dot.classList.remove('bg-primary', 'w-6');
+                        dot.classList.add('bg-gray-300', 'w-2');
+                    }
+                });
+            }
         }
 
         function goToSlide(index) {
@@ -875,8 +999,17 @@
             moveCarousel(0);
         }
 
-        // Auto-scroll carousel
-        setInterval(() => moveCarousel(1), 5000);
+        // Auto-scroll carousel (desktop only)
+        let autoScrollInterval;
+        function startAutoScroll() {
+            if (window.innerWidth >= 1024) {
+                autoScrollInterval = setInterval(() => moveCarousel(1), 5000);
+            }
+        }
+
+        function stopAutoScroll() {
+            clearInterval(autoScrollInterval);
+        }
 
         // Video Data
         const videos = [
@@ -959,6 +1092,13 @@
         document.addEventListener('DOMContentLoaded', () => {
             initServicesCarousel();
             initVideoSlider();
+            startAutoScroll();
+            
+            // Pause auto-scroll on hover
+            const carousel = document.getElementById('services-carousel');
+            carousel.addEventListener('mouseenter', stopAutoScroll);
+            carousel.addEventListener('mouseleave', startAutoScroll);
+            carousel.addEventListener('touchstart', stopAutoScroll, {passive: true});
             
             // Intersection Observer for fade-in animations
             const observer = new IntersectionObserver((entries) => {
@@ -984,6 +1124,14 @@
                         iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
                     }
                 });
+            }
+        });
+
+        // Handle resize
+        window.addEventListener('resize', () => {
+            clearInterval(autoScrollInterval);
+            if (window.innerWidth >= 1024) {
+                startAutoScroll();
             }
         });
     </script>
