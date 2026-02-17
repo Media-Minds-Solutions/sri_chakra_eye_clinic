@@ -12,7 +12,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://www.youtube.com" />
-    <link rel="preconnect" href="https://elfsightcdn.com" />
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -36,11 +35,21 @@
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
                         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in': 'fadeIn 0.3s ease-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
                         }
                     }
                 }
@@ -69,6 +78,13 @@
             background-color: #f0fdfa;
             overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
+        }
+        
+        body.modal-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
         }
         
         /* Custom Scrollbar */
@@ -155,11 +171,10 @@
             padding: 1.5rem;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
-            cursor: pointer;
+            position: relative;
             user-select: none;
             -webkit-user-select: none;
             -webkit-touch-callout: none;
-            touch-action: manipulation;
         }
         
         .service-card:hover {
@@ -171,56 +186,193 @@
             pointer-events: none;
         }
         
-        /* Video Slider */
+        /* NEW: Button container that sits above the card */
+        .card-content {
+            pointer-events: none;
+        }
+        
+        .learn-more-btn {
+            pointer-events: auto;
+            cursor: pointer;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 100;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 600px;
+            max-height: 90vh;
+            border-radius: 1.5rem 1.5rem 0 0;
+            overflow: hidden;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, #009688 0%, #00695c 100%);
+            color: white;
+            padding: 1.5rem;
+            position: relative;
+            flex-shrink: 0;
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            flex: 1;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            color: white;
+        }
+        
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+        
+        @media (min-width: 640px) {
+            .modal-overlay {
+                align-items: center;
+                padding: 2rem;
+            }
+            .modal-content {
+                border-radius: 1.5rem;
+                max-height: 85vh;
+            }
+        }
+        
+        /* Video Slider - 9:16 Aspect Ratio for Shorts */
         .video-slider-container {
             position: relative;
-            max-width: 1000px;
+            max-width: 400px;
             margin: 0 auto;
-            perspective: 1000px;
+            padding: 0 1rem;
         }
+        
         .video-slider {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 500px;
+            height: 600px;
             position: relative;
         }
+        
         .video-slide {
             position: absolute;
-            width: 320px;
-            height: 240px;
+            width: 280px;
+            height: 498px; /* 9:16 aspect ratio */
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             background: #000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
+        
         .video-slide iframe {
             width: 100%;
             height: 100%;
             border: none;
+            object-fit: cover;
         }
+        
         .video-slide.active {
             z-index: 20;
             transform: translateX(0) scale(1);
             opacity: 1;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
+        
         .video-slide.prev {
             z-index: 10;
-            transform: translateX(-350px) scale(0.85) rotateY(25deg);
-            opacity: 0.6;
+            transform: translateX(-120px) scale(0.85) rotateY(15deg);
+            opacity: 0.5;
             filter: blur(2px);
         }
+        
         .video-slide.next {
             z-index: 10;
-            transform: translateX(350px) scale(0.85) rotateY(-25deg);
-            opacity: 0.6;
+            transform: translateX(120px) scale(0.85) rotateY(-15deg);
+            opacity: 0.5;
             filter: blur(2px);
         }
+        
         .video-slide.hidden-slide {
             z-index: 0;
             opacity: 0;
             transform: scale(0.7);
+        }
+        
+        @media (max-width: 640px) {
+            .video-slider {
+                height: 520px;
+            }
+            .video-slide {
+                width: 240px;
+                height: 426px; /* 9:16 */
+            }
+            .video-slide.prev {
+                transform: translateX(-80px) scale(0.8) rotateY(10deg);
+            }
+            .video-slide.next {
+                transform: translateX(80px) scale(0.8) rotateY(-10deg);
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .video-slider {
+                height: 480px;
+            }
+            .video-slide {
+                width: 200px;
+                height: 355px; /* 9:16 */
+            }
+            .video-slide.prev {
+                transform: translateX(-60px) scale(0.75);
+            }
+            .video-slide.next {
+                transform: translateX(60px) scale(0.75);
+            }
         }
         
         /* Gradient Text */
@@ -231,44 +383,10 @@
             background-clip: text;
         }
         
-        /* Loading Skeleton */
-        .skeleton {
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
-        }
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-        
         /* Mobile Optimizations */
         @media (max-width: 768px) {
             .video-slide {
-                width: 280px;
-                height: 200px;
-            }
-            .video-slide.prev {
-                transform: translateX(-200px) scale(0.8) rotateY(15deg);
-            }
-            .video-slide.next {
-                transform: translateX(200px) scale(0.8) rotateY(-15deg);
-            }
-            .video-slider {
-                height: 350px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .video-slide {
-                width: 240px;
-                height: 180px;
-            }
-            .video-slide.prev {
-                transform: translateX(-150px) scale(0.75) rotateY(10deg);
-            }
-            .video-slide.next {
-                transform: translateX(150px) scale(0.75) rotateY(-10deg);
+                border-radius: 12px;
             }
         }
         
@@ -296,62 +414,47 @@
         .swipe-hint {
             animation: swipeHint 1.5s ease-in-out infinite;
         }
-         /* ============================================
+        
+        /* ============================================
            FLOATING WHATSAPP BUTTON STYLES
            ============================================ */
         
         .whatsapp-float {
-            position: fixed;          /* Fixed to viewport, not page */
-            bottom: 30px;             /* Distance from bottom of screen */
-            right: 30px;              /* Distance from right of screen */
-            z-index: 9999;            /* Always on top */
-            
-            /* Button styling */
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
             width: 60px;
             height: 60px;
-            background: #25D366;      /* WhatsApp green */
+            background: #25D366;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            
-            /* Shadow and effects */
             box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
             cursor: pointer;
-            
-            /* Animation */
             transition: all 0.3s ease;
             animation: pulse 2s infinite;
         }
 
-        /* Hover effects */
         .whatsapp-float:hover {
             transform: scale(1.1) translateY(-5px);
             box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
-            animation: none;          /* Stop pulsing on hover */
+            animation: none;
         }
 
-        /* WhatsApp Icon (SVG) */
         .whatsapp-float svg {
             width: 32px;
             height: 32px;
             fill: white;
         }
 
-        /* Pulse animation */
         @keyframes pulse {
-            0% {
-                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            }
-            50% {
-                box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7), 0 0 0 10px rgba(37, 211, 102, 0.1);
-            }
-            100% {
-                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            }
+            0% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.7), 0 0 0 10px rgba(37, 211, 102, 0.1); }
+            100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
         }
 
-        /* Tooltip (optional) */
         .whatsapp-tooltip {
             position: fixed;
             bottom: 100px;
@@ -371,7 +474,6 @@
             opacity: 1;
         }
 
-        /* Mobile responsiveness */
         @media (max-width: 768px) {
             .whatsapp-float {
                 width: 50px;
@@ -379,12 +481,270 @@
                 bottom: 20px;
                 right: 20px;
             }
-            
             .whatsapp-float svg {
                 width: 26px;
                 height: 26px;
             }
         }
+
+        /* ============================================
+           DOCTOR PROFILE CARD STYLES
+           ============================================ */
+        .doctor-card-container {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+        
+        .doctor-card {
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .doctor-card:hover {
+            transform: rotateY(-2deg) rotateX(2deg) translateZ(10px);
+        }
+        
+        .image-wrapper {
+            transform: translateZ(50px);
+            transition: transform 0.5s ease;
+        }
+        
+        .doctor-card:hover .image-wrapper {
+            transform: translateZ(80px) scale(1.02);
+        }
+        
+        .doctor-image {
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-origin: bottom center;
+        }
+        
+        .doctor-card:hover .doctor-image {
+            filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.4));
+            transform: translateY(-10px);
+        }
+        
+        .specialization-badge {
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .doctor-card:hover .specialization-badge {
+            transform: translateX(-50%) translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 150, 136, 0.5);
+        }
+
+        .animated-underline {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .animated-underline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, #009688, #ffab00);
+            transition: width 0.6s ease;
+        }
+        
+        .doctor-card:hover .animated-underline::after {
+            width: 100%;
+        }
+
+        /* Mobile Optimizations for Doctor Card */
+        @media (max-width: 768px) {
+            .doctor-card {
+                transform: none !important;
+            }
+            .doctor-card:hover {
+                transform: translateY(-5px) !important;
+            }
+            .image-wrapper {
+                transform: none !important;
+            }
+            .doctor-card:hover .image-wrapper {
+                transform: scale(1.02) !important;
+            }
+            .doctor-image {
+                filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2)) !important;
+            }
+            .doctor-card:hover .doctor-image {
+                transform: translateY(-5px) !important;
+            }
+        }
+
+        /* ============================================
+           LOCATION & HOURS STYLES - SINGLE COLUMN
+           ============================================ */
+        
+        .location-section {
+            background: white;
+        }
+        
+        .address-card {
+            background: white;
+            border-radius: 1rem;
+            border: 1px solid #e5e7eb;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            background: #f3f4f6;
+        }
+        
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .copy-address-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #009688;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s;
+        }
+        
+        .copy-address-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .copy-address-btn.copied {
+            background: #009688;
+            color: white;
+        }
+        
+        .address-content {
+            padding: 1.5rem;
+        }
+        
+        .address-text {
+            font-family: 'Inter', monospace;
+            background: #f9fafb;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e5e7eb;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #374151;
+            cursor: text;
+            user-select: all;
+        }
+        
+        .info-grid {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: #f9fafb;
+            border-radius: 0.75rem;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            background: #009688;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .hours-badge {
+            display: inline-block;
+            background: #009688;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        
+        .landmark-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .landmark-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 14px;
+            color: #4b5563;
+        }
+        
+        .landmark-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 6px;
+            height: 6px;
+            background: #009688;
+            border-radius: 50%;
+        }
+        
+        @media (max-width: 640px) {
+            .map-container {
+                height: 200px;
+            }
+            .address-content {
+                padding: 1rem;
+            }
+        }
+        .landmark-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline-block; /* For centering */
+}
+
+.landmark-list li {
+    position: relative;
+    padding-left: 0;
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+    color: #4b5563;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.landmark-list li::before {
+    content: none; /* Remove default bullet */
+}
     </style>
     
     <!-- Schema.org JSON-LD -->
@@ -402,7 +762,7 @@
             "postalCode": "515001",
             "addressCountry": "IN"
         },
-        "telephone": "+919493288101",
+        "telephone": "+917569046893",
         "email": "srichakraeyeclinic@gmail.com",
         "url": "https://srichakraeyeclinic.com",
         "medicalSpecialty": "Ophthalmology",
@@ -416,6 +776,41 @@
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-white px-4 py-2 rounded z-50">
         Skip to main content
     </a>
+
+    <!-- Service Modal -->
+    <div id="serviceModal" class="modal-overlay" onclick="closeModalOnOutside(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeServiceModal()" aria-label="Close modal">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+                <div class="flex items-center gap-3">
+                    <div id="modalIcon" class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                        <!-- Icon injected here -->
+                    </div>
+                    <div>
+                        <h3 id="modalTitle" class="font-headline font-bold text-xl">Service Title</h3>
+                        <p class="text-white/80 text-sm">Sri Chakra Eye Clinic</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div id="modalContent" class="space-y-4">
+                    <!-- Content injected here -->
+                </div>
+                <div class="mt-6 pt-4 border-t border-gray-200">
+                    <a href="tel:+917569046893" class="flex items-center justify-center gap-2 w-full bg-primary text-white py-3 rounded-full font-semibold hover:bg-secondary transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                        </svg>
+                        Book Appointment
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Header -->
     <header class="fixed w-full top-0 z-50 transition-all duration-300" id="site-header">
@@ -503,11 +898,11 @@
                         <a href="about_sri_chakra_eye_clinic.html" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50 transition-colors">About</a>
                         
                         <div class="pt-4 pb-2 border-t border-gray-100 mt-2">
-                            <a href="tel:+919493288101" class="flex items-center px-3 py-2 text-primary font-semibold">
+                            <a href="tel:+917569046893" class="flex items-center px-3 py-2 text-primary font-semibold">
                                 <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                                 </svg>
-                                Emergency: +91 9493288101
+                                Emergency: +91 7569046893
                             </a>
                         </div>
                         
@@ -650,63 +1045,304 @@
             </div>
         </section>
 
-        <!-- Certifications Section -->
-        <section class="py-16 bg-blue-50" aria-labelledby="certifications-heading">
+        <!-- Doctor Profile Section with Pop-out Effect -->
+        <section class="py-16 lg:py-24 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
-                    <h2 id="certifications-heading" class="font-headline font-bold text-3xl md:text-4xl text-gray-900 mb-4">
-                        Medical Certifications & <span class="text-primary">Affiliations</span>
+                    <h2 class="font-headline font-bold text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-4">
+                        Meet the <span class="gradient-text">Expert</span>
                     </h2>
+                    <p class="font-body text-lg text-gray-600 max-w-2xl mx-auto">
+                        Dedicated ophthalmologist serving the Anantapur community with excellence
+                    </p>
                 </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-                    <div class="bg-white p-6 lg:p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow text-center group">
-                        <div class="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-                            </svg>
+
+                <!-- NEW POP-OUT DOCTOR CARD -->
+                <div class="doctor-card-container w-full max-w-5xl mx-auto">
+                    <div class="doctor-card relative bg-white rounded-3xl shadow-2xl overflow-visible grid md:grid-cols-2 gap-0" 
+                         style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;">
+                        
+                        <!-- Left Side: Image with Pop-out Effect -->
+                        <div class="relative bg-gradient-to-br from-gray-50 to-gray-100 rounded-l-3xl md:rounded-l-3xl rounded-t-3xl md:rounded-tr-none p-8 flex items-end justify-center min-h-[400px] md:min-h-[550px] overflow-visible">
+                            
+                            <!-- Decorative Circles -->
+                            <div class="absolute w-[300px] h-[300px] bg-primary/10 rounded-full -top-[100px] -right-[100px] pointer-events-none"></div>
+                            <div class="absolute w-[200px] h-[200px] bg-accent/10 rounded-full -bottom-[50px] -left-[50px] pointer-events-none"></div>
+                            
+                            <!-- Image Wrapper with 3D Effect -->
+                            <div class="image-wrapper relative w-full max-w-sm">
+                                <!-- The Full Doctor Image -->
+                                <img 
+                                    src="images/Doctor_Photo.jpeg" 
+                                    alt="Dr. Eswar Sakare - Ophthalmologist" 
+                                    class="doctor-image w-full h-auto block relative rounded-lg"
+                                    style="filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));"
+                                />
+                                
+                                <!-- Floating Badge -->
+                                <div class="specialization-badge absolute bottom-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-full font-semibold text-sm shadow-lg whitespace-nowrap z-20">
+                                    Ophthalmologist
+                                </div>
+                            </div>
                         </div>
-                        <p class="text-lg font-bold text-gray-900">MBBS, MS Ophthalmology</p>
-                        <p class="text-sm text-gray-600 mt-1">Board Certified</p>
+                        
+                        <!-- Right Side: Content -->
+                        <div class="content-section p-6 md:p-10 flex flex-col justify-center bg-white rounded-r-3xl md:rounded-r-3xl rounded-b-3xl md:rounded-bl-none">
+                            
+                            <!-- Header -->
+                            <div class="mb-6">
+                                <h2 class="font-headline text-sm font-semibold text-primary uppercase tracking-wider mb-2">Meet the Expert</h2>
+                                <h1 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 animated-underline">
+                                    Dr. Eswar Sakare
+                                </h1>
+                                <p class="text-lg text-gray-600 font-medium">MBBS, DNB (Ophthalmology)</p>
+                            </div>
+                            
+                            <!-- Qualifications Grid -->
+                            <div class="grid grid-cols-1 gap-4 mb-6">
+                                
+                                <!-- Experience -->
+                                <div class="flex items-start p-4 bg-gray-50 rounded-xl hover:bg-primary/5 transition-colors group">
+                                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                                        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-900">Experience</h3>
+                                        <p class="text-gray-600 text-sm">10+ years in ophthalmology with specialized training in advanced surgical techniques.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Education -->
+                                <div class="flex items-start p-4 bg-gray-50 rounded-xl hover:bg-secondary/5 transition-colors group">
+                                    <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0 group-hover:bg-secondary/20 transition-colors">
+                                        <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-900">Education</h3>
+                                          <p class="text-gray-600 text-sm">● MBBS (Sri Venkateswara Medical College)</p>
+                                          <p class="text-gray-600 text-sm">● DNB (Ophthalmology), Sankara Eye Hospital, Guntur</p>
+                                        <p class="text-gray-600 text-sm">● Fellow Cornea and Refractive Services, Sankara Eye Hospital Guntur</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Specializations -->
+                                <div class="flex items-start p-4 bg-gray-50 rounded-xl hover:bg-accent/5 transition-colors group">
+                                    <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0 group-hover:bg-accent/20 transition-colors">
+                                        <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-900">Specializations</h3>
+                                        <div class="flex flex-wrap gap-2 mt-2">
+                                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full font-medium">Cataract Surgery</span>
+                                            <span class="px-3 py-1 bg-secondary/10 text-secondary text-xs rounded-full font-medium">Glaucoma</span>
+                                            <span class="px-3 py-1 bg-accent/10 text-accent text-xs rounded-full font-medium">Cornea</span>
+                                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full font-medium">Refractive Surgery</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- CTA Buttons -->
+                            <div class="flex flex-wrap gap-3 mt-auto">
+                                <a href="tel:+917569046893" class="flex-1 bg-primary hover:bg-secondary text-white px-6 py-3 rounded-full font-semibold text-center transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                    </svg>
+                                    Book Consultation
+                                </a>
+                                <button onclick="toggleDetails()" class="px-6 py-3 border-2 border-gray-200 hover:border-primary text-gray-700 hover:text-primary rounded-full font-semibold transition-all duration-300 flex items-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    More Info
+                                </button>
+                            </div>
+                            <!-- Hidden Details Section -->
+                            <div id="doctor-more-info" class="hidden mt-4 p-4 bg-primary/5 rounded-xl border border-primary/10">
+                                <p class="text-sm text-gray-600">
+                                    Dr. Eswar Sakare is a distinguished ophthalmologist with extensive experience in cataract surgery, glaucoma management, and corneal disorders. He is committed to providing personalized care using the latest technology. He has successfully performed thousands of surgeries and is known for his patient-centric approach.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div class="bg-white p-6 lg:p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow text-center group">
-                        <div class="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-                            </svg>
+                </div>
+
+                <!-- Professional Affiliations -->
+                <div class="mt-16 text-center">
+                    <h3 class="font-headline font-semibold text-xl text-gray-900 mb-6">Professional Affiliations</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-3">
+                                <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-900">All India Ophthalmological Society</p>
+                            <p class="text-xs text-gray-500 mt-1">Active Member</p>
                         </div>
-                        <p class="text-lg font-bold text-gray-900">All India Ophthalmological Society</p>
-                        <p class="text-sm text-gray-600 mt-1">Member</p>
-                    </div>
-                    
-                    <div class="bg-white p-6 lg:p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow text-center group">
-                        <div class="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/>
-                            </svg>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 mx-auto bg-secondary/10 rounded-full flex items-center justify-center mb-3">
+                                <svg class="w-6 h-6 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-900">Andhra Pradesh Medical Council</p>
+                            <p class="text-xs text-gray-500 mt-1">Registered</p>
                         </div>
-                        <p class="text-lg font-bold text-gray-900">Andhra Pradesh Medical Council</p>
-                        <p class="text-sm text-gray-600 mt-1">Registered</p>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 mx-auto bg-accent/10 rounded-full flex items-center justify-center mb-3">
+                                <svg class="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-900">Indian Medical Association</p>
+                            <p class="text-xs text-gray-500 mt-1">Life Member</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-3">
+                                <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-900">Cornea Society of India</p>
+                            <p class="text-xs text-gray-500 mt-1">Member</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Google Reviews -->
-        <section class="py-16 bg-white" aria-label="Patient reviews">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-8">
-                    <h2 class="font-headline font-bold text-3xl md:text-4xl text-gray-900 mb-4">
-                        What Our <span class="text-primary">Patients Say</span>
+        <!-- Location & Hours - SINGLE COLUMN WITH COPYABLE ADDRESS -->
+        <section class="py-16 lg:py-24 location-section">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10">
+                    <h2 class="font-headline font-bold text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-4">
+                        Find Us in <span class="gradient-text">Anantapur</span>
                     </h2>
+                    <p class="font-body text-lg text-gray-600">
+                        Conveniently located with easy access from all major landmarks
+                    </p>
                 </div>
-                <div class="elfsight-app-eb074307-5734-46a6-a064-a5494bf0bf08" data-elfsight-app-lazy></div>
+
+                <!-- Single Column Address Card -->
+                <div class="address-card">
+                    <!-- Map -->
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.8267!2d77.6!3d14.68!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDQwJzQ4LjAiTiA3N8KwMzYnMDAuMCJF!5e0!3m2!1sen!2sin!4v1635000000000!5m2!1sen!2sin" 
+                                allowfullscreen 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                        <button class="copy-address-btn" onclick="copyAddress()" id="copyBtn">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                            </svg>
+                            Copy
+                        </button>
+                    </div>
+                    
+                    <!-- Address Content -->
+                    <div class="address-content">
+                        <h3 class="font-headline font-semibold text-lg text-gray-900 mb-3 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                            Clinic Address
+                        </h3>
+                        
+                        <!-- Copyable Address -->
+                        <div class="address-text" id="addressText">
+Sri Chakra Eye Clinic,
+near Riya Hospital, SAPTHAGIRI CIRCLE,
+Anantapur, Andhra Pradesh 515001
+
+శ్రీ చక్ర ఐ క్లినిక్,
+రియా హాస్పిటల్ సమీపంలో, సప్తగిరి సర్కిల్,
+అనంతపురం, ఆంధ్రప్రదేశ్ 515001</div>
+                        
+                        <p class="text-xs text-gray-500 mt-2 text-center">Click address to select, or use Copy button on map</p>
+                        
+                        <!-- Info Grid -->
+                        <div class="info-grid">
+                             <!-- Directions Button -->
+                        <a href="https://maps.google.com/?q=Sri+Chakra+Eye+Clinic+Anantapur" 
+                           target="_blank"
+                           class="mt-4 flex items-center justify-center gap-2 w-full bg-primary text-white py-3 rounded-full font-semibold hover:bg-secondary transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0121 18.382V7.618a1 1 0 01-.806-.984A1 1 0 0118.553 6.894L15 7m0 13V7"/>
+                            </svg>
+                            Get Directions in Google Maps
+                        </a>
+                            <!-- Landmarks -->
+                            <div class="info-item flex-col items-center text-center">
+                                <div class="info-icon mb-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 text-sm mb-2">Nearby Landmarks</h4>
+                                    <ul class="landmark-list flex flex-col items-center">
+                                        <li>Opposite to Anantapur Municipality Corporation office</li>
+                                        <li>Near Sapthagiri Circle</li>
+                                        <li>1 km from Anantapur Tower clock</li>
+                                        <li>1.6 Km from Anantapur Railway Station</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Operating Hours - Clean Minimal -->
+                            <div class="info-item bg-primary text-white border-0">
+                                <div class="w-full">
+                                    <div class="flex items-center gap-3 mb-4 pb-3 border-b border-white/20">
+                                        <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                        </div>
+                                        <h4 class="font-bold text-lg">Opening Hours</h4>
+                                    </div>
+                                    
+                                    <div class="space-y-3">
+                                        <!-- Weekdays -->
+                                        <div class="bg-white/10 rounded-lg p-3">
+                                            <div class="flex justify-between items-center mb-2">
+                                                <span class="font-medium">Monday – Saturday</span>
+                                                <span class="text-xs bg-accent text-gray-900 px-2 py-0.5 rounded font-bold">OPEN</span>
+                                            </div>
+                                            <div class="space-y-1 text-sm">
+                                                <div class="flex justify-between">
+                                                    <span class="text-white">🌅 Morning</span>
+                                                    <span class="font-mono font-semibold">9:30 AM – 2:00 PM</span>
+                                                </div>
+                                                <div class="flex justify-between">
+                                                    <span class="text-white">🌙 Evening</span>
+                                                    <span class="font-mono font-semibold">6:00 PM – 8:00 PM</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Sunday -->
+                                        <div class="flex justify-between items-center bg-red-500/30 rounded-lg px-3 py-2 border border-red-400/30">
+                                            <span class="font-medium">Sunday</span>
+                                            <span class="text-sm font-bold text-red-200">❌ Closed</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
-        <script src="https://elfsightcdn.com/platform.js" async></script>
 
-        <!-- Video Section -->
+        <!-- Video Section - YOUTUBE SHORTS 9:16 -->
         <section class="py-16 lg:py-24 bg-gray-900 text-white overflow-hidden" aria-labelledby="videos-heading">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
@@ -723,21 +1359,24 @@
                         <!-- Videos injected via JS -->
                     </div>
                     
-                    <button class="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur p-3 rounded-full transition-all z-30" onclick="moveVideoSlider(-1)" aria-label="Previous video">
+                    <button class="absolute left-2 lg:left-0 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur p-3 rounded-full transition-all z-30" onclick="moveVideoSlider(-1)" aria-label="Previous video">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                         </svg>
                     </button>
-                    <button class="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur p-3 rounded-full transition-all z-30" onclick="moveVideoSlider(1)" aria-label="Next video">
+                    <button class="absolute right-2 lg:right-0 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 backdrop-blur p-3 rounded-full transition-all z-30" onclick="moveVideoSlider(1)" aria-label="Next video">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                         </svg>
                     </button>
                 </div>
+                
+                <p class="text-center text-gray-500 text-sm mt-6">Swipe to browse more videos</p>
             </div>
         </section>
+        
          <!-- WhatsApp Button -->
-    <a href="https://wa.me/+919493288101" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+    <a href="https://wa.me/+917569046893" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
         <!-- WhatsApp SVG Icon -->
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -828,7 +1467,7 @@
                             <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                             </svg>
-                            <a href="tel:+919493288101" class="text-gray-400 hover:text-primary transition-colors">+91 94932 88101</a>
+                            <a href="tel:+917569046893" class="text-gray-400 hover:text-primary transition-colors">+91 94932 88101</a>
                         </div>
                         <div class="flex items-center gap-3">
                             <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
@@ -882,64 +1521,223 @@
                 document.getElementById('mobile-menu').classList.add('hidden');
             }
         });
+         // Toggle More Info
+        function toggleDetails() {
+            const info = document.getElementById('doctor-more-info');
+            info.classList.toggle('hidden');
+        }
 
-        // Services Data
+        // Copy Address Function
+        function copyAddress() {
+            const addressText = document.getElementById('addressText').innerText;
+            navigator.clipboard.writeText(addressText).then(() => {
+                const btn = document.getElementById('copyBtn');
+                const originalHTML = btn.innerHTML;
+                btn.classList.add('copied');
+                btn.innerHTML = `
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Copied!
+                `;
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = originalHTML;
+                }, 2000);
+            });
+        }
+
+        // Services Data with Detailed Information
         const services = [
             {
                 title: "Comprehensive Eye Examination",
-                desc: "Thorough check-up of vision, eye pressure, and retinal health using advanced diagnostic tools.",
-                icon: "M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12zm11-3a3 3 0 100 6 3 3 0 000-6z"
+                shortDesc: "Thorough check-up of vision, eye pressure, and retinal health using advanced diagnostic tools.",
+                icon: "M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12zm11-3a3 3 0 100 6 3 3 0 000-6z",
+                fullDescription: `
+                    <p class="text-gray-600 mb-4">A comprehensive eye examination is the foundation of good eye health. Our thorough evaluation includes visual acuity testing, refraction assessment, intraocular pressure measurement, and detailed retinal examination using state-of-the-art diagnostic equipment.</p>
+                    <h4 class="font-semibold text-gray-900 mt-4 mb-2">What's Included:</h4>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 mb-4">
+                        <li>Visual acuity and refraction testing</li>
+                        <li>Intraocular pressure (IOP) measurement</li>
+                        <li>Slit-lamp biomicroscopy</li>
+                        <li>Fundus examination (retinal check)</li>
+                        <li>Color vision testing</li>
+                        <li>Peripheral vision assessment</li>
+                    </ul>
+                    <h4 class="font-semibold text-gray-900 mt-4 mb-2">Recommended For:</h4>
+                    <p class="text-gray-600">Everyone should have a comprehensive eye exam annually, especially those over 40, people with diabetes, hypertension, or family history of eye diseases.</p>
+                `
             },
             {
                 title: "Dry Eye Treatment",
-                desc: "Customized therapies to relieve irritation, burning, and blurred vision caused by dry eyes.",
-                icon: "M12 2C8 7 4 11 4 14a8 8 0 0016 0c0-3-4-7-8-12z"
+                shortDesc: "Customized therapies to relieve irritation, burning, and blurred vision caused by dry eyes.",
+                icon: "M12 2C8 7 4 11 4 14a8 8 0 0016 0c0-3-4-7-8-12z",
+                fullDescription: `
+                    <p class="text-gray-600 mb-4">Dry eye syndrome occurs when your eyes don't produce enough tears or produce poor-quality tears. Our specialized dry eye clinic offers advanced diagnostic and treatment options to provide lasting relief from irritation, burning, and blurred vision.</p>
+                    <h4 class="font-semibold text-gray-900 mt-4 mb-2">Treatment Options:</h4>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 mb-4">
+                        <li>Preservative-free artificial tears</li>
+                        <li>Prescription eye drops (Restasis, Xiidra)</li>
+                        <li>Punctal plugs to retain tears</li>
+                        <li>Lipiflow thermal pulsation therapy</li>
+                        <li>Intense Pulsed Light (IPL) therapy</li>
+                        <li>Meibomian gland expression</li>
+                    </ul>
+                    <h4 class="font-semibold text-gray-900 mt-4 mb-2">Common Symptoms:</h4>
+                    <p class="text-gray-600">Stinging/burning sensation, redness, light sensitivity, difficulty wearing contact lenses, watery eyes (reflex tearing), and blurred vision.</p>
+                `
             },
             {
                 title: "Eye Allergy Treatment",
-                desc: "Relief from redness, itching, and watering with safe and effective allergy care.",
-                icon: "M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm-1-7v-2H9v-2h2V9h2v2h2v2h-2v2h-2z"
+                shortDesc: "Relief from redness, itching, and watering with safe and effective allergy care.",
+                icon: "M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm-1-7v-2H9v-2h2V9h2v2h2v2h-2v2h-2z",
+                fullDescription: `
+                    <p class="text-gray-600 mb-4">Eye allergies (allergic conjunctivitis) affect millions of people worldwide. We provide comprehensive allergy testing and personalized treatment plans to help you find relief from persistent eye irritation caused by pollen, dust, pet dander, and other allergens.</p>
+                    <h4 class="font-semibold text-gray-900 mt-4 mb-2">Our Approach:</h4>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 mb-4">
+                        <li>Allergen-specific diagnostic testing</li>
+                        <li>Antihistamine and mast cell stabilizer eye drops</li>
+                        <li>Corticosteroid drops for severe cases</li>
+                        <li>Immunotherapy options</li>
+                        <li>Lifestyle and environmental modifications</li>
+                    </ul>
+                    <h4 class="font-semibold text-gray-900 mt-4 mb-2">Symptoms We Treat:</h4>
+                    <p class="text-gray-600">Itchy eyes, redness, tearing, burning sensation, swollen eyelids, and sensitivity to light.</p>
+                `
             },
             {
                 title: "Pediatric Eye Care",
-                desc: "Specialized eye exams and treatments for children, including lazy eye and squint correction.",
-                icon: "M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+                shortDesc: "Specialized eye exams and treatments for children, including lazy eye and squint correction.",
+                icon: "M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z",
+                fullDescription: `
+                    <p class="text-gray-600 mb-4">Children's eye health requires specialized care and attention. Our pediatric ophthalmology services focus on early detection and treatment of vision problems to ensure proper visual development and academic performance.</p>
+                    <h4 class="font-semibold text-gray-900 mt-4 mb-2">Services Offered:</h4>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 mb-4">
+                        <li>Comprehensive pediatric eye exams</li>
+                        <li>Lazy eye (Amblyopia) treatment</li>
+                        <li>Squint/Strabismus correction</li>
+                        <li>Refractive error correction</li>
+                        <li>Congenital cataract management</li>
+                        <li>Retinopathy of Prematurity (ROP) screening</li>
+                    </ul>
+                    <h4 class="font-semibold text-gray-900 mt-4 mb-2">When to Visit:</h4>
+                    <p class="text-gray-600">First exam at 6 months, then at 3 years, and before starting school. Earlier if you notice squinting, eye rubbing, headaches, or difficulty reading.</p>
+                `
             },
             {
                 title: "Cataract Surgery",
-                desc: "Stitchless cataract removal with advanced intraocular lens (IOL) options for clear vision.",
-                icon: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                shortDesc: "Stitchless cataract removal with advanced intraocular lens (IOL) options for clear vision.",
+                icon: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z",
+                fullDescription: `
+                    <p class="text-gray-600 mb-4">Cataract is the clouding of the eye's natural lens, leading to blurred vision. We offer advanced phacoemulsification (stitchless) cataract surgery with premium intraocular lens options to restore clear vision and reduce dependency on glasses.</p>
+                    <h4 class="font-semibold text-gray-900 mt-4 mb-2">Surgical Options:</h4>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 mb-4">
+                        <li>Phacoemulsification (Stitchless surgery)</li>
+                        <li>Monofocal IOLs for distance vision</li>
+                        <li>Multifocal IOLs for near and distance</li>
+                        <li>Toric IOLs for astigmatism correction</li>
+                        <li>Extended Depth of Focus (EDOF) lenses</li>
+                    </ul>
+                    <h4 class="font-semibold text-gray-900 mt-4 mb-2">Procedure Benefits:</h4>
+                    <p class="text-gray-600">10-15 minute procedure, no stitches, quick recovery, day-care surgery, and immediate visual improvement.</p>
+                `
             },
             {
                 title: "Corneal Transplantation",
-                desc: "Corneal transplant surgery to restore clarity in patients with damaged or scarred corneas.",
-                icon: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
+                shortDesc: "Corneal transplant surgery to restore clarity in patients with damaged or scarred corneas.",
+                icon: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z",
+                fullDescription: `
+                    <p class="text-gray-600 mb-4">The cornea is the clear front window of the eye. When damaged by disease or injury, corneal transplantation (keratoplasty) can restore vision. We perform various types of corneal transplants using advanced techniques and donor tissue.</p>
+                    <h4 class="font-semibold text-gray-900 mt-4 mb-2">Types of Transplants:</h4>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 mb-4">
+                        <li>Penetrating Keratoplasty (PKP) - Full thickness</li>
+                        <li>Deep Anterior Lamellar Keratoplasty (DALK)</li>
+                        <li>Descemet's Stripping Endothelial Keratoplasty (DSEK)</li>
+                        <li>Descemet's Membrane Endothelial Keratoplasty (DMEK)</li>
+                    </ul>
+                    <h4 class="font-semibold text-gray-900 mt-4 mb-2">Conditions Treated:</h4>
+                    <p class="text-gray-600">Fuchs' dystrophy, keratoconus, corneal scarring, corneal ulcers, and failed previous grafts.</p>
+                `
             },
             {
                 title: "DCR Surgeries",
-                desc: "Surgical treatment for blocked tear ducts to restore normal tear drainage.",
-                icon: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+                shortDesc: "Surgical treatment for blocked tear ducts to restore normal tear drainage.",
+                icon: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z",
+                fullDescription: `
+                    <p class="text-gray-600 mb-4">Dacryocystorhinostomy (DCR) is a surgical procedure to treat blocked tear ducts (nasolacrimal duct obstruction). This condition causes excessive tearing, recurrent infections, and discharge from the eyes.</p>
+                    <h4 class="font-semibold text-gray-900 mt-4 mb-2">Surgical Techniques:</h4>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 mb-4">
+                        <li>External DCR (Conventional approach)</li>
+                        <li>Endoscopic/Endonasal DCR (Scarless)</li>
+                        <li>Laser-assisted DCR</li>
+                        <li>Balloon dacryoplasty</li>
+                        <li>Silicone intubation</li>
+                    </ul>
+                    <h4 class="font-semibold text-gray-900 mt-4 mb-2">Symptoms Indicating DCR:</h4>
+                    <p class="text-gray-600">Constant watery eyes, mucous discharge, swelling near the inner corner of the eye, and recurrent eye infections.</p>
+                `
             },
             {
                 title: "Glaucoma Services",
-                desc: "Early detection and pressure management to protect optic nerve and prevent blindness.",
-                icon: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"
+                shortDesc: "Early detection and pressure management to protect optic nerve and prevent blindness.",
+                icon: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z",
+                fullDescription: `
+                    <p class="text-gray-600 mb-4">Glaucoma is a group of eye conditions that damage the optic nerve, often due to high intraocular pressure. It's a leading cause of irreversible blindness worldwide. Early detection and continuous management are crucial to preserving vision.</p>
+                    <h4 class="font-semibold text-gray-900 mt-4 mb-2">Diagnostic Services:</h4>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 mb-4">
+                        <li>Comprehensive glaucoma screening</li>
+                        <li>Optical Coherence Tomography (OCT)</li>
+                        <li>Visual field analysis (Perimetry)</li>
+                        <li>Pachymetry (corneal thickness)</li>
+                        <li>Gonioscopy (angle examination)</li>
+                    </ul>
+                    <h4 class="font-semibold text-gray-900 mt-4 mb-2">Treatment Options:</h4>
+                    <p class="text-gray-600">Eye drops, laser therapy (SLT/ALT), minimally invasive glaucoma surgery (MIGS), trabeculectomy, and glaucoma drainage devices.</p>
+                `
             },
             {
                 title: "Diabetic Retinopathy",
-                desc: "Advanced imaging and laser therapy to prevent diabetes-related vision loss.",
-                icon: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.93-9h.02c.66 0 1.2.54 1.2 1.2s-.54 1.2-1.2 1.2h-.02c-.66 0-1.2-.54-1.2-1.2s.54-1.2 1.2-1.2zM12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"
+                shortDesc: "Advanced imaging and laser therapy to prevent diabetes-related vision loss.",
+                icon: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.93-9h.02c.66 0 1.2.54 1.2 1.2s-.54 1.2-1.2 1.2h-.02c-.66 0-1.2-.54-1.2-1.2s.54-1.2 1.2-1.2zM12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z",
+                fullDescription: `
+                    <p class="text-gray-600 mb-4">Diabetic retinopathy is a diabetes complication that affects the eyes, caused by damage to the blood vessels of the light-sensitive tissue at the back of the eye (retina). Early detection and treatment can prevent vision loss.</p>
+                    <h4 class="font-semibold text-gray-900 mt-4 mb-2">Our Services:</h4>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 mb-4">
+                        <li>Comprehensive diabetic eye screening</li>
+                        <li>Fundus fluorescein angiography (FFA)</li>
+                        <li>Optical Coherence Tomography (OCT)</li>
+                        <li>Focal/grid laser photocoagulation</li>
+                        <li>Pan-retinal photocoagulation (PRP)</li>
+                        <li>Intravitreal injections (Anti-VEGF)</li>
+                        <li>Vitrectomy for advanced cases</li>
+                    </ul>
+                    <h4 class="font-semibold text-gray-900 mt-4 mb-2">Prevention:</h4>
+                    <p class="text-gray-600">Annual eye exams for all diabetics, strict blood sugar control, blood pressure management, and early intervention.</p>
+                `
             },
             {
                 title: "LASIK Surgery",
-                desc: "Laser vision correction to reduce or eliminate the need for glasses or contact lenses.",
-                icon: "M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+                shortDesc: "Laser vision correction to reduce or eliminate the need for glasses or contact lenses.",
+                icon: "M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z",
+                fullDescription: `
+                    <p class="text-gray-600 mb-4">LASIK (Laser-Assisted In Situ Keratomileusis) is a popular refractive surgery that corrects vision problems like myopia, hyperopia, and astigmatism. The procedure reshapes the cornea to improve how light is focused on the retina.</p>
+                    <h4 class="font-semibold text-gray-900 mt-4 mb-2">Technology Used:</h4>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 mb-4">
+                        <li>Wavefront-guided LASIK</li>
+                        <li>Bladeless (Femtosecond) LASIK</li>
+                        <li>Topography-guided LASIK</li>
+                        <li>SMILE (Small Incision Lenticule Extraction)</li>
+                        <li>PRK (Photorefractive Keratectomy)</li>
+                    </ul>
+                    <h4 class="font-semibold text-gray-900 mt-4 mb-2">Benefits:</h4>
+                    <p class="text-gray-600">Quick 15-minute procedure, minimal discomfort, rapid recovery (24-48 hours), and freedom from glasses/contact lenses for most activities.</p>
+                `
             }
         ];
 
         // Carousel State
         let currentSlide = 0;
-        const cardWidth = 296; // 280px + 16px gap
+        const cardWidth = 296;
         let isDragging = false;
         let startPos = 0;
         let currentTranslate = 0;
@@ -951,26 +1749,29 @@
             const track = document.getElementById('services-track');
             const dotsContainer = document.getElementById('carousel-dots');
             
-            // Create cards
             services.forEach((service, index) => {
                 const card = document.createElement('div');
                 card.className = 'service-card';
                 card.setAttribute('role', 'listitem');
+                card.setAttribute('data-index', index);
+                
+                // NEW STRUCTURE: Separate content (non-clickable) from button (clickable)
                 card.innerHTML = `
-                    <div class="w-14 h-14 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="${service.icon}"/>
-                        </svg>
+                    <div class="card-content">
+                        <div class="w-14 h-14 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="${service.icon}"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-lg text-gray-900 mb-2 text-center">${service.title}</h3>
+                        <p class="text-sm text-gray-600 text-center mb-4 line-clamp-3">${service.shortDesc}</p>
                     </div>
-                    <h3 class="font-semibold text-lg text-gray-900 mb-2 text-center">${service.title}</h3>
-                    <p class="text-sm text-gray-600 text-center mb-4 line-clamp-3">${service.desc}</p>
-                    <a href="services_overview.html" class="block text-center text-primary font-semibold text-sm hover:underline">
+                    <button class="learn-more-btn w-full text-center text-primary font-semibold text-sm hover:underline bg-transparent border-none py-2" data-index="${index}">
                         Learn More →
-                    </a>
+                    </button>
                 `;
                 track.appendChild(card);
                 
-                // Create dot
                 const dot = document.createElement('button');
                 dot.className = `w-2 h-2 rounded-full transition-all ${index === 0 ? 'bg-primary w-6' : 'bg-gray-300'}`;
                 dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
@@ -978,39 +1779,84 @@
                 dotsContainer.appendChild(dot);
             });
 
-            // Setup touch/mouse events
             setupCarouselEvents();
+            setupButtonEvents(); // NEW: Separate button event setup
         }
+
+        // NEW: Completely separate button event handling
+        function setupButtonEvents() {
+            // Use event delegation on document for buttons
+            document.addEventListener('click', function(e) {
+                const btn = e.target.closest('.learn-more-btn');
+                if (!btn) return;
+                
+                // Get the carousel container
+                const carousel = document.getElementById('services-carousel');
+                
+                // Only process if carousel is NOT currently being dragged
+                if (!carousel.classList.contains('dragging')) {
+                    const index = parseInt(btn.getAttribute('data-index'));
+                    openServiceModal(index);
+                }
+            });
+        }
+
+        // Modal Functions
+        function openServiceModal(index) {
+            const service = services[index];
+            const modal = document.getElementById('serviceModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+            const modalIcon = document.getElementById('modalIcon');
+            
+            modalTitle.textContent = service.title;
+            modalContent.innerHTML = service.fullDescription;
+            modalIcon.innerHTML = `<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="${service.icon}"/></svg>`;
+            
+            modal.classList.add('active');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeServiceModal() {
+            const modal = document.getElementById('serviceModal');
+            modal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
+
+        function closeModalOnOutside(event) {
+            if (event.target === event.currentTarget) {
+                closeServiceModal();
+            }
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeServiceModal();
+            }
+        });
 
         function setupCarouselEvents() {
             const carousel = document.getElementById('services-carousel');
-
-            // Touch events - FIXED: Direct function calls
+            
+            // Touch events for mobile
             carousel.addEventListener('touchstart', handleTouchStart, {passive: false});
             carousel.addEventListener('touchend', handleTouchEnd, {passive: false});
             carousel.addEventListener('touchmove', handleTouchMove, {passive: false});
-
-            // Mouse events
+            
+            // Mouse events for desktop
             carousel.addEventListener('mousedown', handleMouseDown);
             carousel.addEventListener('mouseup', handleMouseUp);
             carousel.addEventListener('mouseleave', handleMouseLeave);
             carousel.addEventListener('mousemove', handleMouseMove);
-
-            // Prevent context menu on long press
+            
+            // Prevent context menu on right click
             carousel.addEventListener('contextmenu', e => {
                 e.preventDefault();
                 return false;
             });
-            
-            // Prevent default touch actions
-            carousel.addEventListener('touchstart', function(e) {
-                if (e.touches.length === 1) {
-                    // Allow vertical scroll but handle horizontal
-                }
-            }, {passive: false});
         }
 
-        // FIXED: Direct event handlers
         function handleTouchStart(event) {
             isDragging = true;
             startPos = event.touches[0].clientX;
@@ -1025,11 +1871,8 @@
                 const currentPosition = event.touches[0].clientX;
                 const diff = currentPosition - startPos;
                 currentTranslate = prevTranslate + diff;
-                
                 const track = document.getElementById('services-track');
                 track.style.transform = `translateX(${currentTranslate}px)`;
-                
-                // Prevent default to stop page scroll during horizontal swipe
                 if (Math.abs(diff) > 5) {
                     event.preventDefault();
                 }
@@ -1040,16 +1883,12 @@
             isDragging = false;
             cancelAnimationFrame(animationID);
             document.getElementById('services-carousel').classList.remove('dragging');
-            
             const movedBy = currentTranslate - prevTranslate;
-            
-            // Threshold to change slide (50px)
             if (movedBy < -50 && currentSlide < services.length - 1) {
                 currentSlide += 1;
             } else if (movedBy > 50 && currentSlide > 0) {
                 currentSlide -= 1;
             }
-            
             goToSlide(currentSlide);
             startAutoScroll();
         }
@@ -1069,7 +1908,6 @@
                 const currentPosition = event.pageX;
                 const diff = currentPosition - startPos;
                 currentTranslate = prevTranslate + diff;
-                
                 const track = document.getElementById('services-track');
                 track.style.transform = `translateX(${currentTranslate}px)`;
             }
@@ -1080,15 +1918,12 @@
             isDragging = false;
             cancelAnimationFrame(animationID);
             document.getElementById('services-carousel').classList.remove('dragging');
-            
             const movedBy = currentTranslate - prevTranslate;
-            
             if (movedBy < -50 && currentSlide < services.length - 1) {
                 currentSlide += 1;
             } else if (movedBy > 50 && currentSlide > 0) {
                 currentSlide -= 1;
             }
-            
             goToSlide(currentSlide);
             startAutoScroll();
         }
@@ -1108,17 +1943,11 @@
             const track = document.getElementById('services-track');
             const dots = document.getElementById('carousel-dots').children;
             const progressBar = document.getElementById('scroll-progress');
-            
-            // Calculate position
             const maxSlide = services.length - 1;
             currentSlide = Math.max(0, Math.min(index, maxSlide));
-            
             currentTranslate = currentSlide * -cardWidth;
             prevTranslate = currentTranslate;
-            
             track.style.transform = `translateX(${currentTranslate}px)`;
-            
-            // Update dots
             Array.from(dots).forEach((dot, i) => {
                 if (i === currentSlide) {
                     dot.classList.remove('bg-gray-300', 'w-2');
@@ -1128,8 +1957,6 @@
                     dot.classList.add('bg-gray-300', 'w-2');
                 }
             });
-            
-            // Update progress bar
             const progress = ((currentSlide + 1) / services.length) * 100;
             progressBar.style.width = progress + '%';
         }
@@ -1138,7 +1965,6 @@
             goToSlide(currentSlide + direction);
         }
 
-        // Auto-scroll
         let autoScrollInterval;
         function startAutoScroll() {
             stopAutoScroll();
@@ -1155,7 +1981,7 @@
             clearInterval(autoScrollInterval);
         }
 
-        // Video Data
+        // YouTube Shorts Data - 9:16 Aspect Ratio Videos
         const videos = [
             { id: 'OWDtzP07CfU', title: 'Eye Care Tips 1' },
             { id: 'vNeRvUCkgRI', title: 'Eye Care Tips 2' },
@@ -1169,14 +1995,14 @@
 
         function initVideoSlider() {
             const container = document.getElementById('video-slider');
-            
             videos.forEach((video, index) => {
                 const slide = document.createElement('div');
                 slide.className = 'video-slide';
                 slide.setAttribute('data-index', index);
+                // Using YouTube Shorts embed format for 9:16 aspect ratio
                 slide.innerHTML = `
                     <iframe 
-                        src="https://www.youtube.com/embed/${video.id}?enablejsapi=1&rel=0&modestbranding=1" 
+                        src="https://www.youtube.com/embed/${video.id}?enablejsapi=1&rel=0&modestbranding=1&playsinline=1" 
                         title="${video.title}"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen
@@ -1185,17 +2011,14 @@
                 `;
                 container.appendChild(slide);
             });
-            
             updateVideoSlider();
         }
 
         function updateVideoSlider() {
             const slides = document.querySelectorAll('.video-slide');
             const total = slides.length;
-            
             slides.forEach((slide, index) => {
                 slide.classList.remove('active', 'prev', 'next', 'hidden-slide');
-                
                 if (index === currentVideoIndex) {
                     slide.classList.add('active');
                 } else if (index === (currentVideoIndex - 1 + total) % total) {
@@ -1206,7 +2029,6 @@
                     slide.classList.add('hidden-slide');
                 }
             });
-            
             // Pause all videos except active
             slides.forEach((slide, index) => {
                 const iframe = slide.querySelector('iframe');
@@ -1238,7 +2060,6 @@
             initVideoSlider();
             startAutoScroll();
             
-            // Intersection Observer for fade-in animations
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1252,9 +2073,29 @@
                 section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
                 observer.observe(section);
             });
+
+            // 3D Tilt Effect for Doctor Card (Desktop only)
+            const card = document.querySelector('.doctor-card');
+            const container = document.querySelector('.doctor-card-container');
+            
+            if (window.matchMedia("(min-width: 768px)").matches && card && container) {
+                container.addEventListener('mousemove', (e) => {
+                    const rect = container.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 30;
+                    const rotateY = (centerX - x) / 30;
+                    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+                });
+                
+                container.addEventListener('mouseleave', () => {
+                    card.style.transform = 'rotateX(0) rotateY(0) translateZ(0)';
+                });
+            }
         });
 
-        // Handle visibility change to pause videos
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
                 document.querySelectorAll('.video-slide iframe').forEach(iframe => {

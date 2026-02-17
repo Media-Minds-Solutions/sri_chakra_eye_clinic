@@ -245,6 +245,21 @@
         .toast-error { background: #ef4444; }
         .toast-warning { background: #f59e0b; }
         
+        .security-info {
+            background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%);
+            border: 1px solid #009688;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        .security-info p {
+            color: #00695c;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
         @media (max-width: 768px) {
             .sidebar { display: none; }
             .mobile-nav { display: flex; }
@@ -270,7 +285,7 @@
                 <p class="text-gray-500 mt-1">Doctor Portal</p>
             </div>
 
-            <form id="loginForm" onsubmit="handleLogin(event)">
+            <form id="loginForm" onsubmit="handleSecureLogin(event)">
                 <div class="mb-4">
                     <label class="block text-sm font-semibold text-gray-700 mb-2">Username</label>
                     <input type="text" id="username" class="input-field" placeholder="Enter username" required autocomplete="username" />
@@ -294,9 +309,8 @@
                 </button>
             </form>
 
-            <div class="mt-6 p-3 bg-gray-50 rounded-lg text-xs text-gray-500 text-center">
-                <p class="font-semibold mb-1">Demo Access</p>
-                <p>dr.eswar / secure123</p>
+            <div class="security-info">
+                <p>🔒 Secure Login • SHA-256 Encrypted • 8hr Session</p>
             </div>
         </div>
     </div>
@@ -319,7 +333,7 @@
                 </div>
 
                 <div class="flex items-center gap-4">
-                    <span id="doctorName" class="hidden md:block text-sm font-semibold text-gray-700">Dr. Eswar Sakare</span>
+                    <span id="doctorName" class="hidden md:block text-sm font-semibold text-gray-700">Doctor</span>
                     <button onclick="logout()" class="text-sm text-red-600 hover:text-red-700 font-medium">Logout</button>
                 </div>
             </div>
@@ -441,42 +455,127 @@
     <div id="toastContainer"></div>
 
     <script>
-        // API Configuration
-        const BOOKING_API_URL = "https://script.google.com/macros/s/AKfycbwUBMrJDyLHu49XIYBHOGkeBiF9tUnkT7kC833LG8kH7rq5lt_EPIX-o8YTU5lMCfA/exec";
-        const PATIENT_API_URL = "https://script.google.com/macros/s/AKfycbx9uK0WyfEKKPSM3C9giNMqXGjz6uoJz-0w4o06WVu-Nf4dTifdXyu5uFwUSZtbocGu/exec";
+        // ==========================================
+        // CONFIGURATION
+        // ==========================================
+        const API_URL = "https://script.google.com/macros/s/AKfycbz8NUW_cBbxJsXdOFPactwNRLU4de7VrOr3d3cA2VHzIQkKfRWhXVOISEwDFMMsZUvH/exec";
         
-        // State
+        // ==========================================
+        // STATE
+        // ==========================================
+        let authToken = null;
         let currentPatient = null;
         let currentTab = 'appointments';
 
-        // Initialize
+        // ==========================================
+        // CRYPTOGRAPHY
+        // ==========================================
+        async function sha256Hex(str) {
+            if (!str) str = "";
+            const encoder = new TextEncoder();
+            const data = encoder.encode(str);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => ('0' + b.toString(16)).slice(-2)).join('');
+        }
+
+        // ==========================================
+        // INITIALIZATION
+        // ==========================================
         document.addEventListener('DOMContentLoaded', () => {
-            // Set today's date
             document.getElementById('appointmentDate').value = new Date().toISOString().split('T')[0];
         });
 
-        // Login Handler
-        function handleLogin(e) {
+        // ==========================================
+        // JSONP REQUEST HELPER
+        // ==========================================
+        function jsonpRequest(url, callbackName, onSuccess, onError) {
+            const script = document.createElement('script');
+            const cleanup = () => {
+                if (script.parentNode) script.parentNode.removeChild(script);
+                delete window[callbackName];
+            };
+            
+            window[callbackName] = function(data) {
+                cleanup();
+                if (onSuccess) onSuccess(data);
+            };
+            
+            script.onerror = function() {
+                cleanup();
+                if (onError) onError(new Error('JSONP request failed'));
+            };
+            
+            script.src = url;
+            document.head.appendChild(script);
+            
+            // Timeout after 10 seconds
+            setTimeout(() => {
+                if (window[callbackName]) {
+                    cleanup();
+                    if (onError) onError(new Error('Request timeout'));
+                }
+            }, 10000);
+        }
+
+        // ==========================================
+        // AUTHENTICATION (JSONP)
+        // ==========================================
+        async function handleSecureLogin(e) {
             e.preventDefault();
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value;
             const btn = document.getElementById('loginBtn');
             const btnText = document.getElementById('btnText');
 
-            if ((username === 'dr.eswar' && password === 'secure123') || (username === 'admin' && password === 'admin2025')) {
-                btn.disabled = true;
-                btnText.innerHTML = '<span class="spinner"></span>Signing in...';
+            btn.disabled = true;
+            btnText.innerHTML = '<span class="spinner"></span>Signing in...';
+
+            try {
+                const passwordHash = await sha256Hex(password);
+                const callbackName = 'loginCallback_' + Date.now();
                 
-                setTimeout(() => {
-                    document.getElementById('loginScreen').classList.add('hidden');
-                    document.getElementById('appScreen').classList.remove('hidden');
-                    document.getElementById('doctorName').textContent = username === 'admin' ? 'Administrator' : 'Dr. Eswar Sakare';
-                    
-                    // Load initial data
-                    fetchAppointments();
-                }, 800);
-            } else {
-                showToast('Invalid credentials', 'error');
+                // Build URL with all parameters (GET request for JSONP)
+                const params = new URLSearchParams({
+                    action: 'login',
+                    username: username,
+                    password: passwordHash,
+                    callback: callbackName,
+                    _: Date.now()
+                });
+                
+                jsonpRequest(
+                    `${API_URL}?${params.toString()}`,
+                    callbackName,
+                    function(data) {
+                        btn.disabled = false;
+                        btnText.textContent = 'Sign In';
+                        
+                        if (data.success) {
+                            authToken = data.token;
+                            
+                            document.getElementById('loginScreen').classList.add('hidden');
+                            document.getElementById('appScreen').classList.remove('hidden');
+                            document.getElementById('doctorName').textContent = data.name || username;
+                            
+                            fetchAppointments();
+                            showToast(`Welcome, ${data.name || username}!`, 'success');
+                        } else {
+                            showToast(data.message || 'Invalid credentials', 'error');
+                        }
+                    },
+                    function(error) {
+                        btn.disabled = false;
+                        btnText.textContent = 'Sign In';
+                        console.error('Login error:', error);
+                        showToast('Network error. Please try again.', 'error');
+                    }
+                );
+            } catch (error) {
+                btn.disabled = false;
+                btnText.textContent = 'Sign In';
+                console.error('Login error:', error);
+                showToast('Error processing login', 'error');
             }
         }
 
@@ -493,31 +592,51 @@
         }
 
         function logout() {
+            if (authToken) {
+                // Fire and forget logout request
+                const params = new URLSearchParams({
+                    action: 'logout',
+                    token: authToken,
+                    _: Date.now()
+                });
+                const img = new Image();
+                img.src = `${API_URL}?${params.toString()}`;
+            }
+            authToken = null;
             location.reload();
         }
 
-        // Navigation
+        // ==========================================
+        // NAVIGATION
+        // ==========================================
         function showTab(tab) {
             currentTab = tab;
             
-            // Hide all tabs
             document.getElementById('tab-appointments').classList.add('hidden');
             document.getElementById('tab-patients').classList.add('hidden');
             
-            // Show selected
             document.getElementById('tab-' + tab).classList.remove('hidden');
             
-            // Update nav states
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             document.getElementById('nav-' + tab)?.classList.add('active');
             
-            // Update mobile nav
-            document.getElementById('mobile-tab-appointments').className = tab === 'appointments' ? 'flex-1 py-2 px-4 rounded-lg text-sm font-medium bg-primary text-white' : 'flex-1 py-2 px-4 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100';
-            document.getElementById('mobile-tab-patients').className = tab === 'patients' ? 'flex-1 py-2 px-4 rounded-lg text-sm font-medium bg-primary text-white' : 'flex-1 py-2 px-4 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100';
+            document.getElementById('mobile-tab-appointments').className = tab === 'appointments' ? 
+                'flex-1 py-2 px-4 rounded-lg text-sm font-medium bg-primary text-white' : 
+                'flex-1 py-2 px-4 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100';
+            document.getElementById('mobile-tab-patients').className = tab === 'patients' ? 
+                'flex-1 py-2 px-4 rounded-lg text-sm font-medium bg-primary text-white' : 
+                'flex-1 py-2 px-4 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100';
         }
 
-        // Fetch Appointments (JSONP)
+        // ==========================================
+        // APPOINTMENTS (JSONP)
+        // ==========================================
         function fetchAppointments() {
+            if (!authToken) {
+                showToast('Please login first', 'error');
+                return;
+            }
+
             const dateVal = document.getElementById('appointmentDate').value;
             if (!dateVal) return;
 
@@ -527,48 +646,65 @@
             const tbody = document.getElementById('appointmentsBody');
             tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-gray-500">Loading...</td></tr>';
 
-            // Remove old script
-            const oldScript = document.getElementById('jsonpScript');
-            if (oldScript) oldScript.remove();
+            const callbackName = 'appointmentsCallback_' + Date.now();
+            
+            const params = new URLSearchParams({
+                action: 'getAppointments',
+                authorization: 'Bearer ' + authToken,
+                callback: callbackName,
+                _: Date.now()
+            });
+            
+            jsonpRequest(
+                `${API_URL}?${params.toString()}`,
+                callbackName,
+                function(data) {
+                    if (data && data.success === false) {
+                        showToast(data.message || 'Session expired', 'error');
+                        setTimeout(() => logout(), 1500);
+                        return;
+                    }
 
-            // Create callback
-            window.loadAppointments = function(data) {
-                tbody.innerHTML = '';
-                
-                const filtered = data.filter(app => app.Date === filterDate);
-                
-                if (filtered.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="5" class="text-center py-8 text-gray-500">No appointments for ${filterDate}</td></tr>`;
-                    return;
-                }
-
-                filtered.forEach(app => {
-                    const tr = document.createElement('tr');
-                    const statusClass = app.Status === 'Confirmed' ? 'badge-success' : app.Status === 'Pending' ? 'badge-warning' : 'badge-info';
+                    tbody.innerHTML = '';
                     
-                    tr.innerHTML = `
-                        <td class="font-medium whitespace-nowrap">${app['Start Time']} - ${app['End Time']}</td>
-                        <td>${app['Patient Name']}</td>
-                        <td class="whitespace-nowrap">${app['Phone Number']}<br><span class="text-xs text-gray-500">${app['Email']}</span></td>
-                        <td>${app['Location/Notes'] || '-'}</td>
-                        <td><span class="badge ${statusClass}">${app['Status']}</span></td>
-                    `;
-                    tbody.appendChild(tr);
-                });
-            };
+                    const filtered = (Array.isArray(data) ? data : []).filter(app => app.Date === filterDate);
+                    
+                    if (filtered.length === 0) {
+                        tbody.innerHTML = `<tr><td colspan="5" class="text-center py-8 text-gray-500">No appointments for ${filterDate}</td></tr>`;
+                        return;
+                    }
 
-            // Create script tag
-            const script = document.createElement('script');
-            script.id = 'jsonpScript';
-            script.src = BOOKING_API_URL + '?callback=loadAppointments';
-            script.onerror = () => {
-                tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-red-500">Error loading appointments</td></tr>';
-            };
-            document.body.appendChild(script);
+                    filtered.forEach(app => {
+                        const tr = document.createElement('tr');
+                        const statusClass = app.Status === 'Confirmed' ? 'badge-success' : 
+                                           app.Status === 'Pending' ? 'badge-warning' : 'badge-info';
+                        
+                        tr.innerHTML = `
+                            <td class="font-medium whitespace-nowrap">${app['Start Time']} - ${app['End Time']}</td>
+                            <td>${app['Patient Name']}</td>
+                            <td class="whitespace-nowrap">${app['Phone Number'] || '-'}<br><span class="text-xs text-gray-500">${app['Email'] || ''}</span></td>
+                            <td>${app['Location/Notes'] || '-'}</td>
+                            <td><span class="badge ${statusClass}">${app['Status']}</span></td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                },
+                function(error) {
+                    console.error('Appointments error:', error);
+                    tbody.innerHTML = '<tr><td colspan="5" class="text-center py-8 text-red-500">Error loading appointments</td></tr>';
+                }
+            );
         }
 
-        // Patient Functions
+        // ==========================================
+        // PATIENT FUNCTIONS (JSONP)
+        // ==========================================
         function searchPatient() {
+            if (!authToken) {
+                showToast('Please login first', 'error');
+                return;
+            }
+
             const mobile = document.getElementById('searchMobile').value.trim();
             
             if (!mobile || mobile.length !== 10 || !/^\d+$/.test(mobile)) {
@@ -576,19 +712,33 @@
                 return;
             }
 
-            fetch(`${PATIENT_API_URL}?action=search&mobile=${encodeURIComponent(mobile)}`)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.length === 0) {
+            const callbackName = 'searchCallback_' + Date.now();
+            
+            const params = new URLSearchParams({
+                action: 'search',
+                mobile: mobile,
+                authorization: 'Bearer ' + authToken,
+                callback: callbackName,
+                _: Date.now()
+            });
+            
+            jsonpRequest(
+                `${API_URL}?${params.toString()}`,
+                callbackName,
+                function(data) {
+                    if (data.success && data.data && data.data.length > 0) {
+                        displayPatient(data.data);
+                    } else {
                         showToast('Patient not found. Register below.', 'warning');
                         document.getElementById('newPatientMobile').value = mobile;
                         document.getElementById('patientResults').classList.add('hidden');
-                        return;
                     }
-
-                    displayPatient(data);
-                })
-                .catch(() => showToast('Error searching patient', 'error'));
+                },
+                function(error) {
+                    console.error('Search error:', error);
+                    showToast('Error searching patient', 'error');
+                }
+            );
         }
 
         function displayPatient(data) {
@@ -635,7 +785,7 @@
         }
 
         function addVisit() {
-            if (!currentPatient) return;
+            if (!authToken || !currentPatient) return;
             
             const condition = document.getElementById('newCondition').value.trim();
             const prescription = document.getElementById('newPrescription').value.trim();
@@ -645,54 +795,87 @@
                 return;
             }
 
-            const data = {
+            const callbackName = 'addVisitCallback_' + Date.now();
+            
+            const params = new URLSearchParams({
+                action: 'addPatient',
                 mobile: currentPatient.mobile,
                 name: currentPatient.name,
                 age: currentPatient.age,
                 condition: condition,
                 prescription: prescription,
-                date: new Date().toLocaleDateString('en-GB')
-            };
-
-            fetch(PATIENT_API_URL, {
-                method: 'POST',
-                body: JSON.stringify(data)
-            })
-            .then(() => {
-                showToast('Visit added', 'success');
-                document.getElementById('newCondition').value = '';
-                document.getElementById('newPrescription').value = '';
-                searchPatient();
-            })
-            .catch(() => showToast('Error adding visit', 'error'));
+                authorization: 'Bearer ' + authToken,
+                callback: callbackName,
+                _: Date.now()
+            });
+            
+            jsonpRequest(
+                `${API_URL}?${params.toString()}`,
+                callbackName,
+                function(data) {
+                    if (data.success) {
+                        showToast('Visit added', 'success');
+                        document.getElementById('newCondition').value = '';
+                        document.getElementById('newPrescription').value = '';
+                        searchPatient();
+                    } else {
+                        showToast(data.message || 'Error adding visit', 'error');
+                    }
+                },
+                function(error) {
+                    console.error('Add visit error:', error);
+                    showToast('Error adding visit', 'error');
+                }
+            );
         }
 
         function handleAddPatient(e) {
             e.preventDefault();
             
-            const data = {
+            if (!authToken) {
+                showToast('Please login first', 'error');
+                return;
+            }
+            
+            const callbackName = 'addPatientCallback_' + Date.now();
+            
+            const params = new URLSearchParams({
+                action: 'addPatient',
                 mobile: document.getElementById('newPatientMobile').value.trim(),
                 name: document.getElementById('newPatientName').value.trim(),
                 age: document.getElementById('newPatientAge').value,
                 condition: document.getElementById('newPatientCondition').value.trim(),
-                prescription: document.getElementById('newPatientPrescription').value.trim()
-            };
-
-            fetch(PATIENT_API_URL, {
-                method: 'POST',
-                body: JSON.stringify(data)
-            })
-            .then(() => {
-                showToast('Patient registered', 'success');
-                document.getElementById('patientForm').reset();
-                document.getElementById('searchMobile').value = data.mobile;
-                searchPatient();
-                showTab('patients');
-            })
-            .catch(() => showToast('Error registering patient', 'error'));
+                prescription: document.getElementById('newPatientPrescription').value.trim(),
+                authorization: 'Bearer ' + authToken,
+                callback: callbackName,
+                _: Date.now()
+            });
+            
+            jsonpRequest(
+                `${API_URL}?${params.toString()}`,
+                callbackName,
+                function(data) {
+                    if (data.success) {
+                        showToast('Patient registered', 'success');
+                        const mobile = document.getElementById('newPatientMobile').value;
+                        document.getElementById('patientForm').reset();
+                        document.getElementById('searchMobile').value = mobile;
+                        searchPatient();
+                        showTab('patients');
+                    } else {
+                        showToast(data.message || 'Error registering patient', 'error');
+                    }
+                },
+                function(error) {
+                    console.error('Register error:', error);
+                    showToast('Error registering patient', 'error');
+                }
+            );
         }
 
-        // Toast
+        // ==========================================
+        // UTILITIES
+        // ==========================================
         function showToast(message, type) {
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
@@ -706,7 +889,6 @@
             }, 3000);
         }
 
-        // Enter key on search
         document.getElementById('searchMobile')?.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') searchPatient();
         });
