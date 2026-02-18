@@ -191,6 +191,116 @@
             width: 100%;
         }
         
+        /* CINEMATIC SCROLL GALLERY STYLES */
+        .cinematic-scroll-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 24px;
+            box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.05);
+        }
+        
+        .cinematic-scroll-wrapper {
+            display: flex;
+            width: max-content;
+            animation: scrollCinematic 60s linear infinite;
+            will-change: transform;
+        }
+        
+        .cinematic-scroll-container:hover .cinematic-scroll-wrapper {
+            animation-play-state: paused;
+        }
+        
+        @keyframes scrollCinematic {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        .cinematic-image-card {
+            flex-shrink: 0;
+            width: 400px;
+            height: 300px;
+            margin: 0 20px;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: scale(0.95);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .cinematic-image-card:hover {
+            transform: scale(1.05);
+            z-index: 10;
+            box-shadow: 0 30px 60px rgba(0, 150, 136, 0.3);
+        }
+        
+        .cinematic-image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        
+        .cinematic-image-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .cinematic-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 24px;
+        }
+        
+        .cinematic-image-card:hover .cinematic-overlay {
+            opacity: 1;
+        }
+        
+        .cinematic-caption {
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+        
+        .cinematic-image-card:hover .cinematic-caption {
+            transform: translateY(0);
+        }
+        
+        /* Gradient masks for smooth fade */
+        .cinematic-scroll-container::before,
+        .cinematic-scroll-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 150px;
+            z-index: 20;
+            pointer-events: none;
+        }
+        
+        .cinematic-scroll-container::before {
+            left: 0;
+            background: linear-gradient(to right, #f8fafc, transparent);
+        }
+        
+        .cinematic-scroll-container::after {
+            right: 0;
+            background: linear-gradient(to left, #f8fafc, transparent);
+        }
+        
         /* Mobile Optimizations */
         @media (max-width: 768px) {
             .doctor-card {
@@ -198,6 +308,25 @@
             }
             .doctor-card:hover {
                 transform: translateY(-5px) !important;
+            }
+            
+            .cinematic-image-card {
+                width: 280px;
+                height: 210px;
+                margin: 0 12px;
+            }
+            
+            .cinematic-scroll-container::before,
+            .cinematic-scroll-container::after {
+                width: 80px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .cinematic-image-card {
+                width: 240px;
+                height: 180px;
+                margin: 0 8px;
             }
         }
         
@@ -208,6 +337,15 @@
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
             }
+            .cinematic-scroll-wrapper {
+                animation: none;
+                flex-wrap: wrap;
+                justify-content: center;
+                width: 100%;
+            }
+            .cinematic-image-card {
+                margin: 10px;
+            }
         }
         
         /* Focus Visible */
@@ -215,49 +353,38 @@
             outline: 2px solid #009688;
             outline-offset: 2px;
         }
-        /* ============================================
-           FLOATING WHATSAPP BUTTON STYLES
-           ============================================ */
         
+        /* FLOATING WHATSAPP BUTTON STYLES */
         .whatsapp-float {
-            position: fixed;          /* Fixed to viewport, not page */
-            bottom: 30px;             /* Distance from bottom of screen */
-            right: 30px;              /* Distance from right of screen */
-            z-index: 9999;            /* Always on top */
-            
-            /* Button styling */
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
             width: 60px;
             height: 60px;
-            background: #25D366;      /* WhatsApp green */
+            background: #25D366;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            
-            /* Shadow and effects */
             box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
             cursor: pointer;
-            
-            /* Animation */
             transition: all 0.3s ease;
             animation: pulse 2s infinite;
         }
 
-        /* Hover effects */
         .whatsapp-float:hover {
             transform: scale(1.1) translateY(-5px);
             box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
-            animation: none;          /* Stop pulsing on hover */
+            animation: none;
         }
 
-        /* WhatsApp Icon (SVG) */
         .whatsapp-float svg {
             width: 32px;
             height: 32px;
             fill: white;
         }
 
-        /* Pulse animation */
         @keyframes pulse {
             0% {
                 box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
@@ -270,27 +397,6 @@
             }
         }
 
-        /* Tooltip (optional) */
-        .whatsapp-tooltip {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            background: #333;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-            white-space: nowrap;
-        }
-
-        .whatsapp-float:hover + .whatsapp-tooltip {
-            opacity: 1;
-        }
-
-        /* Mobile responsiveness */
         @media (max-width: 768px) {
             .whatsapp-float {
                 width: 50px;
@@ -298,11 +404,26 @@
                 bottom: 20px;
                 right: 20px;
             }
-            
             .whatsapp-float svg {
                 width: 26px;
                 height: 26px;
             }
+        }
+        
+        /* Stats Counter Animation */
+        .stat-number {
+            background: linear-gradient(135deg, #009688 0%, #00695c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        
+        /* Glass morphism effect */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
     </style>
     
@@ -321,7 +442,7 @@
             "postalCode": "515001",
             "addressCountry": "IN"
         },
-        "telephone": "+919493288101",
+        "telephone": "+917569046893",
         "email": "srichakraeyeclinic@gmail.com",
         "url": "https://srichakraeyeclinic.com",
         "medicalSpecialty": "Ophthalmology",
@@ -353,7 +474,6 @@
                                     width="64" 
                                     height="64">
                             </div>
-                            <!-- Now visible on mobile too -->
                             <div class="ml-2 sm:ml-3 min-w-0">
                                 <h1 class="font-headline font-bold text-base sm:text-lg lg:text-2xl text-gray-900 leading-tight truncate">Sri Chakra</h1>
                                 <p class="text-xs text-gray-600 font-medium tracking-wide">Eye Clinic</p>
@@ -422,11 +542,11 @@
                         <a href="about_sri_chakra_eye_clinic.html" class="block px-3 py-2 rounded-lg text-base font-medium text-primary bg-primary/10" aria-current="page">About</a>
                         
                         <div class="pt-4 pb-2 border-t border-gray-100 mt-2">
-                            <a href="tel:+919493288101" class="flex items-center px-3 py-2 text-primary font-semibold">
+                            <a href="tel:+917569046893" class="flex items-center px-3 py-2 text-primary font-semibold">
                                 <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                                 </svg>
-                                Emergency: +91 9493288101
+                                Emergency: +91 7569046893
                             </a>
                         </div>
                         
@@ -491,180 +611,6 @@
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
                 </svg>
-            </div>
-        </section>
-
-        <!-- Doctor Profile Section with Pop-out Effect -->
-        <section class="py-16 lg:py-24 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h2 class="font-headline font-bold text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-4">
-                        Meet the <span class="gradient-text">Expert</span>
-                    </h2>
-                    <p class="font-body text-lg text-gray-600 max-w-2xl mx-auto">
-                        Dedicated ophthalmologist serving the Anantapur community with excellence
-                    </p>
-                </div>
-
-                <!-- NEW POP-OUT DOCTOR CARD -->
-                <div class="doctor-card-container w-full max-w-5xl mx-auto">
-                    <div class="doctor-card relative bg-white rounded-3xl shadow-2xl overflow-visible grid md:grid-cols-2 gap-0" 
-                         style="box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;">
-                        
-                        <!-- Left Side: Image with Pop-out Effect -->
-                        <div class="relative bg-gradient-to-br from-gray-50 to-gray-100 rounded-l-3xl md:rounded-l-3xl rounded-t-3xl md:rounded-tr-none p-8 flex items-end justify-center min-h-[400px] md:min-h-[550px] overflow-visible">
-                            
-                            <!-- Decorative Circles -->
-                            <div class="absolute w-[300px] h-[300px] bg-primary/10 rounded-full -top-[100px] -right-[100px] pointer-events-none"></div>
-                            <div class="absolute w-[200px] h-[200px] bg-accent/10 rounded-full -bottom-[50px] -left-[50px] pointer-events-none"></div>
-                            
-                            <!-- Image Wrapper with 3D Effect -->
-                            <div class="image-wrapper relative w-full max-w-sm">
-                                <!-- The Full Doctor Image -->
-                                <img 
-                                    src="images/Doctor_Photo.jpeg" 
-                                    alt="Dr. Eswar Sakare - Ophthalmologist" 
-                                    class="doctor-image w-full h-auto block relative rounded-lg"
-                                    style="filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.3));"
-                                />
-                                
-                                <!-- Floating Badge -->
-                                <div class="specialization-badge absolute bottom-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-secondary text-white px-6 py-2 rounded-full font-semibold text-sm shadow-lg whitespace-nowrap z-20">
-                                    Ophthalmologist
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Right Side: Content -->
-                        <div class="content-section p-6 md:p-10 flex flex-col justify-center bg-white rounded-r-3xl md:rounded-r-3xl rounded-b-3xl md:rounded-bl-none">
-                            
-                            <!-- Header -->
-                            <div class="mb-6">
-                                <h2 class="font-headline text-sm font-semibold text-primary uppercase tracking-wider mb-2">Meet the Expert</h2>
-                                <h1 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 animated-underline">
-                                    Dr. Eswar Sakare
-                                </h1>
-                                <p class="text-lg text-gray-600 font-medium">MBBS, DNB (Ophthalmology)</p>
-                            </div>
-                            
-                            <!-- Qualifications Grid -->
-                            <div class="grid grid-cols-1 gap-4 mb-6">
-                                
-                                <!-- Experience -->
-                                <div class="flex items-start p-4 bg-gray-50 rounded-xl hover:bg-primary/5 transition-colors group">
-                                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                                        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <h3 class="font-semibold text-gray-900">Experience</h3>
-                                        <p class="text-gray-600 text-sm">10+ years in ophthalmology with specialized training in advanced surgical techniques</p>
-                                    </div>
-                                </div>
-                                
-                                <!-- Education -->
-                                <div class="flex items-start p-4 bg-gray-50 rounded-xl hover:bg-secondary/5 transition-colors group">
-                                    <div class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0 group-hover:bg-secondary/20 transition-colors">
-                                        <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <h3 class="font-semibold text-gray-900">Education</h3>
-                                          <p class="text-gray-600 text-sm">MBBS (Sri Venkateswara Medical College)</p>
-                                          <p class="text-gray-600 text-sm">DNB (Ophthalmology), Sankara Eye Hospital, Guntur</p>
-                                        <p class="text-gray-600 text-sm">Fellow Cornea and Refractive Services, Sankara Eye Hospital Guntur</p>
-                                    </div>
-                                </div>
-                                
-                                <!-- Specializations -->
-                                <div class="flex items-start p-4 bg-gray-50 rounded-xl hover:bg-accent/5 transition-colors group">
-                                    <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0 group-hover:bg-accent/20 transition-colors">
-                                        <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <h3 class="font-semibold text-gray-900">Specializations</h3>
-                                        <div class="flex flex-wrap gap-2 mt-2">
-                                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full font-medium">Cataract Surgery</span>
-                                            <span class="px-3 py-1 bg-secondary/10 text-secondary text-xs rounded-full font-medium">Glaucoma</span>
-                                            <span class="px-3 py-1 bg-accent/10 text-accent text-xs rounded-full font-medium">Cornea</span>
-                                            <span class="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full font-medium">Refractive Surgery</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- CTA Buttons -->
-                            <div class="flex flex-wrap gap-3 mt-auto">
-                                <a href="tel:+919493288101" class="flex-1 bg-primary hover:bg-secondary text-white px-6 py-3 rounded-full font-semibold text-center transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                                    </svg>
-                                    Book Consultation
-                                </a>
-                                <button onclick="toggleDetails()" class="px-6 py-3 border-2 border-gray-200 hover:border-primary text-gray-700 hover:text-primary rounded-full font-semibold transition-all duration-300 flex items-center gap-2">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                    </svg>
-                                    More Info
-                                </button>
-                            </div>
-
-                            <!-- Hidden Details Section -->
-                            <div id="doctor-more-info" class="hidden mt-4 p-4 bg-primary/5 rounded-xl border border-primary/10">
-                                <p class="text-sm text-gray-600">
-                                    Dr. Eswar Sakare is a distinguished ophthalmologist with extensive experience in cataract surgery, glaucoma management, and corneal disorders. He is committed to providing personalized care using the latest technology. He has successfully performed thousands of surgeries and is known for his patient-centric approach.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Professional Affiliations -->
-                <div class="mt-16 text-center">
-                    <h3 class="font-headline font-semibold text-xl text-gray-900 mb-6">Professional Affiliations</h3>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                            <div class="w-12 h-12 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-3">
-                                <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                                </svg>
-                            </div>
-                            <p class="text-sm font-semibold text-gray-900">All India Ophthalmological Society</p>
-                            <p class="text-xs text-gray-500 mt-1">Active Member</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                            <div class="w-12 h-12 mx-auto bg-secondary/10 rounded-full flex items-center justify-center mb-3">
-                                <svg class="w-6 h-6 text-secondary" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                                </svg>
-                            </div>
-                            <p class="text-sm font-semibold text-gray-900">Andhra Pradesh Medical Council</p>
-                            <p class="text-xs text-gray-500 mt-1">Registered</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                            <div class="w-12 h-12 mx-auto bg-accent/10 rounded-full flex items-center justify-center mb-3">
-                                <svg class="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                                </svg>
-                            </div>
-                            <p class="text-sm font-semibold text-gray-900">Indian Medical Association</p>
-                            <p class="text-xs text-gray-500 mt-1">Life Member</p>
-                        </div>
-                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                            <div class="w-12 h-12 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-3">
-                                <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                                </svg>
-                            </div>
-                            <p class="text-sm font-semibold text-gray-900">Vitreo Retinal Society</p>
-                            <p class="text-xs text-gray-500 mt-1">Member</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -793,117 +739,116 @@
             </div>
         </section>
 
-        <!-- Location & Hours -->
-        <section class="py-16 lg:py-24 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h2 class="font-headline font-bold text-3xl md:text-4xl lg:text-5xl text-gray-900 mb-4">
-                        Find Us in <span class="gradient-text">Anantapur</span>
+        <!-- SECTION 1: SURGICAL EXCELLENCE - CINEMATIC SCROLL -->
+        <section class="py-16 lg:py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+                <div class="text-center max-w-3xl mx-auto">
+                    <span class="text-primary font-semibold tracking-wider uppercase text-sm">Precision & Care</span>
+                    <h2 class="font-headline font-bold text-3xl md:text-4xl lg:text-5xl text-gray-900 mt-2 mb-4">
+                        Surgical <span class="gradient-text">Excellence</span>
                     </h2>
-                    <p class="font-body text-lg text-gray-600">
-                        Conveniently located with easy access from all major landmarks
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        State-of-the-art operation theater equipped with advanced phacoemulsification technology, 
+                        ensuring painless, stitchless cataract surgeries with rapid recovery times.
                     </p>
                 </div>
+            </div>
+            
+            <!-- Cinematic Scroll Gallery - Surgery Images -->
+            <div class="cinematic-scroll-container py-8">
+                <div class="cinematic-scroll-wrapper" id="surgery-scroll">
+                    <!-- Surgery images populated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <div class="stat-number text-4xl font-bold mb-2">5000+</div>
+                        <p class="text-gray-600">Successful Surgeries</p>
+                    </div>
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <div class="stat-number text-4xl font-bold mb-2">99.8%</div>
+                        <p class="text-gray-600">Success Rate</p>
+                    </div>
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <div class="stat-number text-4xl font-bold mb-2">15min</div>
+                        <p class="text-gray-600">Avg. Surgery Time</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                <div class="grid lg:grid-cols-2 gap-8">
-                    <!-- Map -->
-                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 service-card">
-                        <div class="aspect-w-16 aspect-h-12 bg-gray-200 h-[400px]">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.8267!2d77.6!3d14.68!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDQwJzQ4LjAiTiA3N8KwMzYnMDAuMCJF!5e0!3m2!1sen!2sin!4v1635000000000!5m2!1sen!2sin" 
-                                    width="100%" 
-                                    height="100%" 
-                                    style="border:0;" 
-                                    allowfullscreen 
-                                    loading="lazy" 
-                                    referrerpolicy="no-referrer-when-downgrade">
-                            </iframe>
-                        </div>
-                        <div class="p-4 text-center">
-                            <a href="https://maps.google.com/?q=Sri+Chakra+Eye+Clinic+Anantapur" 
-                               target="_blank"
-                               class="inline-flex items-center text-primary font-semibold hover:text-secondary transition-colors">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                </svg>
-                                Open in Google Maps
-                            </a>
+        <!-- SECTION 2: COMMUNITY OUTREACH - CINEMATIC SCROLL -->
+        <section class="py-16 lg:py-24 bg-primary/5 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="text-primary font-semibold tracking-wider uppercase text-sm">Serving the Community</span>
+                        <h2 class="font-headline font-bold text-3xl md:text-4xl lg:text-5xl text-gray-900 mt-2 mb-4">
+                            Free Eye <span class="gradient-text">Camps</span>
+                        </h2>
+                        <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                            Committed to reaching the underserved, we conduct free eye camps across Anantapur and surrounding villages. 
+                            Our mobile team brings quality eye care to those who need it most, conducting screenings, 
+                            distributing medicines, and performing free surgeries for the economically disadvantaged.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white p-4 rounded-xl shadow-sm">
+                                <div class="text-3xl font-bold text-primary mb-1">1000+</div>
+                                <p class="text-sm text-gray-600">Patients Served</p>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl shadow-sm">
+                                <div class="text-3xl font-bold text-primary mb-1">50+</div>
+                                <p class="text-sm text-gray-600">Camps Conducted</p>
+                            </div>
                         </div>
                     </div>
-
-                    <!-- Info Cards -->
-                    <div class="space-y-6">
-                        <!-- Address -->
-                        <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100 service-card">
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                                    <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-3xl transform rotate-3"></div>
+                        <div class="relative bg-white p-6 rounded-3xl shadow-xl">
+                            <h3 class="font-semibold text-gray-900 mb-4">Camp Activities Include:</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-center text-gray-600">
+                                    <svg class="w-5 h-5 text-primary mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                     </svg>
-                                </div>
-                                <div>
-                                    <h3 class="font-headline font-semibold text-lg text-gray-900 mb-2">Clinic Address</h3>
-                                    <p class="text-gray-600 mb-1">
-                                        Sri Chakra Eye Clinic,<br />
-                                        near Riya Hospital, SAPTHAGIRI CIRCLE,<br />
-                                        Anantapur, Andhra Pradesh 515001
-                                    </p>
-                                    <p class="text-gray-500 text-sm">
-                                        శ్రీ చక్ర ఐ క్లినిక్,<br />
-                                        రియా హాస్పిటల్ సమీపంలో, సప్తగిరి సర్కిల్,<br />
-                                        అనంతపురం, ఆంధ్రప్రదేశ్ 515001
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Landmarks -->
-                        <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100 service-card">
-                            <h3 class="font-headline font-semibold text-lg text-gray-900 mb-4">Nearby Landmarks</h3>
-                            <div class="space-y-3">
-                                <div class="flex items-center text-gray-600">
-                                    <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                                    <span>Oposite to Anantapur Municipality Corporation office</span>
-                                </div>
-                                <div class="flex items-center text-gray-600">
-                                    <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                                    <span>Near Sapthagiri Circle</span>
-                                </div>
-                                <div class="flex items-center text-gray-600">
-                                    <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                                    <span>1 km from Anantapur Tower clock</span>
-                                </div>
-                                <div class="flex items-center text-gray-600">
-                                    <div class="w-2 h-2 bg-primary rounded-full mr-3"></div>
-                                    <span>1.6 Km from Anantapur Railway Station</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Operating Hours -->
-                        <div class="bg-primary rounded-2xl p-6 text-white service-card">
-                            <h3 class="font-headline font-semibold text-lg mb-4 flex items-center">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                Operating Hours
-                            </h3>
-                            <div class="space-y-2 text-sm">
-                                <div class="flex justify-between items-center py-1 border-b border-white/20">
-                                    <span>Monday - Saturday</span>
-                                    <span class="font-semibold">10:00 AM - 8:00 PM</span>
-                                </div>
-                                <div class="flex justify-between items-center py-1 border-b border-white/20">
-                                    <span>Sunday</span>
-                                    <span class="text-white/70">Closed</span>
-                                </div>
-                                <div class="flex justify-between items-center py-1">
-                                    <span>Lunch Break</span>
-                                    <span class="text-white/70">2:00 PM - 5:30 PM</span>
-                                </div>
-                            </div>
+                                    Comprehensive Eye Screenings
+                                </li>
+                                <li class="flex items-center text-gray-600">
+                                    <svg class="w-5 h-5 text-primary mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Free Cataract Surgeries
+                                </li>
+                                <li class="flex items-center text-gray-600">
+                                    <svg class="w-5 h-5 text-primary mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Spectacle Distribution
+                                </li>
+                                <li class="flex items-center text-gray-600">
+                                    <svg class="w-5 h-5 text-primary mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    Diabetes Eye Checkups
+                                </li>
+                                <li class="flex items-center text-gray-600">
+                                    <svg class="w-5 h-5 text-primary mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    School Children Vision Programs
+                                </li>
+                            </ul>
                         </div>
                     </div>
+                </div>
+            </div>
+            
+            <!-- Cinematic Scroll Gallery - Camp Images -->
+            <div class="cinematic-scroll-container py-8">
+                <div class="cinematic-scroll-wrapper" id="camp-scroll">
+                    <!-- Camp images populated by JavaScript -->
                 </div>
             </div>
         </section>
@@ -930,23 +875,23 @@
                         </svg>
                         Book Appointment
                     </a>
-                    <a href="tel:+919493288101" class="border-2 border-white text-white px-8 py-4 rounded-full font-headline font-semibold hover:bg-white hover:text-primary transition-all duration-300 flex items-center gap-2">
+                    <a href="tel:+917569046893" class="border-2 border-white text-white px-8 py-4 rounded-full font-headline font-semibold hover:bg-white hover:text-primary transition-all duration-300 flex items-center gap-2">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                         </svg>
-                        Call: +91 9493288101
+                        Call: +91 7569046893
                     </a>
                 </div>
             </div>
         </section>
-         <!-- WhatsApp Button -->
-    <a href="https://wa.me/+919493288101" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
-        <!-- WhatsApp SVG Icon -->
+    </main>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/+917569046893" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
         </svg>
     </a>
-    </main>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white pt-16 pb-8 border-t border-gray-800">
@@ -1024,7 +969,7 @@
                             <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                             </svg>
-                            <a href="tel:+919493288101" class="text-gray-400 hover:text-primary transition-colors">+91 94932 88101</a>
+                            <a href="tel:+917569046893" class="text-gray-400 hover:text-primary transition-colors">+91 94932 88101</a>
                         </div>
                         <div class="flex items-center gap-3">
                             <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
@@ -1149,6 +1094,170 @@
                 }
             });
         });
+
+        // Image Gallery Data
+        const galleryData = {
+            surgery: {
+                images: [
+                    'Doctor Operating 10.jpeg',
+                    'Doctor Operating 9.jpeg',
+                    'Doctor Operating 8.jpeg',
+                    'Doctor Operating 7.jpeg',
+                    'Doctor Post Operation 2.jpeg',
+                    'Doctor Operating 6.jpeg',
+                    'Doctor OPerating 5.jpeg',
+                    'Docto Post Operation.jpeg',
+                    'Doctor Operating without machine.jpeg',
+                    'Doctor Operating 4.jpeg',
+                    'Doctor after Operation with Patients.jpeg',
+                    'Doctor Operating 3.jpeg',
+                    'Doctor Operating 2.jpeg',
+                    'Doctor Operating.jpeg',
+                    'Doctor using Machine.jpeg'
+                ],
+                captions: [
+                    'Advanced Surgical Procedure',
+                    'Precision in Operation',
+                    'State-of-the-art Surgery',
+                    'Expert Surgical Care',
+                    'Post-Operation Care',
+                    'Surgical Excellence',
+                    'Operating Room',
+                    'Patient Recovery',
+                    'Manual Surgical Technique',
+                    'Microsurgery',
+                    'Patient Consultation',
+                    'Surgical Precision',
+                    'Operation Theater',
+                    'Surgery in Progress',
+                    'Advanced Equipment'
+                ]
+            },
+            camps: {
+                images: [
+                    'Doctor Camp 4.jpeg',
+                    'Doctor in camp 3.jpeg',
+                    'Doctor Camp 3.jpeg',
+                    'Doctor in camp 2.jpeg',
+                    'Doctor in camp.jpeg',
+                    'Doctor in free camp surrounded.jpeg',
+                    'Free Camp Checkup.jpeg',
+                    'Free Camp.jpeg',
+                    'Doctor in village camp.jpeg',
+                    'Doctor Prescribing Medicine.jpeg',
+                    's chakra C5-01.jpg.jpeg',
+                    's chakra C3-01.jpg.jpeg',
+                    's chakra C2-01.jpg.jpeg',
+                    's chakra C6-01.jpg.jpeg',
+                    's chakra C1-01.jpg.jpeg',
+                    's chakra C4-01.jpg.jpeg'
+                ],
+                captions: [
+                    'Community Camp',
+                    'Rural Eye Care',
+                    'Free Screening',
+                    'Village Outreach',
+                    'Camp Setup',
+                    'Patient Crowd',
+                    'Eye Checkup',
+                    'Camp Activity',
+                    'Village Program',
+                    'Medicine Distribution',
+                    'Camp C5',
+                    'Camp C3',
+                    'Camp C2',
+                    'Camp C6',
+                    'Camp C1',
+                    'Camp C4'
+                ]
+            },
+            services: {
+                images: [
+                    'Doctor Operating 10.jpeg',
+                    'Doctor Operating 9.jpeg',
+                    'Doctor Operating 8.jpeg',
+                    'Doctor Operating 7.jpeg',
+                    'Doctor Post Operation 2.jpeg',
+                    'Doctor Operating 6.jpeg',
+                    'Doctor OPerating 5.jpeg',
+                    'Docto Post Operation.jpeg'
+                ],
+                captions: [
+                    'Cataract Surgery',
+                    'Glaucoma Treatment',
+                    'Retinal Care',
+                    'Corneal Surgery',
+                    'Post-Op Care',
+                    'LASIK Procedure',
+                    'Pediatric Eye Care',
+                    'Comprehensive Checkup'
+                ]
+            }
+        };
+
+        // Function to populate galleries
+        function populateGalleries() {
+            // Populate Surgery Gallery
+            const surgeryWrapper = document.getElementById('surgery-scroll');
+            if (surgeryWrapper && galleryData.surgery.images.length > 0) {
+                let surgeryHTML = '';
+                // Add images twice for infinite loop
+                [...galleryData.surgery.images, ...galleryData.surgery.images].forEach((img, index) => {
+                    const captionIndex = index % galleryData.surgery.captions.length;
+                    surgeryHTML += `
+                        <div class="cinematic-image-card">
+                            <img src="images/${img}" alt="${galleryData.surgery.captions[captionIndex]}" 
+                                 onerror="this.src='https://via.placeholder.com/800x600/009688/ffffff?text=Surgery+${index+1}'">
+                            <div class="cinematic-overlay">
+                                <span class="cinematic-caption">${galleryData.surgery.captions[captionIndex]}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+                surgeryWrapper.innerHTML = surgeryHTML;
+            }
+
+            // Populate Camp Gallery
+            const campWrapper = document.getElementById('camp-scroll');
+            if (campWrapper && galleryData.camps.images.length > 0) {
+                let campHTML = '';
+                [...galleryData.camps.images, ...galleryData.camps.images].forEach((img, index) => {
+                    const captionIndex = index % galleryData.camps.captions.length;
+                    campHTML += `
+                        <div class="cinematic-image-card">
+                            <img src="images/${img}" alt="${galleryData.camps.captions[captionIndex]}" 
+                                 onerror="this.src='https://via.placeholder.com/800x600/00695c/ffffff?text=Camp+${index+1}'">
+                            <div class="cinematic-overlay">
+                                <span class="cinematic-caption">${galleryData.camps.captions[captionIndex]}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+                campWrapper.innerHTML = campHTML;
+            }
+
+            // Populate Services Gallery
+            const servicesWrapper = document.getElementById('services-scroll');
+            if (servicesWrapper && galleryData.services.images.length > 0) {
+                let servicesHTML = '';
+                [...galleryData.services.images, ...galleryData.services.images].forEach((img, index) => {
+                    const captionIndex = index % galleryData.services.captions.length;
+                    servicesHTML += `
+                        <div class="cinematic-image-card">
+                            <img src="images/${img}" alt="${galleryData.services.captions[captionIndex]}" 
+                                 onerror="this.src='https://via.placeholder.com/800x600/ffab00/ffffff?text=Service+${index+1}'">
+                            <div class="cinematic-overlay">
+                                <span class="cinematic-caption">${galleryData.services.captions[captionIndex]}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+                servicesWrapper.innerHTML = servicesHTML;
+            }
+        }
+
+        // Initialize galleries when DOM is loaded
+        document.addEventListener('DOMContentLoaded', populateGalleries);
     </script>
 </body>
 </html>
