@@ -199,6 +199,22 @@
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             border-radius: 24px;
             box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.05);
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: pan-y pinch-zoom;
+        }
+        
+        .cinematic-scroll-container:active {
+            cursor: grabbing;
+        }
+        
+        .cinematic-scroll-container.dragging {
+            cursor: grabbing;
+        }
+        
+        .cinematic-scroll-container.dragging .cinematic-scroll-wrapper {
+            animation-play-state: paused !important;
         }
         
         .cinematic-scroll-wrapper {
@@ -206,10 +222,20 @@
             width: max-content;
             animation: scrollCinematic 60s linear infinite;
             will-change: transform;
+            transform: translateX(0);
         }
         
         .cinematic-scroll-container:hover .cinematic-scroll-wrapper {
             animation-play-state: paused;
+        }
+        
+        .cinematic-scroll-wrapper.manual-scroll {
+            animation: none !important;
+            transition: transform 0.3s ease-out;
+        }
+        
+        .cinematic-scroll-wrapper.momentum {
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         @keyframes scrollCinematic {
@@ -232,6 +258,11 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             transform: scale(0.95);
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+        
+        .cinematic-scroll-container.dragging .cinematic-image-card {
+            pointer-events: auto;
         }
         
         .cinematic-image-card:hover {
@@ -245,6 +276,7 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.8s ease;
+            pointer-events: none;
         }
         
         .cinematic-image-card:hover img {
@@ -260,6 +292,7 @@
             display: flex;
             align-items: flex-end;
             padding: 24px;
+            pointer-events: none;
         }
         
         .cinematic-image-card:hover .cinematic-overlay {
@@ -277,6 +310,35 @@
         
         .cinematic-image-card:hover .cinematic-caption {
             transform: translateY(0);
+        }
+        
+        /* Scroll hint indicator */
+        .scroll-hint {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 150, 136, 0.9);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 30;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .cinematic-scroll-container:hover .scroll-hint {
+            opacity: 1;
+        }
+        
+        .cinematic-scroll-container.dragging .scroll-hint {
+            opacity: 0;
         }
         
         /* Gradient masks for smooth fade */
@@ -319,6 +381,11 @@
             .cinematic-scroll-container::before,
             .cinematic-scroll-container::after {
                 width: 80px;
+            }
+            
+            .scroll-hint {
+                font-size: 0.75rem;
+                padding: 6px 12px;
             }
         }
         
@@ -443,7 +510,7 @@
             "addressCountry": "IN"
         },
         "telephone": "+917569046893",
-        "email": "srichakraeyeclinic@gmail.com",
+        "email": "srichakraeye@gmail.com",
         "url": "https://srichakraeyeclinic.com",
         "medicalSpecialty": "Ophthalmology",
         "priceRange": "$$"
@@ -709,7 +776,7 @@
                                 At Sri Chakra Eye Clinic, we understand that healthcare is deeply personal and cultural. Our approach honors the rich traditions of Andhra Pradesh while delivering internationally recognized medical standards.
                             </p>
                             <p>
-                                Our multilingual team communicates fluently in Telugu, Hindi, Tamil, and English, ensuring every patient feels comfortable and understood. We respect traditional health beliefs while gently educating about modern treatment options.
+                                Our multilingual team communicates fluently in Telugu, Hindi, Marathi, and English, ensuring every patient feels comfortable and understood. We respect traditional health beliefs while gently educating about modern treatment options.
                             </p>
                         </div>
                         
@@ -755,9 +822,18 @@
             </div>
             
             <!-- Cinematic Scroll Gallery - Surgery Images -->
-            <div class="cinematic-scroll-container py-8">
+            <div class="cinematic-scroll-container py-8" id="surgery-container">
                 <div class="cinematic-scroll-wrapper" id="surgery-scroll">
                     <!-- Surgery images populated by JavaScript -->
+                </div>
+                <div class="scroll-hint">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
+                    </svg>
+                    Drag to explore
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
                 </div>
             </div>
             
@@ -768,7 +844,7 @@
                         <p class="text-gray-600">Successful Surgeries</p>
                     </div>
                     <div class="glass-panel p-6 rounded-2xl">
-                        <div class="stat-number text-4xl font-bold mb-2">99.8%</div>
+                        <div class="stat-number text-4xl font-bold mb-2">98%</div>
                         <p class="text-gray-600">Success Rate</p>
                     </div>
                     <div class="glass-panel p-6 rounded-2xl">
@@ -846,9 +922,18 @@
             </div>
             
             <!-- Cinematic Scroll Gallery - Camp Images -->
-            <div class="cinematic-scroll-container py-8">
+            <div class="cinematic-scroll-container py-8" id="camp-container">
                 <div class="cinematic-scroll-wrapper" id="camp-scroll">
                     <!-- Camp images populated by JavaScript -->
+                </div>
+                <div class="scroll-hint">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
+                    </svg>
+                    Drag to explore
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
                 </div>
             </div>
         </section>
@@ -969,13 +1054,13 @@
                             <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                             </svg>
-                            <a href="tel:+917569046893" class="text-gray-400 hover:text-primary transition-colors">+91 94932 88101</a>
+                            <a href="tel:+917569046893" class="text-gray-400 hover:text-primary transition-colors">+91 7569046893</a>
                         </div>
                         <div class="flex items-center gap-3">
                             <svg class="w-5 h-5 text-primary flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                             </svg>
-                            <a href="mailto:srichakraeyeclinic@gmail.com" class="text-gray-400 hover:text-primary transition-colors text-sm">srichakraeyeclinic@gmail.com</a>
+                            <a href="mailto:srichakraeye@gmail.com" class="text-gray-400 hover:text-primary transition-colors text-sm">srichakraeye@gmail.com</a>
                         </div>
                     </div>
                 </div>
@@ -1170,28 +1255,6 @@
                     'Camp C1',
                     'Camp C4'
                 ]
-            },
-            services: {
-                images: [
-                    'Doctor Operating 10.jpeg',
-                    'Doctor Operating 9.jpeg',
-                    'Doctor Operating 8.jpeg',
-                    'Doctor Operating 7.jpeg',
-                    'Doctor Post Operation 2.jpeg',
-                    'Doctor Operating 6.jpeg',
-                    'Doctor OPerating 5.jpeg',
-                    'Docto Post Operation.jpeg'
-                ],
-                captions: [
-                    'Cataract Surgery',
-                    'Glaucoma Treatment',
-                    'Retinal Care',
-                    'Corneal Surgery',
-                    'Post-Op Care',
-                    'LASIK Procedure',
-                    'Pediatric Eye Care',
-                    'Comprehensive Checkup'
-                ]
             }
         };
 
@@ -1235,29 +1298,184 @@
                 });
                 campWrapper.innerHTML = campHTML;
             }
+        }
 
-            // Populate Services Gallery
-            const servicesWrapper = document.getElementById('services-scroll');
-            if (servicesWrapper && galleryData.services.images.length > 0) {
-                let servicesHTML = '';
-                [...galleryData.services.images, ...galleryData.services.images].forEach((img, index) => {
-                    const captionIndex = index % galleryData.services.captions.length;
-                    servicesHTML += `
-                        <div class="cinematic-image-card">
-                            <img src="images/${img}" alt="${galleryData.services.captions[captionIndex]}" 
-                                 onerror="this.src='https://via.placeholder.com/800x600/ffab00/ffffff?text=Service+${index+1}'">
-                            <div class="cinematic-overlay">
-                                <span class="cinematic-caption">${galleryData.services.captions[captionIndex]}</span>
-                            </div>
-                        </div>
-                    `;
+        // Manual Scroll Handler Class
+        class ManualScrollHandler {
+            constructor(containerId, wrapperId) {
+                this.container = document.getElementById(containerId);
+                this.wrapper = document.getElementById(wrapperId);
+                this.isDragging = false;
+                this.startX = 0;
+                this.scrollLeft = 0;
+                this.velocity = 0;
+                this.lastX = 0;
+                this.lastTime = 0;
+                this.animationId = null;
+                this.autoScrollPaused = false;
+                
+                if (this.container && this.wrapper) {
+                    this.init();
+                }
+            }
+            
+            init() {
+                // Mouse events
+                this.container.addEventListener('mousedown', this.handleMouseDown.bind(this));
+                document.addEventListener('mousemove', this.handleMouseMove.bind(this));
+                document.addEventListener('mouseup', this.handleMouseUp.bind(this));
+                
+                // Touch events
+                this.container.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: false });
+                this.container.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
+                this.container.addEventListener('touchend', this.handleTouchEnd.bind(this));
+                
+                // Prevent default drag behavior on images
+                this.wrapper.querySelectorAll('img').forEach(img => {
+                    img.addEventListener('dragstart', (e) => e.preventDefault());
                 });
-                servicesWrapper.innerHTML = servicesHTML;
+            }
+            
+            getCurrentTranslate() {
+                const style = window.getComputedStyle(this.wrapper);
+                const matrix = new WebKitCSSMatrix(style.transform);
+                return matrix.m41;
+            }
+            
+            handleMouseDown(e) {
+                this.isDragging = true;
+                this.container.classList.add('dragging');
+                this.wrapper.classList.add('manual-scroll');
+                this.wrapper.classList.remove('momentum');
+                
+                this.startX = e.pageX - this.container.offsetLeft;
+                this.scrollLeft = this.getCurrentTranslate();
+                this.lastX = e.pageX;
+                this.lastTime = Date.now();
+                this.velocity = 0;
+                
+                if (this.animationId) {
+                    cancelAnimationFrame(this.animationId);
+                }
+            }
+            
+            handleMouseMove(e) {
+                if (!this.isDragging) return;
+                e.preventDefault();
+                
+                const x = e.pageX - this.container.offsetLeft;
+                const walk = (x - this.startX);
+                const newTranslate = this.scrollLeft + walk;
+                
+                // Calculate velocity for momentum
+                const now = Date.now();
+                const dt = now - this.lastTime;
+                if (dt > 0) {
+                    this.velocity = (e.pageX - this.lastX) / dt;
+                }
+                this.lastX = e.pageX;
+                this.lastTime = now;
+                
+                this.wrapper.style.transform = `translateX(${newTranslate}px)`;
+            }
+            
+            handleMouseUp(e) {
+                if (!this.isDragging) return;
+                this.isDragging = false;
+                this.container.classList.remove('dragging');
+                
+                this.applyMomentum();
+            }
+            
+            handleTouchStart(e) {
+                this.isDragging = true;
+                this.container.classList.add('dragging');
+                this.wrapper.classList.add('manual-scroll');
+                this.wrapper.classList.remove('momentum');
+                
+                const touch = e.touches[0];
+                this.startX = touch.pageX - this.container.offsetLeft;
+                this.scrollLeft = this.getCurrentTranslate();
+                this.lastX = touch.pageX;
+                this.lastTime = Date.now();
+                this.velocity = 0;
+                
+                if (this.animationId) {
+                    cancelAnimationFrame(this.animationId);
+                }
+            }
+            
+            handleTouchMove(e) {
+                if (!this.isDragging) return;
+                e.preventDefault();
+                
+                const touch = e.touches[0];
+                const x = touch.pageX - this.container.offsetLeft;
+                const walk = (x - this.startX);
+                const newTranslate = this.scrollLeft + walk;
+                
+                const now = Date.now();
+                const dt = now - this.lastTime;
+                if (dt > 0) {
+                    this.velocity = (touch.pageX - this.lastX) / dt;
+                }
+                this.lastX = touch.pageX;
+                this.lastTime = now;
+                
+                this.wrapper.style.transform = `translateX(${newTranslate}px)`;
+            }
+            
+            handleTouchEnd(e) {
+                if (!this.isDragging) return;
+                this.isDragging = false;
+                this.container.classList.remove('dragging');
+                
+                this.applyMomentum();
+            }
+            
+            applyMomentum() {
+                const containerWidth = this.container.offsetWidth;
+                const wrapperWidth = this.wrapper.scrollWidth / 2; // Half because duplicated
+                let currentTranslate = this.getCurrentTranslate();
+                
+                // Apply momentum scrolling
+                const momentum = this.velocity * 200; // Scale factor for momentum
+                let targetTranslate = currentTranslate + momentum;
+                
+                // Bounds checking - wrap around for infinite scroll effect
+                if (targetTranslate > 0) {
+                    targetTranslate = -wrapperWidth + (targetTranslate % wrapperWidth);
+                } else if (targetTranslate < -wrapperWidth) {
+                    targetTranslate = targetTranslate % wrapperWidth;
+                }
+                
+                // Snap to nearest card
+                const cardWidth = 440; // 400px + 40px margin
+                const snapTarget = Math.round(targetTranslate / cardWidth) * cardWidth;
+                
+                this.wrapper.classList.add('momentum');
+                this.wrapper.style.transform = `translateX(${snapTarget}px)`;
+                
+                // Resume auto-scroll after delay
+                setTimeout(() => {
+                    if (!this.isDragging) {
+                        this.wrapper.classList.remove('manual-scroll', 'momentum');
+                        this.wrapper.style.transform = '';
+                    }
+                }, 2000);
             }
         }
 
-        // Initialize galleries when DOM is loaded
-        document.addEventListener('DOMContentLoaded', populateGalleries);
+        // Initialize galleries and scroll handlers when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            populateGalleries();
+            
+            // Initialize manual scroll for surgery gallery
+            new ManualScrollHandler('surgery-container', 'surgery-scroll');
+            
+            // Initialize manual scroll for camp gallery
+            new ManualScrollHandler('camp-container', 'camp-scroll');
+        });
     </script>
 </body>
 </html>
