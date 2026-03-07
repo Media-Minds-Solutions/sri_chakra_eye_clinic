@@ -56,6 +56,7 @@
             }
         }
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -861,7 +862,7 @@
 
                     <!-- CTA Button -->
                     <div class="hidden md:flex items-center">
-                        <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1AES5FOjzTbpeRi5KEeW9NKGSfhUFuy1ntJpT64BB6PFnt1E74zjufsoXk2izw4zrwm4A7Xm-I?gv=true" 
+                        <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3rYrLh-gK_LZJ4MBzTo7OMnylBx74BKAwe_4719z6xdyLljVwuu7akbkbqnxYljSfQqDTdC4Sd" 
                            target="_blank" 
                            rel="noopener noreferrer"
                            class="bg-primary hover:bg-secondary text-white px-6 py-2.5 rounded-full font-semibold text-sm lg:text-base transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 flex items-center gap-2">
@@ -907,7 +908,7 @@
                         </div>
                         
                         <div class="px-3 py-2">
-                            <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1AES5FOjzTbpeRi5KEeW9NKGSfhUFuy1ntJpT64BB6PFnt1E74zjufsoXk2izw4zrwm4A7Xm-I?gv=true" 
+                            <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3rYrLh-gK_LZJ4MBzTo7OMnylBx74BKAwe_4719z6xdyLljVwuu7akbkbqnxYljSfQqDTdC4Sd" 
                                target="_blank"
                                class="block w-full bg-primary text-white text-center py-3 rounded-lg font-semibold hover:bg-secondary transition-colors">
                                 Book Appointment
@@ -940,7 +941,7 @@
                 </p>
                 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1AES5FOjzTbpeRi5KEeW9NKGSfhUFuy1ntJpT64BB6PFnt1E74zjufsoXk2izw4zrwm4A7Xm-I?gv=true" 
+                    <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ3rYrLh-gK_LZJ4MBzTo7OMnylBx74BKAwe_4719z6xdyLljVwuu7akbkbqnxYljSfQqDTdC4Sd" 
                        target="_blank"
                        rel="noopener noreferrer"
                        class="w-full sm:w-auto bg-accent hover:bg-yellow-500 text-gray-900 px-8 py-4 rounded-full font-headline font-bold text-lg transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 flex items-center justify-center gap-2">
@@ -1990,7 +1991,9 @@ Anantapur, Andhra Pradesh 515001
             { id: 'sBqwcpkdaaI', title: 'Eye Care Tips 5' },
             { id: 'Z2L99hrTJIQ', title: 'Eye Care Tips 6' }
         ];
-
+        
+        // Initialize with defaults (no undefined issues)
+        
         let currentVideoIndex = 0;
 
         function initVideoSlider() {
